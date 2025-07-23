@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/product/product_detail.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <title>상품 상세</title>
+</head>
+
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+  <!-- 상품 타이틀 -->
+  <div class="product-header-container">
+    <div class="product-header">
+      <div class="product-header-left">
+        <div>
+          <!-- 카테고리 -->
+          <div class="product-category">
+            <a th:href="@{/}">홈</a> &gt;
+            <a href="#">테마여행</a> &gt; <!--th:href="${}"-->
+            <a href="#"><span th:if="${product.category == 'area'}">지역</span>
+              <span th:if="${product.category == 'pet'}">반려동물</span>
+              <span th:if="${product.category == 'restaurant'}">맛집</span>
+              <span th:if="${product.category == 'culture_history'}">문화/역사</span>
+              <span th:if="${product.category == 'season_nature'}">계절/자연</span>
+              <span th:if="${product.category == 'silver_disables'}">실버/교통약자</span>
+              <span th:if="${!(product.category == 'area'
+                              or product.category == 'pet'
+                              or product.category == 'restaurant'
+                              or product.category == 'culture_history'
+                              or product.category == 'season_nature'
+                              or product.category == 'silver_disables')}"
+              >카테고리 없음</span>
+            </a>
+          </div>
+          <!-- 좋아요와 공유 -->
+          <div class="product-actions">
+            <span style="font-size: 14px;">&#9825; 12</span>
+            <a href="#" title="공유하기">
+              <i class="fas fa-share-alt"></i>
+            </a>
+          </div>
+        </div>
+        <!-- 상품명 -->
+        <h1 th:text="${product.title}"></h1>
+        <!-- 평점 -->
+        <div class="rating" style="margin-top: 5px;">
+          <span class="stars" style="color: gold;">
+            <!-- 가득 찬 별 -->
+            <!-- <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, T(java.lang.Math).floor(rating))}"></i> -->
+
+            <!-- 반 별 -->
+            <!-- <i class="fas fa-star-half-alt" th:if="${rating % 1 >= 0.5}"></i> -->
+
+            <!-- 빈 별 -->
+            <!-- <i class="far fa-star" th:each="i : ${#numbers.sequence(1, 5 - T(java.lang.Math).ceil(rating))}"></i> -->
+          </span>
+          <!-- <span class="rating-text" style="margin-left: 5px;" -->
+          <!-- th:text="${#numbers.formatDecimal(rating, 1, 'POINT', 1, 'POINT')}"> -->
+          <!-- Fallback -->
+          0.0
+          <!-- </span> -->
+        </div>
+        <!-- 판매자 프로필 -->
+        <div class="product-seller">
+          <img th:src="${sellerImage}" alt="프로필 이미지"
+               class="profile-img" onerror="this.onerror=null; this.src='/img/default-profile.png';">
+          <div class="seller-info">
+            <strong th:text="${nickname}"></strong>
+            <div class="seller-tags" th:text="${intro}">#소개글 #태그들</div>
+          </div>
+          <button class="inquiry-btn">문의하기</button>
+        </div>
+      </div>
+      <div class="product-header-right">
+        <!-- 메인 썸네일 이미지 -->
+        <img th:src="${product.productImages[0].base64ImageData}" th:alt="${product.productImages[0].fileName}">
+      </div>
+    </div>
+  </div>
+
+  <!-- 상품 바디 -->
+  <div class="product-detail-container">
+    <div class="product-body">
+      <!-- 왼쪽 (이미지, 리뷰, 상품탭 등) -->
+      <section class="product-body-left">
+
+        <!-- 상품 이미지들(슬라이드) -->
+        <div class="slider-container">
+          <button id="prevBtn" class="prev-button" aria-label="이전 슬라이드">❰</button>
+          <div class="slider-wrapper">
+            <div class="slider">
+              <div class="slide" th:each="img, iterStat : ${product.productImages}"
+                   th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                <img th:src="${img.base64ImageData}" th:alt="${img.fileName}" />
+              </div>
+            </div>
+          </div>
+          <button id="nextBtn" class="next-button" aria-label="다음 슬라이드">❱</button>
+        </div>
+
+        <!-- 최근 리뷰 -->
+        <div class="product-recent-reviews">
+          <h3 id="recently-review">최근 받은 리뷰 <a href="/reviews" class="see-all">전체보기 ></a></h3>
+          <div class="swiper review-swiper">
+            <div class="swiper-wrapper">
+              <!--              <div class="swiper-slide" th:each="review : ${reviews}">-->
+              <!--                <div class="review-card">-->
+              <!--                  <div class="review-header">-->
+              <!--                    <img src="https://via.placeholder.com/40" alt="user" class="review-user-img">-->
+              <!--                    <div>-->
+              <!--                      <strong text="review.memberName">김**</strong>-->
+              <!--                      <div class="stars">⭐ 5.0</div>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                  <p>우리집 강아지가 너무 좋아해요~</p>-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <!-- 샘플 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-header">
+                    <img src="https://via.placeholder.com/40" alt="user" class="profile-img" onerror="this.onerror=null; this.src='/img/default-profile.png';">
+                    <div>
+                      <div class="stars">⭐ 5.0</div>
+                      <strong>류**</strong>
+                    </div>
+                  </div>
+                  <p>우리집 댕댕이도 완전 환장하네</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 화살표 -->
+            <div class="prev-button review-button">❰</div>
+            <div class="next-button review-button">❱</div>
+          </div>
+        </div>
+
+        <!-- 탭 메뉴 -->
+        <div class="tab-menu">
+          <a href="#basic-info">기본 정보</a>
+          <a href="#detail-info">상세 정보</a>
+          <a href="#price-info">가격 정보</a>
+          <a href="#guide-info">가이드 정보</a>
+          <a href="#review">리뷰</a>
+        </div>
+
+        <!-- 섹션들 -->
+
+
+        <div id="basic-info">
+          <h3>기본 정보</h3>
+
+          <!-- 요약 내용 -->
+          <div class="summary-box">
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|소요 시간 또는 기간 : ${product.totalDay}일 ${product.totalTime}시간|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span class="allPrice" th:text="|인원당 최소 여행 경비 : ${product.reqMoney}원|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|가이드 동반 여부 : ${(product.guideYn != null and product.guideYn == 'Y') ? '포함' : '미포함'}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|숙박 포함 여부 : ${(product.sleepInfo != null and product.sleepInfo == 'Y') ? '포함' : '미포함'}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|교통 정보 : ${product.transportInfo}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|식사 일정 여부 : ${(product.foodInfo != null and product.foodInfo == 'Y') ? '포함' : '미포함'}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|추천 인원 수 : ${product.reqPeople}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|추천 연령 : ${product.target}|"></span>
+            </div>
+            <div>
+              <i class="fas fa-circle" style="font-size:6px; margin-right:5px;"></i>
+              <span th:text="|추천 준비물 : ${product.stucks}|"></span>
+            </div>
+          </div>
+
+          <!-- 설명란 -->
+          <div class="product-content basic-description" style="margin-top: 20px;">
+            <span th:text="${product.description}"></span>
+          </div>
+
+          <!-- 버튼 -->
+          <div class="see-more">
+            <button class="active-btn btn-basic" onclick="return false;" style="
+
+                border: 1px solid #22c8e5;
+                border-radius: 10px;
+                color: #333;
+                text-decoration: none;
+              ">
+              코스 구매하고 상세 정보 확인하기
+            </button>
+          </div>
+
+        </div>
+
+
+        <div id="detail-info">
+          <h3>상세 정보</h3>
+
+          <!-- 블러 처리된 textarea -->
+          <div class="product-content detail-description">
+            <span th:text="${product.detail}"></span>
+          </div>
+
+          <!-- 더보기 버튼 -->
+          <div class="see-more">
+            <button class="active-btn btn-detail" onclick="unlockDetail()" style="
+
+              border: 1px solid #22c8e5;
+              border-radius: 8px;
+              background: white;
+              color: #333;">
+              더보기
+            </button>
+          </div>
+        </div>
+
+        <script>
+          function unlockDetail() {
+            alert("결제 후 확인 가능합니다.");
+            // 결제 완료 시 아래 코드 실행
+            // document.getElementById('detailTextarea').style.filter = 'none';
+          }
+        </script>
+
+
+        <div id="price-info">
+          <h3>가격 정보</h3>
+          <div class="price-info-container">
+            <!-- 기본 코스 -->
+            <div class="course-info">
+              <div class="price-box">
+                기본<br>
+                <span class="allPrice" th:text="|${product.salesPrice}원|"></span>
+              </div>
+
+              <!-- 설명 textarea -->
+              <div class="product-content price-detail">
+                <span th:text="${product.priceDetail}"></span>
+              </div>
+
+              <button>구매하기</button>
+            </div>
+
+            <!-- 가이드 동반 -->
+            <div class="course-info">
+              <div class="price-box">
+                가이드 동반<br>
+                <span class="allPrice" th:text="|${product.salesGuidePrice}원|"></span>
+              </div>
+
+              <!-- 설명 textarea -->
+              <div class="product-content price-detail">
+                <span th:text="${product.gpriceDetail}"></span>
+              </div>
+
+              <button>구매하기</button>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div id="guide-info">
+          <h3>가이드 정보</h3>
+          <div class="product-seller guide-inform">
+            <div class="guide-inform-array">
+              <!-- 가이드정보 + 해시태그 -->
+              <div class="array-detail">
+                <!-- 프로필 이미지 -->
+                <img th:src="${sellerImage}" alt="guide" class="profile-img" onerror="this.onerror=null; this.src='/img/default-profile.png';">
+                <div>
+                  <strong th:text="${nickname}"></strong>
+                  <div class="array-detail-style">
+                      <a href="#">
+                        <span th:text="${countProduct}"></span><br>판매코스
+                      </a>
+                      <span>
+                        <span>125<br>팔로워</span>
+                      </span>
+                      <span>
+                        <span>10<br>팔로잉</span>
+                      </span>
+                      <span>
+                        <span>9.8<br>만족도</span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <div class="guide-intro">
+                <span th:text="${intro}">#댕댕이아빠 #너만을위한 #애견카페사장</span>
+              </div>
+            </div>
+            <!-- 팔로우 버튼 -->
+            <button>팔로잉</button>
+          </div>
+        </div>
+
+        <!-- 취소 및 환불 규정 / 업데이트 정책 아코디언 -->
+        <div class="policy-box">
+          <div id="cancel-policy">
+            <div class="policy-menu">
+              <h3>취소 및 환불규정</h3>
+              <div th:replace="fragments/expand_button :: ex_btn"></div>
+            </div>
+            <div class="policy-content">
+              <p>
+                구매 후 24시간 이내에는 전액 환불 가능합니다. 이후에는 일정 비용이 발생할 수 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div id="update-policy">
+            <div class="policy-menu">
+              <h3>업데이트 정책</h3>
+              <div th:replace="fragments/expand_button :: ex_btn"></div>
+            </div>
+            <div class="policy-content">
+              <p>
+                코스 구매 후 1개월 내 업데이트되는 신규 코스를 무료로 받으실 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div id="review">
+          <h3>리뷰</h3>
+          <p>여기에 리뷰 내용이 들어갑니다.</p>
+        </div>
+      </section>
+
+
+
+
+      <!-- 오른쪽 (구매박스) -->
+      <section class="product-body-right">
+        <div class="product-body-right-container">
+          <!-- 탭 -->
+          <div style="display: flex;">
+            <div id="tab-basic" onclick="showTab('basic')"
+              style="flex:1; text-align:center; padding:12px; cursor:pointer; font-weight:bold; border-bottom: 2px solid #333;">
+              기본 코스
+            </div>
+            <div id="tab-guide" onclick="showTab('guide')"
+              style="flex:1; text-align:center; padding:12px; cursor:pointer; color:#999;">
+              가이드 포함
+            </div>
+          </div>
+
+          <!-- 기본 코스 -->
+          <div id="content-basic">
+            <div class="allPrice" th:text="|${product.salesPrice}원|">
+              <span> (VAT 포함가)</span>
+            </div>
+            <div class="content-download-available">※ 다운로드 가능 기간 : 구매일로부터 1주일</div>
+            <div class="content-info" style="margin-top:15px;">
+              <div style="font-weight:bold;">기본 여행 코스</div>
+              <ul>
+                <li th:text="|- 숙박 ${(product.sleepInfo != null and product.sleepInfo == 'Y') ? '포함' : '미포함'}|"></li>
+                <li th:text="|- 교통편 정보: ${product.transportInfo}|"></li>
+                <li>- PDF 파일 제공</li>
+              </ul>
+            </div>
+            <button class="product-btn btn-question">
+              가이드에게 문의하기
+            </button>
+            <button class="product-btn btn-buy">
+              구매하기
+            </button>
+          </div>
+
+          <!-- 가이드 포함 -->
+          <div id="content-guide">
+            <div class="allPrice" th:text="|${product.salesGuidePrice}원|">
+              <span> (VAT 포함가)</span>
+            </div>
+            <div class="content-download-available">※ 다운로드 가능 기간 : 구매일로부터 1주일</div>
+            <div class="content-download-available">※ 예약 필요</div>
+            <div class="content-info" style="margin-top:15px;">
+              <div style="font-weight:bold;">가이드 포함 코스</div>
+              <ul>
+                <li th:text="|- 숙박 ${(product.sleepInfo != null and product.sleepInfo == 'Y') ? '포함' : '미포함'}|"></li>
+                <li th:text="|- 교통편 정보: ${product.transportInfo}|"></li>
+                <li>- PDF 파일 제공 + 가이드 동반 서비스</li>
+              </ul>
+            </div>
+            <button class="product-btn btn-question">
+              가이드에게 문의하기
+            </button>
+            <button class="product-btn btn-buy">
+              구매하기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        function showTab(tab) {
+          document.getElementById('content-basic').style.display = 'none';
+          document.getElementById('content-guide').style.display = 'none';
+
+          document.getElementById('tab-basic').style.borderBottom = '2px solid #ddd';
+          document.getElementById('tab-guide').style.borderBottom = '2px solid #ddd';
+          document.getElementById('tab-basic').style.color = '#999';
+          document.getElementById('tab-guide').style.color = '#999';
+
+          document.getElementById('content-' + tab).style.display = 'block';
+          document.getElementById('tab-' + tab).style.borderBottom = '2px solid #333';
+          document.getElementById('tab-' + tab).style.color = '#333';
+        }
+
+        // 기본 활성화
+        document.addEventListener('DOMContentLoaded', function () {
+          showTab('basic');
+        });
+      </script>
+      <script th:src="@{/js/product/product_detail.js}"></script>
+    </div>
+  </div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+
+</html>

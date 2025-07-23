@@ -1,0 +1,44 @@
+/*goodbye.css*/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goodbye-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 48px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.goodbye-container h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #343a40;
+}
+
+.goodbye-container p {
+  font-size: 16px;
+  margin-bottom: 24px;
+  color: #6c757d;
+}
+
+.goodbye-container a.btn {
+  padding: 10px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #0d6efd;
+  color: white;
+  text-decoration: none;
+}
+
+.goodbye-container a.btn:hover {
+  background-color: #0b5ed7;
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글상세</title>
+  <link rel="stylesheet" href="" th:href="@{/css/common.css}">
+</head>
+<body>
+<h3>게시글상세</h3>
+<form action="" method="" th:object="${detailForm}">
+  <div>
+    <label for="">게시판아이디</label>
+    <input type="text" name="postId" id="postId" th:value="*{postId}" readonly>
+  </div>
+  <div>
+    <label for="">제목</label>
+    <input type="text" name="title" id="" th:value="*{title}" readonly>
+  </div>
+  <div>
+    <label for="">작성자</label>
+    <input type="text" name="nickname" id="" th:value="*{nickname}" readonly>
+  </div>
+  <div>
+    <label for="">작성일</label>
+    <input type="text" name="cdate" id="" th:value="*{cdate}" readonly>
+  </div>
+  <div>
+    <label for="">수정일</label>
+    <input type="text" name="udate" id="" th:value="*{udate}" readonly>
+  </div>
+  <div>
+    <label for="">내용</label>
+    <input type="text" name="content" id="" th:value="*{content}" readonly>
+  </div>
+  <div>
+    <button type="button" id="btnUpdate">수정</button>
+    <button type="button" id="btnDelete">삭제</button>
+    <button type="button" id="btnFindAll">목록</button>
+  </div>
+</form>
+<dialog id="modalDel">
+  <p>삭제하겠습니까?</p>
+  <button class="btnYes">예</button>
+  <button class="btnNo">아니오</button>
+</dialog>
+<script type="module">
+  import { ajax, PaginationUI } from '/js/common.js';
+
+let currentPage = 1;
+const recordsPerPage = 10;
+const pagesPerPage = 5;
+const postId = document.getElementById('postId').value;
+
+// 댓글 목록 가져오기
+const getComments = async (reqPage, reqRec) => {
+  try {
+    const url = `/api/postBoards/${postId}/paging?pageNo=${reqPage}&numOfRows=${reqRec}`;
+    const result = await ajax.get(url);
+
+    if (result.header.rtcd === 'S00') {
+      currentPage = reqPage;
+      displayCommentList(result.body);
+    } else {
+      alert(result.header.rtmsg);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// 댓글 목록 화면 출력
+function displayCommentList(comments) {
+  const makeTr = comments => {
+    return comments
+      .map(
+        comment =>
+          `<tr>
+            <td>${comment.commentId}</td>
+            <td>${comment.nickname || '익명'}</td>
+            <td>${comment.content}</td>
+            <td>${comment.cdate}</td>
+          </tr>`,
+      )
+      .join('');
+  };
+
+  $commentList.innerHTML = `
+    <table>
+      <caption>댓글 목록</caption>
+      <thead>
+        <tr>
+          <th>댓글 ID</th>
+          <th>작성자</th>
+          <th>내용</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${makeTr(comments)}
+      </tbody>
+    </table>`;
+}
+
+// 댓글 목록을 출력할 요소 생성
+const $commentList = document.createElement('div');
+$commentList.setAttribute('id', 'comment-list');
+document.body.appendChild($commentList);
+
+// 페이징 UI를 붙일 요소
+const $pagination = document.createElement('div');
+$pagination.setAttribute('id', 'comment-pagination');
+document.body.appendChild($pagination);
+
+// 페이징 설정
+async function configCommentPagination() {
+  try {
+    const url = `/api/postBoards/${postId}/totCnt`;
+    const result = await ajax.get(url);
+    const totalRecords = result.body;
+
+    const handlePageChange = reqPage => getComments(reqPage, recordsPerPage);
+
+    const pagination = new PaginationUI('comment-pagination', handlePageChange);
+    pagination.setTotalRecords(totalRecords);
+    pagination.setRecordsPerPage(recordsPerPage);
+    pagination.setPagesPerPage(pagesPerPage);
+    pagination.handleFirstClick();
+  } catch (err) {
+    console.error(err);
+  }
+}
+configCommentPagination();
+
+  //수정
+  const $btnUpdate = document.getElementById('btnUpdate');
+  $btnUpdate.addEventListener('click',e=>{
+    const $postId = document.getElementById('postId');
+    const postId = $postId.value;
+    location.href = `/boards/${postId}/edit`;  //GET http://localhost:9080/boards/게시글 아이디/edit
+  },false);
+
+  //삭제
+  const $btnDelete = document.getElementById('btnDelete');
+  $btnDelete.addEventListener('click', e => {
+    const $postId = document.getElementById('postId');
+    const id = $postId.value;
+
+    const $modalDel = document.getElementById("modalDel");
+    const $btnYes = document.querySelector(".btnYes");
+    const $btnNo = document.querySelector(".btnNo");
+
+    //모달창 띄우기
+    $modalDel.showModal();
+
+    $modalDel.addEventListener('close', e => {
+    console.log($modalDel.returnValue);
+      if ($modalDel.returnValue == 'yes') {
+        location.href = `/boards/${id}/del`;          // get http://localhost:9080/boards/게시글아이디/del
+      }else{
+        return;
+      }
+    });
+
+    $btnYes.addEventListener("click", e => {
+      $modalDel.close("yes");
+    });
+
+    $btnNo.addEventListener("click", e => {
+      $modalDel.close("no");
+    });
+
+
+  }, false);
+
+
+  //목록
+  const $btnFindAll = document.getElementById('btnFindAll');
+  $btnFindAll.addEventListener('click',e=>{
+    location.href = '/csr/boards';    // get http://localhost:9080/boards
+  },false);
+</script>
+</body>
+</html>

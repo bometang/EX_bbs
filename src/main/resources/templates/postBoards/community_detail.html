@@ -1,0 +1,218 @@
+<!-- src/main/resources/templates/bbs/bbs_detail.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title th:text="${'Mo:Si  ' + bbs.title}">게시글</title>
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+
+  <link rel="stylesheet" th:href="@{/css/community/community_detail.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.8/dist/web/static/pretendard.css">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+
+<body th:attr="data-parent-id=${bbs.bbsId}">
+<header th:replace="~{fragments/header :: header}"></header>
+<!-- ========================= MAIN LAYOUT ========================= -->
+
+<div class="page-container">
+  <main class="mypage-container">
+    <!-- ---------- 사이드바 ---------- -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <nav class="mypage-nav">
+          <div class="nav-title active">커뮤니티</div>
+          <ul>
+            <li><a th:href="@{/review}">리뷰</a></li>
+            <li><a th:href="@{/bbs/community}">자유 게시판</a></li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ---------- 본문 영역 ---------- -->
+    <section class="content">
+      <section class="post-section">
+        <div class="board" th:id="${bbs.bbsId}">게시글</div>
+        <hr>
+        <div>
+          <span>커뮤니티 &gt; 자유 게시판</span>
+          <div th:classappend="${ #authorization.expression('isAuthenticated()') and (#authentication.principal.member.memberId != bbs.memberId)} ? 'hidden' : ''">
+            <div class="btn-area view-mode">
+              <button id="btn-edit" class="btn-post-edit" type="button">수정</button>
+              <button id="btn-del" class="btn-post-delete" type="button">삭제</button>
+            </div>
+            <div class="edit-mode hidden">
+              <button id="btn-save"    class="btn-post-save"   type="button">저장</button>
+              <button id="btn-cancel"  class="btn-post-cancel" type="button">취소</button>
+            </div>
+          </div>
+          <button th:classappend="${(#authentication.principal.member.memberId == bbs.memberId) and (bbs.bindent < 2)} ? 'hidden' : ''">
+            답글
+          </button>
+        </div>
+      </section>
+
+      <div class="contentAll view-mode">
+
+        <div class="contentHeader">
+          <p class="meta-item"><b>no. </b> <span th:text="${bbs.bbsId}">123</span></p>
+          <p class="meta-item"><span th:text="${bbs.title}">게시글 제목</span></p>
+          <p class="meta-item contentCategory"><span th:text="${bbs.bcategory}">[카테고리]</span></p>
+          <div class="contentInfo">
+            <img class="profile-pic"
+                 th:if="${picData != null}"
+                 th:src="${picData}"
+                 th:alt="${bbs.nickname}" />
+
+            <img class="profile-pic"
+                 th:if="${picData == null}"
+                 th:src="@{/img/bbs/bbs_detail/profile-pic.png}"
+                 th:alt="${bbs.nickname}" />
+            <div class="info-text">
+              <span class="nickname" th:text="${bbs.nickname}">닉네임</span>
+              <span class="nickname" th:text="${'조회수 '+bbs.hit}">조회수</span>
+              <div class="time-group">
+                <span class="createTime"  th:text="${'작성일: ' + #temporals.format(bbs.createDate, 'yyyy.MM.dd HH:mm')}">2025.07.02 09:58</span>
+                <span class="updateTime"  th:text="${'수정일: ' + #temporals.format(bbs.updateDate, 'yyyy.MM.dd HH:mm')}">2025.07.02 09:58</span>
+              </div>
+            </div>
+            <button id="btn-report"
+                    type="button"
+                    th:attr="data-reported=${reported}"
+                    th:disabled="${reported}" >
+              <!-- 신고된 경우 -->
+              <img th:if="${reported}"
+                   th:src="@{/img/bbs/bbs_detail/report_filled.png}"
+                   alt="신고됨 아이콘"
+                   width="24" height="24"/>
+
+              <!-- 신고되지 않은 경우 -->
+              <img th:unless="${reported}"
+                   th:src="@{/img/bbs/bbs_detail/report_begin.png}"
+                   alt="신고 아이콘"
+                   width="24" height="24"/>
+
+              <span>신고</span>
+            </button>
+          </div>
+        </div>
+        <hr>
+        <div class="contentText" th:utext="${bbs.bcontent}"></div>
+        <div class="contentReview">
+          <button id="btn-like" type="button">
+
+            <img th:if="${liked}"
+                 th:src="@{/img/bbs/bbs_detail/Icon_Heart_fill.png}"
+                 alt="좋아요 활성화 아이콘"
+                 width="21" height="21"/>
+
+            <img th:unless="${liked}"
+                 th:src="@{/img/bbs/bbs_detail/Icon_Heart.png}"
+                 alt="좋아요 비활성화 아이콘"
+                 width="21" height="21"/>
+            <span class="cntLike" th:text="${'좋아요 ' + cnt_like}">좋아요 0</span>
+          </button>
+          <div>
+            <img th:src="@{/img/bbs/bbs_detail/comment.png}" alt="댓글 아이콘" width="21" height="21">
+            <span th:text="${'댓글' + cnt_comment}">댓글 0</span>
+          </div>
+        </div>
+        <div class="contentComment">
+          <div><span>등록순</span></div>
+          <div class="comment-list">
+            <!--출력 예정-->
+          </div>
+          <div class="commentForm" th:attrappend="hidden=(${memberId} == null) ? 'hidden' : null">
+            <div>
+              <img id="loginProfilePic" class="profile-pic" th:src="@{${profilePic}}" th:alt="${memberId}">
+            </div>
+            <div class="comment-input">
+              <span class="comment-write-label">댓글쓰기</span>
+              <form id="comment-form">
+                <textarea id="comment-content" name="content" placeholder="내용을 입력해주세요." required></textarea>
+                <button type="submit">입력</button>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- 편집 모드 (초기엔 숨김) -->
+      <div class="contentAll edit-mode hidden">
+        <form id="edit-form">
+          <!-- 제목 -->
+          <label for="edit-title" class="form-label">제목</label>
+          <input
+                  type="text"
+                  id="edit-title"
+                  name="title"
+                  th:value="${bbs.title}"
+                  required
+          />
+          <!-- 본문 에디터 -->
+
+          <div class="content-editor-wrapper">
+            <div id="toolbar">
+              <select class="ql-font"></select>
+              <select class="ql-size">
+                <option value="small"></option>
+                <option selected></option>
+                <option value="large"></option>
+                <option value="huge"></option>
+              </select>
+              <button class="ql-bold"></button>
+              <button class="ql-italic"></button>
+              <button class="ql-underline"></button>
+              <button class="ql-strike"></button>
+              <select class="ql-color"></select>
+              <select class="ql-background"></select>
+              <button class="ql-script" value="sub"></button>
+              <button class="ql-script" value="super"></button>
+              <select class="ql-header">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option selected></option>
+              </select>
+              <button class="ql-align" value=""></button>
+              <button class="ql-align" value="center"></button>
+              <button class="ql-align" value="right"></button>
+              <button class="ql-align" value="justify"></button>
+              <button class="ql-list" value="ordered"></button>
+              <button class="ql-list" value="bullet"></button>
+              <button class="ql-indent" value="-1"></button>
+              <button class="ql-indent" value="+1"></button>
+            </div>
+            <div id="editor" style="height: 300px;" th:utext="${bbs.bcontent}"></div>
+            <input type="hidden" name="bcontent" id="editorContent">
+          </div>
+        </form>
+      </div>
+
+
+
+    </section>
+  </main>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- ========================= SCRIPTS ========================= -->
+<!-- 1) Quill UMD (로컬) -->
+<script th:src="@{/js/community/vendor/quill.min.js}"></script>
+
+<!-- 2) ImageDrop UMD (로컬, 파일명은 image-drop.min.js) -->
+<script th:src="@{/js/community/vendor/image-drop.min.js}"></script>
+
+<!-- 3) ImageResize UMD (로컬) -->
+<script th:src="@{/js/community/vendor/image-resize.min.js}"></script>
+
+<script type="module" src="/js/community/bbs/csr/community_detail.js"></script>
+</body>
+</html>

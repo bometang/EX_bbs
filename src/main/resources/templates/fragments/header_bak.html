@@ -1,0 +1,61 @@
+<!-- header.html -->
+<header th:fragment="header">
+  <div class="header-inner">
+    <!-- 최상단 로그인/회원가입 or 사용자 정보 -->
+    <div class="header-top-bar">
+      <div class="user-links">
+        <!-- 비로그인 상태 -->
+        <th:block th:if="${user == null}">
+          <a th:href="@{/login}">로그인</a>
+          <a th:href="@{/members/join}">회원가입</a>
+        </th:block>
+
+        <!-- 로그인 상태 -->
+        <th:block th:if="${user != null}">
+          <div class="user-logged-in">
+            <form th:action="@{/login/logout}" method="post" class="logout-form">
+              <button type="submit" class="logout-button" aria-label="로그아웃">로그아웃</button>
+            </form>
+            <a th:href="@{/notifications}" class="notification-link" aria-label="알림">
+              <i class="fa fa-bell" aria-hidden="true"></i> <span>알림</span>
+            </a>
+          </div>
+        </th:block>
+      </div>
+    </div>
+
+    <!-- 로고, 검색창, 사용자 메뉴 -->
+    <div class="header-main">
+      <a th:href="@{/}" class="logo">
+        <img th:src="@{/img/msi.png}" alt="MO:SI 아이콘" style="width:64px; height:64px; margin-left:23px;">
+        <span>MO:SI</span>
+      </a>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="검색어를 입력하세요." aria-label="검색어 입력창">
+        <button type="submit" aria-label="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+      <div class="user-menu">
+        <a th:href="@{/wishlist}" aria-label="관심상품">
+          <i class="fas fa-heart" aria-hidden="true"></i><span>관심상품</span>
+        </a>
+        <a th:href="@{/mypage/buyer}" aria-label="내 정보">
+          <i class="fas fa-user" aria-hidden="true"></i><span>내 정보</span>
+        </a>
+        <a th:href="@{/cart}" aria-label="장바구니">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i><span>장바구니</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 내비게이션 메뉴 -->
+    <nav class="header-nav">
+      <ul>
+        <li><a th:href="@{/menu}">전체메뉴</a></li>
+        <li><a th:href="@{/theme}">테마여행</a></li>
+        <li><a th:href="@{/bbs}">커뮤니티</a></li>
+        <li><a th:href="@{/airhotel}">항공/호텔</a></li>
+        <li><a th:href="@{/information}">관광 정보</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

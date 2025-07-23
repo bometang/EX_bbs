@@ -1,0 +1,158 @@
+<!-- seller_mypage_community.html (header/footer fragments are included via Thymeleaf but their internal markup is *not* duplicated here) -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MO:SI 판매자 마이페이지 – 커뮤니티</title>
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.8/dist/web/static/pretendard.css">
+
+  <!-- 페이지 전용 스타일 -->
+  <link rel="stylesheet" th:href="@{/css/sellerpage/sellerMypageHome.css}">
+  <link rel="stylesheet" th:href="@{/css/community/bbs_list.css}">
+</head>
+
+<body>
+  <div class="layout-wrapper">
+    <!-- header / footer 는 이미 fragment 로 존재하므로 th:replace 로만 연결 -->
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <!-- ========================= MAIN LAYOUT ========================= -->
+    <div class="page-container">
+      <main class="mypage-container">
+        <!-- ---------- 사이드바 ---------- -->
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <nav class="mypage-nav">
+              <div class="nav-title active">커뮤니티</div>
+              <ul>
+                <li><a th:href="@{/review}">리뷰</a></li>
+                <li><a th:href="@{/bbs/community}">자유 게시판</a></li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- ---------- 본문 영역 ---------- -->
+        <section class="content">
+          <main class="community-wrapper">
+            <section class="review-list">
+              <h2>리뷰</h2>
+              <article class="review-item" th:each="review : ${reviews}" th:attr="data-rating=${review.rating}">
+                <div class="review-left">
+                  <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                  <div class="img-overlay" th:if="${review.imageCount > 1}" th:text="'+' + (${review.imageCount - 1})">
+                  </div>
+                </div>
+                <div class="review-right">
+                  <div class="review-header">
+                    <div class="review-nickname" th:text="${review.nickname}">닉네임</div>
+                    <div class="stars" th:attr="aria-label=|별점 ${review.rating}|"></div>
+                  </div>
+                  <div class="review-subtitle" th:text="'판매자: ' + ${review.sellerName}">판매자: 모시러버
+                  </div>
+                  <div class="review-text">
+                    <strong th:text="${review.title}">[MO:SI Pick] 황령산 투어 (1박2일)</strong><br />
+                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                      17</span><br />
+                    <span th:text="${review.content}">
+                      부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                    </span>
+                  </div>
+                  <div class="review-more">
+                    <a th:href="@{'/review/' + ${review.id}}">더보기 &gt;&gt;</a>
+                  </div>
+                </div>
+              </article>
+            </section>
+            <section class="post-section">
+              <h2>게시글</h2>
+              <div class="post-search">
+                <select name="category" id="category-select">
+                  <option value="all">전체 검색</option>
+                  <option value="category1">지역</option>
+                  <option value="category2">반려동물</option>
+                  <option value="category3">맛집</option>
+                  <option value="category4">문화/역사</option>
+                  <option value="category5">계절/자연</option>
+                  <option value="category6">실버/교통약자</option>
+                </select>
+                <input type="text" placeholder="제목을 입력해주세요" id="keyword-input" />
+                <button id="search-btn">검색</button>
+              </div>
+              <div th:if="${session.loginMember != null}">
+                <a th:href="@{/csr/bbs/add}" class="btn-write">글쓰기</a>
+              </div>
+              <table class="post-table" aria-label="게시글 목록">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                    <th>작성일</th>
+                    <th>수정일</th>
+                  </tr>
+                </thead>
+                <tbody id="post-tbody">
+                  <!-- 게시글이 비어있을 때 표시 -->
+                  <tr th:if="${postList == null or postList.isEmpty()}">
+                    <td colspan="7" class="empty-row">게시글이 없습니다.</td>
+                  </tr>
+                  <!--게시글 리스트-->
+                  <tr th:each="bbs : ${postList}">
+                    <td th:if="${!bbs.deleted}" th:text="${bbs.bbsId}">589524</td>
+                    <td th:if="${!bbs.deleted}" th:text="${bbs.categoryName}">맛집</td>
+                    <td class="title-cell" th:if="${!bbs.deleted}">
+                      <a th:href="@{'/bbs/' + ${bbs.bbsId}}">
+                        <span th:text="${bbs.title}">황령산 근처 맛집 찾아요!!!</span>
+                        <span class="comment-count" th:text="'[' + ${bbs.commentCount} + ']'">[12]</span>
+                      </a>
+                    </td>
+                    <td th:if="${!bbs.deleted}" th:text="${bbs.nickname}">이름있음</td>
+                    <td th:if="${!bbs.deleted}" th:text="${bbs.viewCount}">31</td>
+                    <td th:if="${!bbs.deleted}" th:text="${#temporals.format(bbs.createdAt, 'yyyy. MM. dd')}">2025.06.22
+                    </td>
+                    <td th:if="${!bbs.deleted}"
+                      th:text="${bbs.updatedAt != null ? #temporals.format(bbs.updatedAt, 'yyyy. MM. dd') : '-'}">
+                      -</td>
+                    <!-- 삭제된 게시물 표시 -->
+                    <td th:if="${bbs.deleted}" colspan="7" class="deleted-row">삭제된 게시물입니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pagination" aria-label="페이지네이션" th:if="${totalPages != null}">
+                <button th:if="${currentPage > 1}" th:onclick="|location.href='@{/csr/bbs(page=${currentPage - 1})}'|">
+                  &lt;
+                </button>
+                <button th:each="i : ${#numbers.sequence(1, totalPages)}"
+                  th:classappend="${i == currentPage} ? 'active' : ''"
+                  th:onclick="|location.href='@{/csr/bbs(page=${i})}'|" th:text="${i}">
+                </button>
+                <button th:if="${currentPage < totalPages}"
+                  th:onclick="|location.href='@{/csr/bbs(page=${currentPage + 1})}'|">
+                  &gt;
+                </button>
+              </div>
+            </section>
+
+          </main>
+        </section>
+      </main>
+    </div>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+  </div>
+
+  <!-- ========================= SCRIPTS ========================= -->
+  <script type="module" th:src="@{/js/community/bbs/csr/bbs_list.js}"></script>
+</body>
+
+</html>

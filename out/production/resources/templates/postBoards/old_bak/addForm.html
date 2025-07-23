@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글등록</title>
+  <link rel="stylesheet" href="" th:href="@{/css/common.css}">
+</head>
+<body>
+<h3>게시글등록</h3>
+<form id="frm" action="/boards/add" method="post" th:object="${saveForm}">
+  <div th:if="${#fields.hasGlobalErrors()}">
+    <p class="global-err" th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+  </div>
+  <div>
+    <label for="">제목</label>
+    <input type="text" name="title" id="title" th:value="*{title}">
+    <span class="field-err" th:each="err:${#fields.errors('title')}" th:text="${err}"></span>
+    <span class="field-err" id='errTitle'></span>
+  </div>
+  <div>
+    <label for="">작성자</label>
+    <input type="text" name="nickname" id="nickname" th:value="*{nickname}" readonly>
+  </div>
+  <div>
+    <label for="">내용</label>
+    <input type="text" name="content" id="content" th:value="*{content}">
+    <span class="field-err" th:each="err:${#fields.errors('content')}" th:text="${err}"></span>
+    <span class="field-err" id='errContent'></span>
+  </div>
+  <div>
+    <button type="submit" id="btnAdd">등록</button>
+    <button type="button" id="btnFindAll">목록</button>
+  </div>
+</form>
+<script type="module">
+  //등록
+
+  import { getBytesSize }  from '/js/common.js';
+
+  //등록
+  btnAdd.addEventListener('click', e=>{
+    e.preventDefault();  //submit 기본 이벤트 막기
+    //유효성 체크
+
+    //제목
+    if(title.value.length == 0){
+      errTitle.textContent = '제목을 입력하세요';
+      title.focus();
+      return;
+    }else if( getBytesSize(title.value) > 33){
+      errTitle.textContent = '제목은 33자를 초과할수 없습니다.';
+      title.focus();
+      return;
+    }else {
+      errTitle.textContent = '';
+    }
+    //내용
+    if(content.value.length == 0){
+      errContent.textContent = '내용을 입력하세요';
+      content.focus();
+      return;
+    }else {
+      errContent.textContent = '';
+    }
+
+    frm.submit();
+
+  }, false);
+
+  // 목록
+    const $btnFindAll = document.getElementById('btnFindAll');
+    $btnFindAll.addEventListener('click',e=>{
+      location.href = '/boards';    // get http://localhost:9080/products
+    },false);
+</script>
+</body>
+</html>

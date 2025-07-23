@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MO:SI 테마여행</title>
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/product/product_area.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<div class="area-container">
+  <div class="area-breadcrumb">홈 &gt; 테마여행 &gt; <span class="area-breadcrumb-current">{카테고리명}</span></div>
+  <h1 class="area-title">{카테고리명}</h1>
+  <section class="area-keywords-section">
+    <div class="area-keywords-title">가장 인기있는 키워드 Top5 <span class="hot-badge">Hot</span></div>
+    <div class="area-keywords-list">
+      <div class="area-keyword"><span class="emoji">🐶</span> 반려견</div>
+      <div class="area-keyword"><span class="emoji">🌮</span> 맛집</div>
+      <div class="area-keyword"><span class="emoji">😎</span> 바다</div>
+      <div class="area-keyword"><span class="emoji">☕</span> 카페</div>
+      <div class="area-keyword"><span class="emoji">💖</span> 연인</div>
+    </div>
+  </section>
+  <section class="area-main-section">
+    <aside class="area-category-list">
+      <div class="area-category">지역</div>
+      <div class="area-category">반려동물</div>
+      <div class="area-category">맛집</div>
+      <div class="area-category">문화</div>
+      <div class="area-category">역사</div>
+      <div class="area-category">계절</div>
+      <div class="area-category">자연</div>
+      <div class="area-category">실버</div>
+      <div class="area-category">교통약자</div>
+    </aside>
+    <div class="area-content">
+      <div class="area-filter-box">
+        <div class="area-filter-row">
+          <select><option>카테고리 선택</option></select>
+          <select><option>가이드 등반</option></select>
+          <select><option>인원 수</option></select>
+          <select><option>추천 연령</option></select>
+          <select><option>상태(판매중)</option></select>
+          <select><option>여행 기간</option></select>
+        </div>
+        <div class="area-filter-row">
+          <select><option>숙박 포함</option></select>
+          <select><option>교통편</option></select>
+          <select><option>···</option></select>
+          <select><option>여행 장비</option></select>
+          <select><option>상품 가격</option></select>
+          <select><option>등록 일자</option></select>
+        </div>
+        <input class="area-keyword-input" type="text" placeholder="키워드를 추가해 보세요. ex) 반려 #맛집 #바다">
+        <div class="area-filter-desc">실버, 가이드 등반 0, 4명, 70대, 판매중, 3박 4일, 200만원, ...</div>
+      </div>
+    </div>
+  </section>
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
+</body>
+</html>

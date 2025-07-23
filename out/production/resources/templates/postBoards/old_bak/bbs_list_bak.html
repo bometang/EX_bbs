@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MO:SI 판매자 마이페이지</title>
+  <!-- <link rel="stylesheet" href="/src/main/resources/static/css/layout.css">
+  <link rel="stylesheet" href="/src/main/resources/static/css/sellerpage/sellerMypageHome.css"> -->
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/sellerpage/sellerMypageHome.css}">
+  <link rel="stylesheet" th:href="@{/css/product/product_managing.css}" />
+  <link rel="stylesheet" th:href="@{/css/community/community_list.css}">
+</head>
+
+<body>
+  <header th:replace="~{fragments/header :: header}"></header>
+  <div class="page-container">
+    <main class="mypage-container">
+      <aside class="sidebar">
+        <div class="sidebar-card">
+
+          <nav class="mypage-nav">
+            <div class="nav-title active">커뮤니티</div>
+            <ul>
+              <li><a th:href="@{/review}">리뷰</a></li>
+              <li><a th:href="@{/api/bbs}">자유 게시판</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <main class="community-wrapper">
+          <section class="post-section">
+            <h2>게시글</h2>
+
+            <div class="post-search">
+              <select name="category" id="category-select">
+                <option value="all">전체 검색</option>
+                <option value="category1">지역</option>
+                <option value="category2">반려동물</option>
+                <option value="category3">맛집</option>
+                <option value="category4">문화/역사</option>
+                <option value="category5">계절/자연</option>
+                <option value="category6">실버/교통약자</option>
+              </select>
+              <input type="text" placeholder="제목을 입력해주세요" id="keyword-input" />
+              <button id="search-btn">검색</button>
+            </div>
+            <div th:if="${session.loginMember != null}">
+              <a th:href="@{/csr/bbs/add}" class="btn-write">글쓰기</a>
+            </div>
+
+            <table class="post-table" aria-label="게시글 목록">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>카테고리</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>조회수</th>
+                  <th>작성일</th>
+                  <th>수정일</th>
+                </tr>
+              </thead>
+              <tbody id="post-tbody">
+
+              </tbody>
+
+            </table>
+            <div class="pagination" aria-label="페이지네이션" th:if="${totalPages != null}">
+              <button th:if="${currentPage > 1}" th:onclick="|location.href='@{/csr/bbs(page=${currentPage - 1})}'|">
+
+              </button>
+
+              <button th:each="i : ${#numbers.sequence(1, totalPages)}"
+                th:classappend="${i == currentPage} ? 'active' : ''"
+                th:onclick="|location.href='@{/csr/bbs(page=${i})}'|" th:text="${i}">
+              </button>
+
+              <button th:if="${currentPage < totalPages}"
+                th:onclick="|location.href='@{/csr/bbs(page=${currentPage + 1})}'|">
+
+              </button>
+            </div>
+          </section>
+
+      </section>
+    </main>
+  </div>
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+  <script th:src="@{/js/sellerpage/sellerMypageHome.js}"></script>
+  <script th:src="@{/js/bbs/bbs_list.js}"></script>
+</body>
+
+</html>

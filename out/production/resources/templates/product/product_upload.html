@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>상품 등록</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/product/product_register.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+<div class="container">
+  <h2>상품 등록</h2>
+  <form th:action="@{/product/upload}" th:object="${productUploadForm}" method="post" enctype="multipart/form-data">
+    <table class="form-table">
+      <colgroup>
+        <col style="width: 15%" />
+        <col style="width: 85%" />
+      </colgroup>
+
+      <!-- 카테고리 -->
+      <tr>
+        <th><span class="required">*</span> 카테고리</th>
+        <td>
+          <select th:field="*{category}" required>
+            <option value="" selected>카테고리 선택</option>
+            <option value="지역">지역</option>
+            <option value="반려동물">반려동물</option>
+            <option value="맛집">맛집</option>
+            <option value="문화/역사">문화/역사</option>
+            <option value="계절/자연">계절/자연</option>
+            <option value="실버/교통약자">실버/교통약자</option>
+          </select>
+        </td>
+      </tr>
+
+      <!-- 상품명 -->
+      <tr>
+        <th><span class="required">*</span> 상품명</th>
+        <td>
+          <input type="text" th:field="*{title}" maxlength="60" placeholder="상품명을 입력해주세요" required />
+          <small>0 / 60자</small>
+        </td>
+      </tr>
+
+      <!-- 가이드 동반 여부 -->
+      <tr>
+        <th><span class="required">*</span> 가이드 동반 여부</th>
+        <td>
+          <label><input type="radio" th:field="*{guideYn}" value="N" checked /> 미포함</label>
+          <label><input type="radio" th:field="*{guideYn}" value="Y" /> 포함</label>
+        </td>
+      </tr>
+
+      <!-- 기본 정가 -->
+      <tr>
+        <th><span class="required">*</span> 정상 상품 가격</th>
+        <td>
+          <input type="number" th:field="*{normalPrice}" min="0" placeholder="기본 정보 가격" required />
+          원
+        </td>
+      </tr>
+
+      <!-- 가이드 포함 정가 -->
+      <tr>
+        <th><span class="required">*</span> 정상 상품 가격</th>
+        <td>
+          <input type="number" th:field="*{guidePrice}" min="0" placeholder="가이드 포함 기본 가격" required />
+          원
+        </td>
+      </tr>
+
+      <!-- 상품 판매가 -->
+      <tr>
+        <th><span class="required">*</span> 판매 상품 가격</th>
+        <td>
+          <input type="number" th:field="*{salesPrice}" min="0" placeholder="기본 정보 가격" required />
+          원
+        </td>
+      </tr>
+
+      <!-- 가이드 포함 판매 가격 -->
+      <tr>
+        <th><span class="required">*</span> 판매 상품 가격</th>
+        <td>
+          <input type="number" th:field="*{salesGuidePrice}" min="0" placeholder="기본 정보 가격" required />
+          원
+        </td>
+      </tr>
+
+      <!-- 소요 시간/기간 -->
+      <tr>
+        <th><span class="required">*</span> 소요 시간 or 기간</th>
+        <td>
+          <input type="number" th:field="*{totalDay}" min="0" placeholder="일" required /> 일
+          <input type="number" th:field="*{totalTime}" min="0" placeholder="시간" /> 시간
+        </td>
+      </tr>
+
+      <!-- 최소 여행 경비 (1인당) -->
+      <tr>
+        <th>최소 여행 경비 (1인당)</th>
+        <td>
+          <input type="number" th:field="*{reqMoney}" min="0" placeholder="ex) 120000" />
+          원
+        </td>
+      </tr>
+
+      <!-- 숙박 포함 여부 -->
+      <tr>
+        <th>숙박 포함 여부</th>
+        <td>
+          <label><input type="radio" th:field="*{sleepInfo}" value="N" checked /> 미포함</label>
+          <label><input type="radio" th:field="*{sleepInfo}" value="Y" /> 포함</label>
+        </td>
+      </tr>
+
+      <!-- 교통 정보 -->
+      <tr>
+        <th>교통 정보</th>
+        <td>
+          <input type="text" th:field="*{transportInfo}" placeholder="ex) 도보로 이동" maxlength="45" />
+        </td>
+      </tr>
+
+      <!-- 식사 일정 여부 -->
+      <tr>
+        <th>식사 일정 여부</th>
+        <td>
+          <label><input type="radio" th:field="*{foodInfo}" value="N" checked /> 미포함</label>
+          <label><input type="radio" th:field="*{foodInfo}" value="Y" /> 포함</label>
+        </td>
+      </tr>
+
+      <!-- 추천 인원 -->
+      <tr>
+        <th>추천 인원</th>
+        <td>
+          <input type="text" th:field="*{reqPeople}" maxlength="15" placeholder="ex) 2~3명, 4명 이상 등" />
+        </td>
+      </tr>
+
+      <!-- 추천 대상 -->
+      <tr>
+        <th>추천 대상</th>
+        <td>
+          <input type="text" th:field="*{target}" maxlength="15" placeholder="ex) 4, 50대 중년 커플" />
+        </td>
+      </tr>
+
+      <!-- 추천 준비물 -->
+      <tr>
+        <th>추천 준비물</th>
+        <td>
+          <input type="text" th:field="*{stucks}" maxlength="60" placeholder="ex) 물, 양산, 겉옷 등등 여행에 필요한 준비물" />
+        </td>
+      </tr>
+
+      <!-- 이미지 업로드 input -->
+      <input type="file" th:field="*{productImages}" accept="image/*" multiple id="productImagesInput" style="display:none;" />
+
+      <!-- 이미지 업로드 박스 (클릭 시 파일 선택창 열림) -->
+      <div class="image-upload-box" id="imageUploadBox">
+        <i class="fas fa-camera"></i>
+        <p>이미지를 클릭하거나 드래그하여 업로드하세요</p>
+      </div>
+
+      <!-- 업로드한 이미지 이름과 삭제 버튼 리스트 -->
+      <div id="imageNameList" class="image-name-list">
+        <!-- 자바스크립트가 여기 이미지아이템 동적으로 추가 -->
+      </div>
+
+      <!-- 이미지 미리보기 영역 -->
+      <img id="imagePreview" class="image-preview" style="display:none;" />
+
+      <!-- 상품 기본 설명 -->
+      <tr>
+        <th><span class="required">*</span> 상품 기본 설명</th>
+        <td>
+          <textarea th:field="*{description}" rows="4" maxlength="500" placeholder="기본 설명을 입력해주세요" required></textarea>
+        </td>
+      </tr>
+
+      <!-- 상품 상세 설명 -->
+      <tr>
+        <th><span class="required">*</span> 상품 상세 설명</th>
+        <td>
+          <!-- 장소 정보 표기 가능 영역 -->
+          <textarea th:field="*{detail}" rows="6" maxlength="3000" placeholder="판매할 여행 상품에 대한 자세한 설명을 작성하세요. PDF 내용 동의해야 합니다." required></textarea>
+        </td>
+      </tr>
+
+      <!-- 판매 파일 첨부 -->
+      <tr>
+        <th><span class="required">*</span> 판매 파일 첨부</th>
+        <td>
+          <input type="file" th:field="*{documentFile}" required />
+          <button type="button">파일 찾기</button>
+        </td>
+      </tr>
+
+      <!-- 가격 정보 상세 기입 -->
+      <tr>
+        <th>가격 정보 상세 기입</th>
+        <td>
+          <div>
+            <label>기본</label>
+            <textarea th:field="*{priceDetail}" rows="3" maxlength="150" placeholder="ex) 기본 여행코스 PDF, 영수증 가능, 다운로드 기간 등"></textarea>
+          </div>
+          <div>
+            <label>가이드 동반</label>
+            <textarea th:field="*{gpriceDetail}" rows="3" maxlength="150" placeholder="ex) 예약 필수, 시간, 주말 일정 등"></textarea>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn-submit"><i class="fas fa-check"></i> 등록</button>
+      <button type="button" class="btn-cancel" onclick="history.back()"><i class="fas fa-times"></i> 취소</button>
+    </div>
+  </form>
+</div>
+
+<script src="/js/product/product_upload.js"></script>
+</body>
+</html>

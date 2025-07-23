@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|MO:SI 커뮤니티 게시글 작성|">MO:SI 커뮤니티 게시글 작성</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="container-wrapper">
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <nav class="main-nav">
+        <div>전체메뉴</div>
+        <div>테마여행</div>
+        <div>커뮤니티</div>
+        <div>항공</div>
+        <div>호텔</div>
+    </nav>
+
+    <main class="main-content">
+        <aside class="left-sidebar">
+            <ul>
+                <li class="menu-title">커뮤니티</li>
+                <li><a th:href="@{/review}">리뷰</a></li>
+                <li><a th:href="@{/freeboard}">자유 게시판</a></li>
+            </ul>
+        </aside>
+
+        <section class="content-area">
+            <h1>게시글 작성</h1>
+            <form class="write-form" id="write-form" th:action="@{/community/write}" method="post">
+                <label for="category" class="form-label">카테고리</label>
+                <div class="select-group">
+                    <select id="category" name="category">
+                        <option value="">--선택--</option>
+                        <option th:each="category : ${categoryList}"
+                                th:value="${category.code}"
+                                th:text="${category.name}">리뷰</option>
+                    </select>
+                    <select id="topic" name="topic">
+                        <option value="">--선택--</option>
+                        <option th:each="topic : ${topicList ?: categoryList}"
+                                th:value="${topic.code}"
+                                th:text="${topic.name}"></option>
+                    </select>
+                </div>
+
+                <label for="title" class="form-label">제목</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="제목을 입력하세요">
+
+                <label for="editor" class="form-label">내용</label>
+                <div class="content-editor-wrapper">
+                    <div id="toolbar">
+                        <select class="ql-font"></select>
+                        <select class="ql-size">
+                            <option value="small"></option>
+                            <option selected></option>
+                            <option value="large"></option>
+                            <option value="huge"></option>
+                        </select>
+
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+
+                        <button class="ql-script" value="sub"></button>
+                        <button class="ql-script" value="super"></button>
+
+                        <select class="ql-header">
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option selected></option>
+                        </select>
+
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
+                        <button class="ql-align" value="justify"></button>
+
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+
+                        <button class="ql-indent" value="-1"></button>
+                        <button class="ql-indent" value="+1"></button>
+
+                        <button class="ql-link"></button>
+                        <button class="ql-image"></button>
+
+                        <button class="ql-clean"></button>
+                    </div>
+                    <div id="editor" style="height: 300px;"></div>
+                    <input type="hidden" name="content" id="editorContent">
+                </div>
+
+                <div class="file-upload-section">
+                    <span class="upload-label">파일 첨부</span>
+                    <div class="file-upload-buttons">
+                        <input type="file" id="file-input" name="files" multiple style="display: none;">
+                        <button type="button" onclick="document.getElementById('file-input').click();">파일 선택</button>
+                        <span id="file-name-display">선택된 파일 없음</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">작성하기</button>
+                    <button type="button" class="temp-save-btn" id="temp-save-btn">임시저장</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Quill editor
+            var quill = new Quill('#editor', {
+                theme: 'snow', // 'snow' or 'bubble'
+                modules: {
+                    toolbar: '#toolbar'
+                }
+            });
+
+            // Set up form submission to include Quill content
+            var writeForm = document.getElementById('write-form');
+            var editorContentInput = document.getElementById('editorContent');
+            if (writeForm && editorContentInput && quill) {
+                writeForm.addEventListener('submit', function() {
+                    // Get the HTML content from Quill editor and put it into the hidden input
+                    editorContentInput.value = quill.root.innerHTML;
+                });
+            }
+
+            // Display selected file names
+            var fileInput = document.getElementById('file-input');
+            var fileNameDisplay = document.getElementById('file-name-display');
+            if (fileInput && fileNameDisplay) {
+                fileInput.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        var fileNames = Array.from(this.files).map(file => file.name).join(', ');
+                        fileNameDisplay.textContent = fileNames;
+                    } else {
+                        fileNameDisplay.textContent = '선택된 파일 없음';
+                    }
+                });
+            }
+
+            // Example for dynamic topic loading (requires backend endpoint and AJAX)
+            var categorySelect = document.getElementById('category');
+            var topicSelect = document.getElementById('topic');
+
+            if (categorySelect && topicSelect) {
+                categorySelect.addEventListener('change', function() {
+                    var selectedCategoryCode = this.value;
+                    // In a real application, you would make an AJAX call here
+                    // to fetch topics related to the selectedCategoryCode
+                    console.log("Category selected: " + selectedCategoryCode);
+
+                    // For demonstration, let's just reset the topic options
+                    // In a real scenario, you'd populate new options based on the fetch result
+                    topicSelect.innerHTML = '<option value="">--선택--</option>';
+                    if (selectedCategoryCode) {
+                        // Simulate fetching topics based on category
+                        // Replace this with an actual fetch/axios call to your API
+                        var simulatedTopics = [];
+                        if (selectedCategoryCode === 'REVIEW') {
+                            simulatedTopics = [
+                                {code: 'REVIEW_1', name: '여행 후기'},
+                                {code: 'REVIEW_2', name: '맛집 리뷰'}
+                            ];
+                        } else if (selectedCategoryCode === 'FREEBOARD') {
+                            simulatedTopics = [
+                                {code: 'FREE_1', name: '자유 토론'},
+                                {code: 'FREE_2', name: '질문과 답변'}
+                            ];
+                        }
+                        simulatedTopics.forEach(function(topic) {
+                            var option = document.createElement('option');
+                            option.value = topic.code;
+                            option.textContent = topic.name;
+                            topicSelect.appendChild(option);
+                        });
+                    }
+                });
+            }
+        });
+        /*]]>*/
+    </script>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tempSaveButton = document.getElementById('temp-save-btn');
+        if (tempSaveButton) {
+            tempSaveButton.addEventListener('click', function() {
+                alert('임시저장이 완료되었습니다');
+            });
+        }
+    });
+</script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Quill 에디터 초기화
+        const quill = new Quill('#editor', {
+            modules: {
+                toolbar: '#toolbar'
+            },
+            theme: 'snow'
+        });
+
+        // 폼 제출 이벤트 핸들러
+        const writeForm = document.getElementById('write-form');
+        writeForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Quill 에디터의 내용을 HTML 형태로 가져옴
+            const contentHTML = quill.root.innerHTML;
+
+            // 제목, 카테고리 등 다른 입력 필드의 값도 가져올 수 있음
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+
+            console.log('제목:', title);
+            console.log('카테고리:', category);
+            console.log('에디터 내용 (HTML):', contentHTML);
+
+            // TODO: 여기서 백엔드 API로 데이터 전송 (fetch, axios 등 사용)
+            alert('게시글을 작성하시겠습니까?');
+        });
+    });
+</script>
+</body>
+</html>

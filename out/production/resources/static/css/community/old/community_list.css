@@ -1,0 +1,386 @@
+/* community_list.css */
+
+/* 사이드바 카드 */
+/*
+.sidebar-card {
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+}
+*/
+/* 페이지 컨테이너: 헤더 높이만큼 패딩 */
+.page-container {
+    padding-top: 167px;
+    background-color: #FFFFFF;
+}
+
+/* 마이페이지 레이아웃: 사이드바 + 콘텐츠 */
+.mypage-container {
+    display: flex;
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 0;
+    box-sizing: border-box;
+}
+
+/* 사이드바 */
+.sidebar {
+    flex: 0 0 180px; /* Figma: 180px */
+    padding-top: 59px; /* (266px - 167px) */
+    box-sizing: border-box;
+}
+
+/* 네비게이션 제목 */
+.mypage-nav .nav-title {
+    width: 180px;
+    height: 40px;
+    background-color: #1EC4CC;
+    border: 1px solid #1EC4CC;
+    border-radius: 4px 4px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* active 상태 (필요시 추가 커스터마이징) */
+.mypage-nav .nav-title.active {
+    /* 현재는 기본 스타일과 동일하게 유지 */
+}
+
+/* nav 목록 spacing */
+.mypage-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 8px;
+}
+.mypage-nav ul li {
+    margin-top: 8px;
+}
+
+.mypage-nav ul li a {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    height: 37px; /* Figma: 37px */
+    padding: 0 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #0099AD;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #5D5D5D;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mypage-nav ul li a:hover {
+    background-color: #F4F4F4;
+}
+
+/* 본문 영역 */
+.content {
+    flex: 1;
+    margin-left: 18px;
+}
+
+/* 게시글 섹션 제목 */
+.post-section h2 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #17292C;
+    margin: 24px 0 0;
+}
+
+/* 검색 바 */
+.post-search{
+  display:flex;
+  align-items:center;
+  gap:37px;
+  margin-bottom:41px;
+}
+
+
+.post-section hr {
+    margin: 11px 0 24px;
+    border: none;
+    height: 0;
+    border-bottom: 2px solid #80CCD6;
+}
+
+/* 선택 박스 */
+.post-search select {
+    width: 119px;
+    height: 40px;
+    margin: 28px 0 0 7px;       /* Figma: left 500px – 기준 493px = 7px */
+    background-color: #FFFFFF;
+    border: 1px solid #0099AD;
+    border-radius: 0;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    leading-trim: none;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 검색창 */
+.post-search input {
+    width: 405px;
+    height: 40px;
+    margin: 28px 0 0 0;
+    border: 1px solid #0099AD;
+    box-sizing: border-box;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    leading-trim: none;
+}
+
+/* 검색 아이콘 위치 */
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.search-input-wrapper .search-icon {
+    position: absolute;
+    top: 70%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+}
+
+/* 입력창에 아이콘 공간 확보 */
+.post-search input {
+    padding-right: 40px;       /* 아이콘 너비(24px) + 여유(16px) */
+}
+
+/* 글쓰기 버튼 */
+.btn-write{
+  margin: 28px 14px 0 293px;
+  width: 104px;
+  height: 41px;
+  background:#00A9CA;
+  border-radius:5px;
+  font:400 20px/24px 'Pretendard',sans-serif;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-align: center;
+}
+
+/* 게시글 테이블 */
+.post-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.post-table thead{
+    background-color:#EFEFEF;
+}
+.post-table thead th {
+    border-bottom: none;
+}
+
+.post-table th,
+.post-table td {
+    padding: 12px;
+    border-bottom: 1px solid #80CCD6;
+    text-align: left;
+    font-family: 'Pretendard', sans-serif;
+    box-sizing: border-box;
+}
+
+.post-table th {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.post-table td {
+    height: 92px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #000000;
+}
+
+.thumb-cell img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+}
+/* 모든 td 가운데 정렬 */
+.post-table tbody td {
+  text-align: center;
+}
+.post-table thead th {
+  text-align: center;
+}
+/* 4번째 칼럼(제목)은 왼쪽 정렬) */
+.post-table tbody td:nth-child(4) {
+  text-align: left;
+}
+/* 1열: 글번호 */
+.post-table th:nth-child(1),
+.post-table td:nth-child(1) {
+  width: 64px;
+}
+
+/* 2열: 카테고리 */
+.post-table th:nth-child(2),
+.post-table td:nth-child(2) {
+  width: 100px;
+}
+
+/* 3열: 썸네일 */
+.post-table th:nth-child(3),
+.post-table td:nth-child(3) {
+  width: 100px;
+}
+
+/* 4열: 제목 (자동 채우기) */
+.post-table th:nth-child(4),
+.post-table td:nth-child(4) {
+  width: auto;
+}
+
+/* 5열: 작성자 */
+.post-table th:nth-child(5),
+.post-table td:nth-child(5) {
+  width: 80px;
+}
+
+/* 6열: 작성일 */
+.post-table th:nth-child(6),
+.post-table td:nth-child(6) {
+  width: 91px;
+}
+
+/* 7열: 조회수 */
+.post-table th:nth-child(7),
+.post-table td:nth-child(7) {
+  width: 75px;
+}
+
+.post-table td {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-style: normal;       /* Regular */
+    font-size: 15px;
+    leading-trim: none;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+
+.post-table th {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-style: normal;       /* Regular */
+    font-size: 16px;
+    leading-trim: none;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+.commentCnt {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-style: normal;      /* Regular */
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0;
+  leading-trim: none;
+  color:#56DDF8;
+  padding-left:3px;
+}
+
+.indent-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  transform: translateY(-3px);
+}
+.post-table .del-box {
+  background-color: #F4F4F4;
+  text-align: left;
+  padding-left: 70px;
+}
+.del-bbsId {
+  background-color: #F4F4F4;
+}
+/* 페이지네이션 */
+/* 전체 네비게이션 래퍼 */
+.pagination {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;
+  margin: 16px 0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 공통 버튼 스타일 */
+.pagination button {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  transition: background-color .2s, color .2s;
+  font-weight:400;
+}
+
+/* 비활성(첫/이전 없을 때 등) */
+.pagination button:disabled {
+  color: #aaa;
+  cursor: default;
+}
+
+/* 페이지 번호 버튼 */
+.pagination button:not(:disabled):hover {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* 현재 페이지 */
+.pagination button.active {
+  background-color: #00A9CA;
+  color: white;
+  border-radius: 4px;
+}
+
+.ql-editor p.inline-image {
+  display:inline-block;
+  margin:0;
+  padding:0;
+  line-height:0;
+  width:auto;
+}
+

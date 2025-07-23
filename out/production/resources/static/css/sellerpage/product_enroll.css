@@ -1,0 +1,14 @@
+.product-registration {
+    width:1010px;
+    padding: 100px;
+}
+
+.resgistratrion-title{
+    font-size: larger;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form-group label{
+    width: 220px;
+}

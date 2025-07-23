@@ -1,0 +1,181 @@
+/* ✅ 전체 body 설정 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #88E3E3; /* 배경색: 밝은 청록 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면 중앙 정렬 */
+}
+
+/* ✅ 로그인 박스 컨테이너 */
+.login-container {
+  width: 510px;
+  background: white;
+  padding: 48px 0 32px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 부드러운 그림자 */
+  text-align: center;
+}
+
+/* ✅ 로고 스타일 */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #222;
+  margin-bottom: 48px;
+  cursor: default;
+  user-select: none; /* 선택 방지 */
+}
+
+/* ✅ 로그인 폼 */
+.login-form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* ✅ 입력 필드: 이메일, 비밀번호 */
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="email"]{
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: text;
+}
+
+/* ✅ 비밀번호 입력 영역: 아이콘 포함 */
+.input-item {
+  position: relative;
+  margin-top: 12px;
+}
+
+/* ✅ 비밀번호 입력 오른쪽 아이콘 공간 확보 */
+.input-item input {
+  padding-right: 70px;
+}
+
+/* ✅ 아이콘 공통 스타일 (눈, 삭제버튼) */
+.btn-eye,
+.btn-clear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #444;
+  cursor: pointer;
+}
+
+/* ✅ 눈 아이콘 기본 위치 */
+.btn-eye {
+  right: 10px;
+}
+
+/* ✅ 삭제 아이콘 표시될 때 눈 아이콘 위치 조정 */
+.btn-eye.shift-left {
+  right: 40px;
+}
+
+/* ✅ 삭제 아이콘 초기 비표시 */
+.btn-clear {
+  right: 10px;
+  display: none;
+}
+
+/* ✅ Caps Lock 경고 메시지 */
+.login-form .caps-warning {
+  color: red;
+  font-size: 14px;
+  text-align: left;
+  margin: 4px 0 0 4px;
+  display: none;
+}
+
+/* ✅ 이메일 기억하기 체크박스 */
+.remember {
+  display: flex;
+  align-items: center;
+  margin: 14px 0 20px;
+  font-size: 14px;
+  color: #333;
+}
+.remember label {
+  cursor: default;
+  user-select: none;
+}
+
+/* ✅ 로그인 버튼 */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #0099AD; /* 청록색 */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* ✅ 하단 링크 (회원가입/비밀번호 찾기) */
+.links {
+  font-size: 14px;
+}
+.links a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+/* ✅ 아이콘 색상 및 hover 효과 */
+.btn-eye i,
+.btn-clear i {
+  color: #bbb;
+  transition: color 0.2s;
+  font-size: 14px;
+}
+.btn-eye:hover i,
+.btn-clear:hover i {
+  color: #555;
+}
+
+/* ✅ 커서 스타일 정리 */
+body,
+.login-container,
+.login-form,
+.logo,
+.remember,
+.links {
+  cursor: default;
+}
+input[type="text"],
+input[type="password"] {
+  cursor: text;
+}
+input[type="checkbox"],
+button,
+.login-btn,
+.links a {
+  cursor: pointer;
+}
+
+/* ✅ 로그인 실패 시 에러 메시지 */
+.global-error {
+  background-color: #ffeaea; /* 연한 붉은 배경 */
+  border: 1px solid #d93025; /* 붉은 테두리 */
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #d93025;
+  font-weight: bold;
+  border-radius: 4px;
+}

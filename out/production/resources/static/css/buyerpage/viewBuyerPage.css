@@ -1,0 +1,193 @@
+/* viewBuyerPage.css */
+/* ✅ 기본 설정 및 초기화 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  color: #333;
+  background-color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ✅ 페이지 전체 컨테이너 설정 */
+.page-container {
+  width: 1200px;
+  height: 1570px;
+  margin: 0 auto 40px auto;
+  background-color: #fff;
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ✅ 마이페이지 전체 레이아웃 (사이드바 + 콘텐츠) */
+.mypage-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+
+/* ✅ 본문 콘텐츠 영역 */
+.content {
+  flex-grow: 1;
+  width: calc(100% - 230px); /* 사이드바 여백 포함 */
+}
+
+/* ✅ 회원 정보 카드 박스 */
+.info-summary-card {
+  width: 938px;               /* ✅ 고정 너비 */
+  height: 463px;              /* ✅ 고정 높이 */
+  margin: 0 auto;
+  font-family: 'Pretendard', sans-serif;
+  color: #333;
+  border: none;               /* ✅ 외곽선 제거 */
+  background-color: #fff;
+}
+
+/* ✅ 회원 정보 제목 */
+.info-summary-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+/* ✅ 기본 form-row 스타일 */
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  /* 선은 조건별로 따로 지정함 */
+}
+
+/* ① 아이디 행 위쪽 라인 (첫 행) */
+.form-row:first-of-type {
+  border-top: 1px solid #1EC4CC;   /* ← 신규 추가 */
+}
+
+/* ✅ 위쪽 선: 일반 항목용 (#BFBFBF) */
+.form-row.divider-top {
+  border-top: 1px solid #BFBFBF;
+}
+
+/* ✅ 아래쪽 선: 알림 설정 항목 전용 (#1EC4CC) */
+.form-row.divider-bottom {
+  border-bottom: 1px solid #1EC4CC;
+}
+
+/* ✅ 항목 이름 (왼쪽 라벨) */
+.form-row label {
+  width: 150px;
+  font-weight: 600;     /* 세미볼드 */
+  font-size: 18px;       /* 글자 크기 18px */
+  color: #6B6B6B;        /* 글자색 #6B6B6B */
+  flex-shrink: 0;
+}
+
+/* ✅ 항목 값 (오른쪽 텍스트) */
+.form-row span,
+.form-row .intro-text {
+  font-size: 18px;       /* label과 동일 */
+  font-weight: 600;      /* 세미볼드 */
+  color: #6B6B6B;        /* 동일 색상 */
+}
+
+/* ✅ 자기소개 없는 경우의 텍스트 */
+.form-row .intro-text {
+  color: #999;
+  font-style: italic;
+}
+
+/* ✅ 전화번호 인증 완료 라벨 */
+.label-certify {
+  background-color: #f0f0f0;
+  color: #999;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+/* ✅ 알림 설정 영역 */
+.notification-setting {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #444;
+}
+
+.notification-setting input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.notification-setting p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #777;
+}
+
+/* ✅ 수정 / 탈퇴 버튼 그룹 */
+.form-button-group {
+  position: relative;            /* 기준점 설정 */
+  display: flex;
+  justify-content: center;       /* 수정 버튼 중앙 정렬 */
+  align-items: center;
+  width: 100%;
+  margin-top: 32px;
+  height: 40px;                  /* 버튼 높이 맞춤 */
+}
+
+/* ✅ 공통 버튼 스타일 */
+.btn {
+  padding: 10px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+/* ✅ 회원정보 수정하기 버튼 */
+.btn.btn-primary {
+  background-color: #1EC4CC !important;
+  color: #FFFFFF !important;
+}
+
+/* ✅ hover 효과 (색상 유지 원하면 제거 가능) */
+.btn-primary:hover {
+  background-color: #00b4cc;
+}
+
+/* ✅ 모시 탈퇴: 오른쪽 고정 */
+.withdraw-text {
+  position: absolute;
+  right: 0;                      /* 오른쪽 끝 정렬 */
+  font-size: 15px;
+  font-weight: 500;              /* 미디엄 */
+  color: #414141;
+  text-decoration: underline;
+  cursor: pointer;
+}
+

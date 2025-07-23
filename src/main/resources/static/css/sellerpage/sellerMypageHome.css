@@ -1,0 +1,366 @@
+/*sellerMypageHome.css*/
+/* 공통 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  color: #000;
+  background-color: #fff;
+  padding-top: 150px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 레이아웃 */
+.page-container {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  height: 1980px; /* ✅ 전체 높이 확보 */
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-container {
+  flex: 1;
+  display: flex;
+  gap: 30px;
+  padding: 40px 20px;
+  background-color: #fff;
+  min-height: calc(100vh - 150px - 80px); /* ✅ 헤더/푸터 제외 높이 확보 */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 180px;
+  min-height: 920px;
+  flex-shrink: 0;
+  background-color: #f8f9fa;
+}
+
+.sidebar-card {
+  border: 1px solid #82d8d8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.profile-box {
+  padding: 20px 15px;
+  text-align: center;
+  border-bottom: 1px solid #E0E0E0;
+  background-color: #ffffff;
+}
+
+.profile-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  border: 1px solid #ddd;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-badge {
+  display: inline-block;
+  color: #666;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.mypage-nav .nav-title {
+  background-color: #1EC4CC;
+  color: #fff;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.mypage-nav ul {
+  background-color: #fff;
+  padding: 10px 0;
+}
+
+.mypage-nav > ul > li > a {
+  font-weight: bold;
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.mypage-nav > ul > li > ul {
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+.mypage-nav > ul > li > ul a {
+  display: block;
+  padding: 6px 30px;
+  font-size: 13px;
+  color: #555;
+}
+
+.mypage-nav > ul > li > ul a:hover {
+  color: #00c7e2;
+}
+
+/* Content */
+.content {
+  flex-grow: 1;
+  width: auto;
+}
+
+/* Info Summary */
+.info-summary-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.info-grid-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #fafafa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.info-item {
+  text-align: center;
+  position: relative;
+  padding: 20px 0;
+}
+
+.info-item:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 40px;
+  background-color: #e0e0e0;
+}
+
+.info-main .title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-main .value {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.info-item .title {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.info-item .value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Recent Orders */
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.recent-orders th, .recent-orders td {
+  padding: 15px 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.recent-orders thead {
+  background-color: #fafafa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.order-item-image {
+  width: 50px;
+  height: 50px;
+  background-color: #ececec;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+}
+
+.price {
+  font-weight: bold;
+}
+
+/* 광고 */
+.ad-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  gap: 40px;
+}
+
+.ad-arrow {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* 상품 카드 */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.tour-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e1e4e8;
+}
+
+.card-image {
+  height: 290px; /* ✅ 시안과 동일 */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: white;
+  text-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-price {
+  text-decoration: line-through;
+  font-size: 14px;
+  color: #888;
+}
+
+.card-discount {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.discount-badge {
+  background-color: #e5f8fb;
+  color: #00a0b6;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* 하단 섹션 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/*공지*/
+ .notice-box {
+   width: 1200px;
+   height: 54px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: #FAFAFA;
+   border: 1px solid rgba(194, 194, 194, 0.5); /* #C2C2C2 50% */
+   border-radius: 1px;
+   padding: 0 20px;
+   box-sizing: border-box;
+   font-size: 14px;
+   color: #333;
+   margin-top: 40px;
+   margin-bottom: 40px;
+ }
+
+ .notice-box b {
+   color: #0099AD;
+   font-size: 16px;
+   font-weight: 600; /* 세미볼드 */
+   margin-right: 12px;
+ }
+
+ .notice-box .text {
+   flex-grow: 1;
+   font-size: 14px;
+   font-weight: 400; /* 레귤러 */
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+ }
+
+ .notice-box .notice-more {
+   font-size: 14px;
+   font-weight: 600; /* 세미볼드 */
+   color: #0099AD;
+   margin-left: 10px;
+ }

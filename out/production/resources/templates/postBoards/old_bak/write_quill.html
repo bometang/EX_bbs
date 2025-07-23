@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|MO:SI 커뮤니티 게시글 작성|">MO:SI 커뮤니티 게시글 작성</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/addStyles.css}">
+    <style>
+        .file-list {
+          display: inline-block;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        .file-list li {
+          display: inline;
+          margin-left: 8px;
+        }
+    </style>
+</head>
+<body th:attr="data-parent-id=${bbsId}">
+<div class="container-wrapper">
+
+    <div th:replace="~{fragments/header :: header}"></div>
+    <nav class="main-nav">
+        <div>전체메뉴</div>
+        <div>테마여행</div>
+        <div>커뮤니티</div>
+        <div>항공</div>
+        <div>호텔</div>
+    </nav>
+
+    <main class="main-content">
+        <aside class="left-sidebar">
+            <ul>
+                <li class="menu-title">커뮤니티</li>
+                <li><a th:href="@{/bbs}">자유 게시판</a></li>
+            </ul>
+        </aside>
+
+        <section class="content-area">
+            <h1>게시글 작성</h1>
+            <form class="write-form" id="write-form">
+                <label for="bcategory" class="form-label">카테고리</label>
+                <div class="select-group">
+                    <select id="bcategory" name="bcategory">
+                        <option value="">--선택--</option>
+                    </select>
+                </div>
+                <label for="title" class="form-label">제목</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="제목을 입력하세요">
+
+                <label for="editor" class="form-label">내용</label>
+                <div class="content-editor-wrapper">
+                    <div id="toolbar">
+                        <select class="ql-font"></select>
+                        <select class="ql-size">
+                            <option value="small"></option>
+                            <option selected></option>
+                            <option value="large"></option>
+                            <option value="huge"></option>
+                        </select>
+
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+
+                        <button class="ql-script" value="sub"></button>
+                        <button class="ql-script" value="super"></button>
+
+                        <select class="ql-header">
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option selected></option>
+                        </select>
+
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
+                        <button class="ql-align" value="justify"></button>
+
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+
+                        <button class="ql-indent" value="-1"></button>
+                        <button class="ql-indent" value="+1"></button>
+
+                        <button class="ql-link"></button>
+                        <button class="ql-image"></button>
+
+                        <button class="ql-clean"></button>
+                    </div>
+                    <div id="editor" style="height: 300px;"></div>
+                    <input type="hidden" name="bcontent" id="editorContent">
+                </div>
+
+                <div class="file-upload-section">
+                    <input type="hidden" id="upload-group" name="uploadGroup">
+                    <span class="upload-label">파일 첨부</span>
+                    <div class="file-upload-buttons">
+                        <input type="file" id="file-input" name="files" multiple style="display: none;">
+                        <button type="button" onclick="document.getElementById('file-input').click();">파일 선택</button>
+                        <span id="file-name-display">선택된 파일 없음</span>
+                        <ul id="file-list" class="file-list"></ul>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="submit-btn" id="submit-btn">작성하기</button>
+                    <button type="button" class="temp-save-btn" id="temp-save-btn">임시저장</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+<!-- 1) Quill UMD (로컬) -->
+<script th:src="@{/js/vendor/quill.min.js}"></script>
+
+<!-- 2) ImageDrop UMD (로컬, 파일명은 image-drop.min.js) -->
+<script th:src="@{/js/vendor/image-drop.min.js}"></script>
+
+<!-- 3) ImageResize UMD (로컬) -->
+<script th:src="@{/js/vendor/image-resize.min.js}"></script>
+
+<script  type="module" th:src="@{/js/bbs/csr/writeForm_quill.js}"></script>
+</body>
+</html>

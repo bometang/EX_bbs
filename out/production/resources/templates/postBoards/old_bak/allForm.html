@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+</head>
+<body>
+<h3>게시글목록</h3>
+<form id="frm" action="/boards/del" method="post">
+    <table>
+        <thead>
+        <tr>
+            <th>전체선택</th>
+            <th>게시판ID</th>
+            <th>제목</th>
+            <th>유저</th>
+            <th>날짜</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="postBoards:${list}" th:object="${postBoards}">
+            <td><input type="checkbox" name="postIds" th:value="*{postId}"></td>
+            <td th:text="*{postId}">1</td>
+            <td><a th:href="@{/boards/{id}(id=*{postId})}" th:text="*{title}">제목</a> </td>
+            <td th:text="*{nickname}">이름</td>
+            <td th:text="*{cdate}">날짜</td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<div>
+    <button id="btnDel">삭제</button>
+    <button id="btnAdd">등록</button>
+</div>
+<script>
+    //삭제
+    const $btnDel = document.getElementById('btnDel');
+    $btnDel.addEventListener('click', e=>{
+      if(!confirm('삭제하시겠습니까')) return;
+      const $frm = document.getElementById('frm');
+      $frm.submit();  // form태그 내에 있는 input요소를 기반으로 http 요청 메시지를 만든다.
+    }, false);
+
+    //등록
+    const $btnAdd = document.getElementById('btnAdd');
+    $btnAdd.addEventListener('click',e=>{
+    location.href = '/boards/add';    // GET http://localhost:9080/boards/add
+    });
+</script>
+</body>
+</html>

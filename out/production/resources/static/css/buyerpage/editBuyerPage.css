@@ -1,0 +1,185 @@
+/*editBuyerPage.css*/
+/* =============================== */
+/* ✅ 기본 설정 */
+/* =============================== */
+body {
+  width: 1200px;
+  margin: 0 auto;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fff;
+  color: #1F1F1F;
+  padding: 0;
+}
+
+h2.form-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #1EC4CC;
+  padding-bottom: 8px;
+}
+
+/* editBuyerPage.css의 상단 or 하단에 추가 */
+.mypage-container {
+  display: flex;
+  gap: 24px;
+}
+
+/* =============================== */
+/* ✅ 전체 폼 컨테이너 */
+/* =============================== */
+.content {
+  width: 938px;         /* 가로 */
+  height: 1587px;       /* 세로 */
+  margin: 0 auto;       /* 가운데 정렬 */
+  padding: 40px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  overflow: hidden;     /* 필요 시 auto로 변경 가능 */
+}
+
+
+.edit-form {
+  width: 100%;
+  max-width: 720px;
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+  margin-top: 16px;
+}
+
+/* =============================== */
+/* ✅ 프로필 이미지 영역 */
+/* =============================== */
+.profile-preview{
+  width:253px !important;     /* ← 253px로 확정 */
+  height:253px !important;    /* ← 253px로 확정 */
+  border-radius: 5px;
+  object-fit:cover;
+  border:1px solid #ccc;
+}
+
+/* ⬇ 버튼을 이미지 아래에 두려면 column 사용 */
+.profile-section{
+  display:flex;
+  flex-direction:column;      /* 가로 → 세로 배치 */
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.btn-upload {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #1EC4CC;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* =============================== */
+/* ✅ 폼 요소 공통 스타일 */
+/* =============================== */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-row label {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #6B6B6B;
+}
+
+.form-row input,
+.form-row textarea {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* =============================== */
+/* ✅ 닉네임 중복확인 버튼 옆 배치 */
+/* =============================== */
+.nickname-box {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #1EC4CC;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* =============================== */
+/* ✅ 오류 메시지 스타일 */
+/* =============================== */
+.error-msg {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* =============================== */
+/* ✅ 자기소개 글자수 표시 */
+/* =============================== */
+.char-count {
+  font-size: 13px;
+  color: #999;
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* =============================== */
+/* ✅ 주소 입력 영역 */
+/* =============================== */
+.address-row > div {
+  display: flex;
+  gap: 8px;
+}
+
+/* =============================== */
+/* ✅ 하위 섹션 제목 */
+.section-subtitle {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+/* =============================== */
+/* ✅ 버튼 영역 */
+/* =============================== */
+.form-button-group {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #1EC4CC;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}

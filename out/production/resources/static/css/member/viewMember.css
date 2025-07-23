@@ -1,0 +1,50 @@
+/* /css/member/resetPwResult.css */
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.result-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 360px;
+}
+
+.result-container h2 {
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.message-box {
+  margin-bottom: 32px;
+}
+
+.success-msg {
+  color: #0099AD;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-box .btn {
+  padding: 10px 20px;
+  background-color: #0099AD;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}

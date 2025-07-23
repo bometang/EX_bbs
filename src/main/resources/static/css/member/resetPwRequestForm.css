@@ -1,0 +1,58 @@
+/* css/member/resetPwRequestForm.css */
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #f0faff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.reset-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.reset-container h2 {
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.reset-container p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.reset-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.reset-container input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.reset-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0099AD;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}

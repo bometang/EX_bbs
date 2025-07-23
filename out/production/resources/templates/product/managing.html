@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/product/product_managing.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="product-managing">
+        <h2>내 상품 목록</h2>
+        <hr>
+
+        <div class="product-managing-main">
+            <!-- 검색박스 -->
+            <div class="search-box">
+                <input type="text" placeholder="상품명을 입력해주세요.">
+            </div>
+            <div class="overall-info">
+                <div>총 12개</div>
+                <select th:field="*{category}">
+                    <option value="on_sale" th:selected="${product.status == 'on_sale'}">판매중</option>
+                    <option value="coming_soon" th:selected="${product.status == 'coming_soon'}">판매대기</option>
+                </select>
+            </div>
+            <hr>
+            <!-- 상품목록 -->
+            <div class="product-list">
+                <div class="product-item" th:each="product : ${products}">
+                    <img th:src="@{${product.imageUrl}}" alt="상품 이미지">
+                    <div class="product-info">
+                        <div class="product-info-left">
+                            <h2 th:text="${product.title}">일이삼사오륙칠팔구십일이삼사오륙칠팔구십일이삼사</h2>
+                            <div class="product-info-left-detail">
+                                <select th:field="*{category}">
+                                    <option value="on_sale" th:selected="${product.status == 'on_sale'}">판매중</option>
+                                    <option value="coming_soon" th:selected="${product.status == 'coming_soon'}">판매대기
+                                    </option>
+                                </select>
+                                <div class="product-info-left-detail-details">
+                                    <div th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd')}">날짜</div>
+                                    <div th:text="'조회 ' + ${product.viewCount}">조회수</div>
+                                    <div th:text="'♡ ' + ${product.likeCount}">좋아요</div>
+                                    <div th:text="'댓글 ' + ${product.commentCount}">댓글수</div>
+                                </div>
+                            </div>
+                            <textarea th:text="${product.description}"
+                                readonly>우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항</textarea>
+                        </div>
+                    </div>
+                    <div class="product-info-right">
+                        <div class="product-info-right-detail">
+                            <div th:text="${product.discount + '% 저렴'}">저렴</div>
+                            <div class="price">
+                                <h1 th:text="${product.price + '원'}">40,000</h1>
+                                <div>원</div>
+                            </div>
+                            <div th:text="'정가 ' + ${product.originalPrice} + '원'">원</div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn-group-edit">수정</button>
+                            <button class="btn-group-delete">삭제</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!-- src/main/resources/templates/bbs/bbs_detail.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title th:text="${bbs.title}">게시글</title>
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/community/write_quill.css}">
+  <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="page-container">
+  <main class="mypage-container">
+    <aside class="sidebar" th:replace="~{fragments/sidebar-community :: sidebar}"></aside>
+
+    <!-- ===== 본문 ===== -->
+    <section class="content">
+      <section class="post-section post-detail">
+
+        <!-- ▶ JS에서 pid를 읽어가기 위한 히든용 div (.board, id=게시글PK) -->
+        <div class="board" th:id="${bbs.bbsId}" hidden></div>
+
+        <!-- ── 제목 & 메타 ─────────────────────────────── -->
+        <h2 class="post-title" th:text="${bbs.title}">제목</h2>
+        <div class="post-meta">
+          <span class="post-category" th:text="${bbs.categoryName}">카테고리</span> ·
+          <span class="post-author"   th:text="${bbs.nickname}">작성자</span> ·
+          <span class="post-date"     th:text="${#dates.format(bbs.createdAt,'yyyy-MM-dd HH:mm')}">2025‑07‑21 12:00</span> ·
+          <span class="post-views">조회수 <strong th:text="${bbs.hit}">0</strong></span>
+        </div>
+        <hr>
+
+        <!-- ── 본문 ────────────────────────────────────── -->
+        <div class="post-body quill-content" th:utext="${bbs.bcontent}"></div>
+
+        <!-- ── 첨부파일 ───────────────────────────────── -->
+        <div class="post-attachments" th:if="${#lists.size(files)>0}">
+          <h3>첨부파일</h3>
+          <ul class="attachments-list">
+            <li th:each="f : ${files}">
+              <a th:href="@{${f.url}}" th:text="${f.originalName}" download></a>
+              (<span th:text="${#numbers.formatInteger(f.size/1024,0)}"></span> KB)
+            </li>
+          </ul>
+        </div>
+
+        <!-- ── 게시글 액션(좋아요/신고/수정/삭제/목록) ───────── -->
+        <div class="post-actions">
+          <button id="btnLike"   class="btn-like">좋아요</button>
+          <span   id="likeCount" class="like-count" th:text="${bbs.likeCnt}">0</span>
+          <button id="btnReport" class="btn-report">신고</button>
+
+          <div class="post-actions-right">
+            <a th:href="@{/bbs/community}"                class="btn-list">목록</a>
+            <a th:if="${isAuthor}" th:href="@{'/bbs/edit/' + ${bbs.bbsId}}" class="btn-edit">수정</a>
+            <button th:if="${isAuthor}"  type="button" class="btn-delete"
+                    onclick="confirm('삭제하시겠습니까?') && (location.href='/bbs/delete/'+[[${bbs.bbsId}]])">
+              삭제
+            </button>
+          </div>
+        </div>
+
+        <!-- ── 댓글 영역 ──────────────────────────────── -->
+        <section id="comment-wrap" class="comment-wrap">
+          <h3>댓글</h3>
+
+          <!-- 댓글 등록 폼(스크립트가 채움) -->
+          <div id="comment-form-zone"></div>
+
+          <!-- 댓글 목록(스크립트가 채움) -->
+          <div id="comment-list"></div>
+
+          <!-- 페이징 위치 고정 -->
+          <div id="reply_pagenation" class="pagination"></div>
+        </section>
+
+      </section>
+    </section>
+  </main>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- ===== 기능 통합 JS ===== -->
+<script type="module" src="/js/community/bbs/bbs_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+spring:
+  # app이름
+  application:
+    name: mosi
+  #DB연결정보
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: c##mosi
+    password: mosi1234
+  #ai
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+      file-size-threshold: 0B
+
+# 웹서버 포트
+server:
+  port: 9090
+
+# 로그레벨
+# trace > debug > info > warn > error > fatal
+logging:
+  level:
+    root: info
+
+
+
+# 게시판 업로드 위치
+upload:
+  path: C:\KDT\projects\uploads\bbs
+  url-prefix: /static/uploads
+

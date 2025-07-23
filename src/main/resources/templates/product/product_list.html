@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여행 상품 목록</title>
+  <link rel="stylesheet" href="/static/css/layout.css">
+  <link rel="stylesheet" href="/static/css/product/product_list_v2.css">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <!-- 최상단 로그인/회원가입 or 사용자 정보 -->
+    <div class="header-top-bar">
+      <div class="user-links">
+        <!-- 비로그인 상태 -->
+        <a href="/login">로그인</a>
+        <a href="/members/join">회원가입</a>
+
+        <!-- 로그인 상태 -->
+        <div class="user-logged-in">
+          <form action="/login/logout" method="post" class="logout-form">
+            <button type="submit" class="logout-button" aria-label="로그아웃">로그아웃</button>
+          </form>
+          <a href="/notifications" class="notification-link" aria-label="알림">
+            <i class="fa fa-bell" aria-hidden="true"></i> <span>알림</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로고, 검색창, 사용자 메뉴 -->
+    <div class="header-main">
+      <a href="/" class="logo">
+        <img src="/img/msi.png" alt="MO:SI 아이콘" style="width:64px; height:64px; margin-left:23px;">
+        <span>MO:SI</span>
+      </a>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="검색어를 입력하세요." aria-label="검색어 입력창">
+        <button type="submit" aria-label="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </div>
+      <div class="user-menu">
+        <a href="/wishlist" aria-label="관심상품">
+          <i class="fas fa-heart" aria-hidden="true"></i><span>관심상품</span>
+        </a>
+        <a href="/mypage/buyer" aria-label="내 정보">
+          <i class="fas fa-user" aria-hidden="true"></i><span>내 정보</span>
+        </a>
+        <a href="/cart" aria-label="장바구니">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i><span>장바구니</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 내비게이션 메뉴 -->
+    <nav class="header-nav">
+      <ul>
+        <li><a href="/menu">전체메뉴</a></li>
+        <li><a href="/theme">테마여행</a></li>
+        <li><a href="/bbs">커뮤니티</a></li>
+        <li><a href="/air">항공</a></li>
+        <li><a href="/hotel">호텔</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="page-container">
+  <div class="breadcrumb">
+    홈 &gt; 테마여행 &gt; <span class="breadcrumb-current">{카테고리명}</span>
+  </div>
+  <!--카테고리명-->
+  <section class="category-header">
+    <h1>카테고리명</h1>
+  </section>
+
+  <!--가장 인기있는 키워드-->
+  <section class="top-keywords-frame">
+    <div class="top-keywords-header">
+      <span class="top-keywords-title">가장 인기있는 키워드 Top5</span>
+      <span class="hot-badge">Hot</span>
+    </div>
+
+    <!-- 키워드 카드 리스트 -->
+    <div class="keyword-cards">
+      <!-- 카드 #1 -->
+      <div class="keyword-card">
+        <div class="keyword-content">
+          <div class="keyword-icon" style="background-image: url('../../static/img/product/product_list/반려견.png');"></div>
+          <span class="keyword-label">반려견</span>
+        </div>
+        <!-- 필요 시 카드 내 Hot 배지 -->
+        <!-- <span class="hot-badge">Hot</span> -->
+      </div>
+
+      <!-- 카드 #2 -->
+      <div class="keyword-card">
+        <div class="keyword-content">
+          <div class="keyword-icon" style="background-image: url('../../static/img/product/product_list/맛집.png');"></div>
+          <span class="keyword-label">맛집</span>
+        </div>
+      </div>
+
+      <!-- 카드 #3 -->
+      <div class="keyword-card">
+        <div class="keyword-content">
+          <div class="keyword-icon" style="background-image: url('../../static/img/product/product_list/바다.png');"></div>
+          <span class="keyword-label">바다</span>
+        </div>
+      </div>
+
+      <!-- 카드 #4 -->
+      <div class="keyword-card">
+        <div class="keyword-content">
+          <div class="keyword-icon" style="background-image: url('../../static/img/product/product_list/카페.png');"></div>
+          <span class="keyword-label">카페</span>
+        </div>
+      </div>
+
+      <!-- 카드 #5 -->
+      <div class="keyword-card">
+        <div class="keyword-content">
+          <div class="keyword-icon" style="background-image: url('../../static/img/product/product_list/연인.png');"></div>
+          <span class="keyword-label">연인</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="content-wrapper">
+    <aside class="sidebar">
+      <div class="guide-box">
+        <ul>
+          <li>탑 글래스 여행가이드</li>
+          <li>모시에서 만나보세요!</li>
+        </ul>
+      </div>
+      <div class="menu-frame">
+        <ul>
+          <li><a href="#">지역</a></li>
+          <li><a href="#">반려동물</a></li>
+          <li><a href="#">맛집</a></li>
+          <li><a href="#">문화</a></li>
+          <li><a href="#">역사</a></li>
+          <li><a href="#">계절</a></li>
+          <li><a href="#">자연</a></li>
+          <li><a href="#">실버</a></li>
+          <li><a href="#">교통약자</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!--main-->
+    <main class="main-content">
+      <form class="filter-form">
+        <div class="select-container">
+          <!-- 카테고리 선택 -->
+          <div class="filter-item filter-category">
+            <select class="filter-select filter-category">
+              <option value="" disabled selected>카테고리 선택</option>
+              <option value="theme1">테마여행1</option>
+              <option value="theme2">테마여행2</option>
+              <!-- … -->
+            </select>
+          </div>
+
+          <!-- 가이드 동반 -->
+          <div class="filter-item filter-guide">
+            <select class="filter-select filter-guide">
+              <option value="" disabled selected>가이드 동반</option>
+              <option value="yes">동반 O</option>
+              <option value="no">동반 X</option>
+            </select>
+          </div>
+
+          <!-- 상태 (판매중) -->
+          <div class="filter-item filter-status">
+            <select class="filter-select filter-status">
+              <option value="" disabled selected>판매 상태</option>
+              <option value="on">판매중</option>
+              <option value="off">판매 종료</option>
+            </select>
+          </div>
+
+          <!-- 인원 수 -->
+          <div class="filter-item filter-people">
+            <select class="filter-select filter-people">
+              <option value="" disabled selected>인원 수</option>
+              <option value="1">1명</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <!-- … -->
+            </select>
+          </div>
+
+          <!-- 추천 연령 -->
+          <div class="filter-item filter-age">
+            <select class="filter-select filter-age">
+              <option value="" disabled selected>추천 연령</option>
+              <option value="20s">20대</option>
+              <option value="30s">30대</option>
+              <option value="40s">40대</option>
+              <!-- … -->
+            </select>
+          </div>
+
+          <!-- 여행 기간 -->
+          <div class="filter-item filter-duration">
+            <select class="filter-select filter-duration">
+              <option value="" disabled selected>여행 기간</option>
+              <option value="1-2">1~2일</option>
+              <option value="3-4">3~4일</option>
+              <option value="5+">5일 이상</option>
+            </select>
+          </div>
+
+          <!-- 숙박 포함 -->
+          <div class="filter-item filter-accommodation">
+            <select class="filter-select filter-accommodation">
+              <option value="" disabled selected>숙박 포함</option>
+              <option value="yes">포함</option>
+              <option value="no">미포함</option>
+            </select>
+          </div>
+
+          <!-- 교통편 -->
+          <div class="filter-item filter-transport">
+            <select class="filter-select filter-transport">
+              <option value="" disabled selected>교통편</option>
+              <option value="bus">버스</option>
+              <option value="train">기차</option>
+              <option value="plane">비행기</option>
+            </select>
+          </div>
+
+          <!-- 여행 경비 -->
+          <div class="filter-item filter-budget">
+            <select class="filter-select filter-budget">
+              <option value="" disabled selected>여행 경비</option>
+              <option value="under500">50만 이하</option>
+              <option value="500-1000">50~100만</option>
+              <option value="1000+">100만 이상</option>
+            </select>
+          </div>
+
+          <!-- 상품 가격 -->
+          <div class="filter-item filter-price">
+            <select class="filter-select filter-price">
+              <option value="" disabled selected>상품 가격</option>
+              <option value="under100">100만 이하</option>
+              <option value="100-200">100~200만</option>
+              <option value="200+">200만 이상</option>
+            </select>
+          </div>
+
+          <!-- 등록 일자 -->
+          <div class="filter-item filter-date">
+            <select class="filter-select filter-date">
+              <option value="" disabled selected>등록 일자</option>
+              <option value="1day">오늘</option>
+              <option value="7day">최근 7일</option>
+              <option value="30day">최근 30일</option>
+            </select>
+          </div>
+        </div>
+        <div class="keyword-container">
+          <!-- 키워드 입력 -->
+          <div class="filter-item filter-keywords">
+            <input
+                    type="text"
+                    class="keyword-input"
+                    name="keywords"
+                    placeholder="키워드를 추가해 보세요. ex) #연인 #우정 #만두"
+            />
+          </div>
+        </div>
+        <div class="formButton-container">
+          <div class="filter-example">
+            실버, 가이드 동반 O, 4명, 70대, 판매중, 3박 4일, 200만원,
+          </div>
+          <!-- 검색 버튼 -->
+          <div class="filter-item filter-search">
+            <button type="submit" class="btn-search">검색</button>
+          </div>
+        </div>
+      </form>
+
+
+      <!--리스트 갯수-->
+      <div class="service-controls">
+        <div class="service-count">
+          <p>3,501개의 서비스</p>
+        </div>
+        <div class="custom-dropdown">
+          <button type="button" class="dropdown-toggle">
+            <span class="selected-label">인기순</span>
+            <img src="/static/img/product/product_list/arrow-down.png" class="arrow-icon" alt="">
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <label>
+                <input type="radio" name="sort" value="popular" checked>
+                <span class="radio-img"></span>
+                인기순
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="sort" value="recommend">
+                <span class="radio-img"></span>
+                추천순
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="sort" value="recommend">
+                <span class="radio-img"></span>
+                신규등록순
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="sort" value="recommend">
+                <span class="radio-img"></span>
+                등록리뷰순
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="sort" value="recommend">
+                <span class="radio-img"></span>
+                평점순
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="sort" value="recommend">
+                <span class="radio-img"></span>
+                판매순
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--상품리스트-->
+      <section class="product-list">
+        <ul class="products">
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+          <li class="product-card">
+            <div class="thumb">
+              <img src="/static/img/product/product_list/product_img.jpg" alt="황령산 투어">
+              <button type="button" class="btn-like" aria-label="관심 등록"></button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="title">[MO:SI&nbsp;Pick] 황령산 투어&nbsp;(1박 2일)</h3>
+
+              <div class="price-row">
+                <span class="price">65,000</span><span class="won">원</span>
+              </div>
+
+              <p class="sub-benefit">가이드 구독시 10% 추가할인</p>
+
+              <div class="discount-row">
+                <span class="discount-price">59,000</span><span class="won">원</span>
+                <span class="badge">MO:SI&nbsp;할인가</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <div class="pagination" id="reply_pagenation" aria-label="페이지네이션">
+        <button type="button" class="page-btn next" aria-label="다음 페이지">&lt;&lt;</button>
+        <button type="button" class="page-btn prev"  aria-label="이전 페이지">&lt;</button>
+        <button type="button" class="page-btn">1</button>
+        <button type="button" class="page-btn is-active">2</button>
+        <button type="button" class="page-btn">3</button>
+        <button type="button" class="page-btn">4</button>
+        <button type="button" class="page-btn">5</button>
+        <button type="button" class="page-btn">6</button>
+        <button type="button" class="page-btn">7</button>
+        <button type="button" class="page-btn">8</button>
+        <button type="button" class="page-btn">9</button>
+        <button type="button" class="page-btn">10</button>
+        <button type="button" class="page-btn next" aria-label="다음 페이지">&gt;</button>
+        <button type="button" class="page-btn next" aria-label="다음 페이지">&gt;&gt;</button>
+      </div>
+    </main>
+  </div>
+
+
+  <!--공지-->
+  <section class="notice-frame">
+    <span class="notice-title">공지</span>
+    <span class="notice-text">
+        &lt;하나LIVE&gt;25년 6월 1일 방송 - 동유럽 구매 인증 이벤트 당첨자 안내
+      </span>
+    <a href="#" class="notice-more">+ 더보기</a>
+  </section>
+
+</div>
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <span class="footer-logo-text">MO:SI</span>
+    </div>
+    <div class="footer-info">
+      <div class="footer-column">
+        <div class="title">(주) 샤인머스캣</div>
+        <div class="item">
+          사업자 등록번호: 338-88-00632 | 대표: 이수영<br>
+          소재지: (06159) 서울시 강남구 테헤란로 208<br>
+          이메일: mosi@subsmsm.co.kr<br>
+          대표번호: 1666-9807
+        </div>
+      </div>
+      <div class="footer-column">
+        <div class="title">고객센터</div>
+        <div class="item">
+          <a href="#" style="color: white; text-decoration: none;">1:1 문의</a><br>
+          <a href="#" style="color: white; text-decoration: none;">FAQ</a><br>
+          <a href="#" style="color: white; text-decoration: none;">공지사항</a>
+        </div>
+      </div>
+      <div class="footer-column footer-social">
+        <div class="title">Follow us</div>
+        <a href="#"><img src="/img/Facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="/img/Instagram.jpg" alt="Instagram"></a>
+        <a href="#"><img src="/img/Youtube.png" alt="YouTube"></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="policy-links">
+      <span>이용약관</span> |
+      <span>개인정보처리방침</span> |
+      <span>전자금융거래 이용약관</span>
+    </div>
+    <div>&copy; Copyright ©
+      subsmsm.co.ltd Inc. All rights reserved.
+    </div>
+  </div>
+</footer>
+</body>
+<script>
+  document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+    const btn        = dropdown.querySelector('.dropdown-toggle');
+    const labelSpan  = btn.querySelector('.selected-label');   // ← 이제 null 아님
+
+    // 토글 열기/닫기
+    btn.addEventListener('click', e => {
+      e.stopPropagation();               // 열자마자 닫히는 현상 방지
+      dropdown.classList.toggle('open');
+    });
+
+    // 옵션 클릭 → 레이블 교체 + 자동 닫기
+    dropdown.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        labelSpan.textContent = radio.parentElement.textContent.trim();
+        dropdown.classList.remove('open');
+      });
+    });
+  });
+
+  // 바깥 클릭 시 닫기
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.custom-dropdown.open').forEach(d => {
+      if (!d.contains(e.target)) d.classList.remove('open');
+    });
+  });
+  document.addEventListener('click', e=>{
+    if(e.target.classList.contains('btn-like')){
+      e.target.classList.toggle('is-active');
+    }
+  });
+</script>
+</html>
+
+

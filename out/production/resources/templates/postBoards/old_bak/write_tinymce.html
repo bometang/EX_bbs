@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|MO:SI 커뮤니티 게시글 작성|">MO:SI 커뮤니티 게시글 작성</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/addStyles.css}">
+
+</head>
+<body th:attr="data-parent-id=${bbsId}">
+<div class="container-wrapper">
+
+    <div th:replace="~{fragments/header :: header}"></div>
+    <nav class="main-nav">
+        <div>전체메뉴</div>
+        <div>테마여행</div>
+        <div>커뮤니티</div>
+        <div>항공</div>
+        <div>호텔</div>
+    </nav>
+
+    <main class="main-content">
+        <aside class="left-sidebar">
+            <ul>
+                <li class="menu-title">커뮤니티</li>
+                <li><a th:href="@{/bbs}">자유 게시판</a></li>
+            </ul>
+        </aside>
+
+        <section class="content-area">
+            <h1>게시글 작성</h1>
+            <form class="write-form" id="write-form">
+                <label for="bcategory" class="form-label">카테고리</label>
+                <div class="select-group">
+                    <select id="bcategory" name="bcategory">
+                        <option value="">--선택--</option>
+                    </select>
+                </div>
+                <label for="title" class="form-label">제목</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="제목을 입력하세요">
+
+                <label for="editor" class="form-label">내용</label>
+                <div class="content-editor-wrapper">
+                    <textarea id="editor" name="bcontent" style="height:300px;"></textarea>
+
+                </div>
+
+                <div class="file-upload-section">
+                    <span class="upload-label">파일 첨부</span>
+                    <div class="file-upload-buttons">
+                        <input type="file" id="file-input" name="files" multiple style="display: none;">
+                        <button type="button" onclick="document.getElementById('file-input').click();">파일 선택</button>
+                        <span id="file-name-display">선택된 파일 없음</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn" id="submit-btn">작성하기</button>
+                    <button type="button" class="temp-save-btn" id="temp-save-btn">임시저장</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+
+
+<script th:src="@{/js/vendor/tinymce/tinymce.min.js}"></script>
+
+
+
+<script  type="module" th:src="@{/js/bbs/csr/writeForm.js}"></script>
+</body>
+</html>

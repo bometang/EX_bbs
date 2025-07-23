@@ -1,0 +1,83 @@
+GET /
+
+// 기존 goods 인덱스 삭제
+DELETE /goods
+
+// goods 인덱스 생성
+PUT /goods
+{
+    "settings": {
+        "analysis": {
+            // 커스텀 필터
+            "filter": {
+                // 동의어 필터 정의
+                "goods_pname_synonyms" :{
+                    "type" : "synonym",
+                    "synonyms" : [
+                        "samsung, 삼성",
+                        "lg, 엘지",
+                        "노트북, 컴퓨터, 랩탑, computer, laptop, notebook",
+                        "휴대폰, 스마트폰, 휴대전화, 전화기, phone, smartphone, mobile phone",
+                        "아이폰, iphone",
+                        "맥북, 맥, mac, mackbook"
+                    ]
+                }
+            },
+
+            // 커스텀 애널라이저 정의
+            "analyzer": {
+                "goods_pname_analyzer" : {
+                    "char_filter": [],
+                    "tokenizer": "nori_tokenizer",
+                    "filter": ["nori_part_of_speech","nori_readingform","lowercase","goods_pname_synonyms"]
+                },
+                "goods_description_analyzer" : {
+                    "char_filter": ["html_strip"], // html 제거
+                    "tokenizer": "nori_tokenizer",
+                    "filter": ["nori_part_of_speech","nori_readingform","lowercase"]
+                },
+                "goods_cateogry_analyzer" : {
+                    "char_filter": [], 
+                    "tokenizer": "nori_tokenizer",
+                    "filter": ["nori_part_of_speech","nori_readingform","lowercase"]
+                }
+            }
+        }
+    },
+    
+    "mappings": {
+        "properties": {
+            "product_id" : {"type":"long"},  
+            "pname" : {
+                "type":"text",
+                "analyzer": "goods_pname_analyzer",
+                // 멀티 필드로 search_as_you_type 타입을 추가
+                "fields": {
+                    "auto_complete": {
+                        "type": "search_as_you_type",
+                        "analyzer": "nori"
+                    }
+                }
+            }, // 유연한검색(full text search)
+            "description" : {
+                "type":"text",
+                "analyzer" : "goods_description_analyzer"
+            }, // 유연한검색(full text search)
+            "price" : {"type" : "integer"},  // 10 억 이하의 정수
+            "rating" : {"type" : "double"},  // 소수점 표현의 실수
+            "category" : {
+                "type" : "text",
+                "analyzer": "goods_cateogry_analyzer",
+                "fields" : {                // multi_fields 정의 (text & keyword 동시정의 사용)
+                    "keyword" : {           // category의 하위 필드로 keyword 추가생성
+                        "type" : "keyword",
+                        "ignore_above" : 50
+                    }
+                }
+            } // 정확히 일치하는 검색(term query)
+        }
+    }
+}
+
+// goods 인덱스 생성 확인
+GET /goods

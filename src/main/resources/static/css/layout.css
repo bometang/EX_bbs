@@ -1,0 +1,278 @@
+/*layout.css(“뼈대” 전용)*/
+
+/* ============================= */
+/* ✅ 0. 레이아웃 전체 구조      */
+/* ============================= */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #ffffff;
+}
+
+.layout-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ============================= */
+/* ✅ 1. Header 영역            */
+/* ============================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 167px;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.header-inner {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── 상단 로그인/회원가입 바 ── */
+.header-top-bar {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 16px;
+  background-color: #EFEFEF;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+}
+.user-links,
+.user-logged-in {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.user-links a,
+.logout-button,
+.notification-link {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+}
+.logout-form {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.logout-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.notification-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── 메인 헤더 ── */
+.header-main {
+  width: 100%;
+  height: 90px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.logo {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #000;
+}
+.logo img { height: 48px; }
+.logo span {
+  font-size: 40px;
+  font-weight: 800;
+}
+
+/* ── 검색창 ── */
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 440px;
+  border: 1px solid #0099ad;
+  border-radius: 10px;
+  padding: 2px;
+  background-color: #fff;
+}
+.search-box input {
+  flex: 1 1 0;
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.search-box button {
+  background: none;
+  border: none;
+  padding: 0 12px 0 4px;
+  font-size: 18px;
+  color: #0099ad;
+  cursor: pointer;
+}
+
+/* ── 우측 메뉴 ── */
+.user-menu {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.user-menu a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #000;
+  text-decoration: none;
+}
+.user-menu .fas { font-size: 22px; }
+
+/* ── 내비게이션 바 ── */
+.header-nav {
+  width: 100%;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+}
+.header-nav ul {
+  display: flex;
+  gap: 48px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.header-nav li {
+  width: 111px;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-nav a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+  white-space: nowrap;
+}
+.header-nav ul li a:hover {
+  border-bottom: 2px solid #0099AD;
+  color: #0099AD;
+}
+
+/* ============================= */
+/* ✅ 2. Footer 영역            */
+/* ============================= */
+
+footer {
+  width: 100%;
+  background: #0099AD;
+  color: #fff;
+  padding: 40px;
+  min-height: 300px;          /* 300px 보장, 넘치면 확장 */
+  box-sizing: border-box;
+}
+
+.footer-container {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.company-info {
+    flex: 2;
+}
+
+
+.footer-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.company-name {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.company-details {
+  font-size: 13px;
+  color: #e0f7fa;
+  line-height: 1.5;
+}
+.copyright {
+  font-size: 13px;
+  color: #ebfcff;
+}
+
+.csns {
+    flex: 1;
+    min-width: 240px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.section-content {
+  font-size: 13px;
+  color: #ebfcff;
+  line-height: 1.5;
+}
+.social-icons a {
+  color: #fff;
+  margin-right: 8px;
+  text-decoration: none;
+}
+
+.footer-links {
+  width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid #e0f7fa;
+  padding-top: 10px;
+  font-size: 13px;
+  color: #e0f7fa;
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  color: #ebfcff;
+  text-decoration: underline;
+}

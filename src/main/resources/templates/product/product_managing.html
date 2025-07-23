@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MO:SI 판매자 마이페이지</title>
+  <!-- <link rel="stylesheet" href="/src/main/resources/static/css/layout.css">
+  <link rel="stylesheet" href="/src/main/resources/static/css/sellerpage/sellerMypageHome.css"> -->
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/sellerpage/sellerMypageHome.css}">
+  <link rel="stylesheet" th:href="@{/css/product/product_managing.css}" />
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css}">
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css}" />
+</head>
+
+<body>
+  <div class="layout-wrapper">
+    <header th:replace="~{fragments/header :: header}"></header>
+    <div class="page-container">
+      <main class="mypage-container">
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <div class="profile-box">
+              <div class="profile-image">
+                <img th:if="${sellerPage != null and sellerPage.image != null}"
+                  th:src="@{'/mypage/seller/images/profile/' + ${sellerPage.pageId}}" alt="프로필 이미지">
+                <img th:if="${sellerPage == null or sellerPage.image == null}" th:src="@{/img/default-profile.png}"
+                  alt="기본 프로필 이미지">
+              </div>
+              <div class="profile-info">
+                <a href="#" class="profile-badge"> 프로가이드 ></a>
+                <div class="profile-name" th:text="${nickname}">이름</div>
+                <form th:action="@{/mypage/role/toBuyer}" method="post" style="margin-top: 10px;">
+                  <button type="submit" class="btn btn-outline-secondary w-100">구매자 전환</button>
+                </form>
+              </div>
+            </div>
+            <nav class="mypage-nav">
+              <div class="nav-title active">MY PAGE</div>
+              <ul>
+                <li><a href="#">상품</a>
+                  <ul>
+                    <li><a th:href="@{/product/list}">내 상품 목록</a></li>
+                    <li><a th:href="@{/product/upload}">상품 등록</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">판매 현황</a>
+                  <ul>
+                    <li><a href="#">주문 현황</a></li>
+                    <li><a href="#">총 판매수 / 매출액</a></li>
+                    <li><a href="#">판매 통계</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">문의 / 리뷰</a>
+                  <ul>
+                    <li><a href="#">상품 문의</a></li>
+                    <li><a href="#">나의 답글</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">알림 / 공지</a>
+                  <ul>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">쿠폰오퍼</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">내 정보</a>
+                  <ul>
+                    <li><a th:href="@{/mypage/seller/view}">프로필</a></li>
+                    <li><a href="#">정산 정보 관리</a></li>
+                    <li><a href="#">주소지 관리</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">고객센터</a>
+                  <ul>
+                    <li><a href="#">1:1 문의</a></li>
+                    <li><a href="#">판매 Q&A 내역</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">고객의 소리</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+        <section class="content">
+          <div class="product-managing">
+            <h2>내 상품 목록</h2>
+            <hr>
+            <div class="product-managing-main">
+              <!-- 검색박스 -->
+              <div class="product-search-box">
+                <input class="search-box-input" type="text" placeholder="상품명을 입력해주세요.">
+              </div>
+              <div class="overall-info">
+                <div>총 12개</div>
+                <select>
+                  <option value="on_sale">판매중</option>
+                  <option value="coming_soon">판매대기</option>
+                </select>
+              </div>
+              <hr>
+              <!-- 상품목록 -->
+              <div class="product-list">
+                <div class="product-item" th:each="product : ${products}">
+                  <img th:src="@{${product.imageUrl}}" alt="상품 이미지">
+                  <div class="product-info">
+                    <div class="product-info-left">
+                      <h2 th:text="${product.title}">일이삼사오륙칠팔구십일이삼사오륙칠팔구십일이삼사</h2>
+                      <div class="product-info-left-detail">
+                        <select th:field="*{status}">
+                          <option value="on_sale" th:selected="${product.status == 'on_sale'}">판매중</option>
+                          <option value="coming_soon" th:selected="${product.status == 'coming_soon'}">판매대기
+                          </option>
+                        </select>
+                        <div class="product-info-left-detail-details">
+                          <div th:text="${#temporals.format(product.createDate, 'yyyy-MM-dd')}">날짜</div>
+                          <div>조회수</div>
+                          <div>좋아요</div>
+                          <div>댓글수</div>
+                        </div>
+                      </div>
+                      <textarea th:text="${product.description}"
+                        readonly>우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항우항항</textarea>
+                    </div>
+                  </div>
+                  <div class="product-info-right">
+                    <div class="product-info-right-detail">
+                      <div>0% 저렴</div>
+                      <div class="price">
+                        <h1 th:text="${product.salesPrice + '원'}">40,000</h1>
+                        <div>원</div>
+                      </div>
+                      <div th:text="'정가 ' + ${product.normalPrice} + '원'">원</div>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn-group-edit">수정</button>
+                      <button class="btn-group-delete">삭제</button>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <!-- 페이지네이션 -->
+              <div class="pagination">
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+  </div>
+  <script th:src="@{/js/sellerpage/sellerMypageHome.js}"></script>
+</body>
+
+</html>

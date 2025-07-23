@@ -1,0 +1,124 @@
+/* 페이지 컨테이너: 헤더 높이만큼 패딩 */
+.page-container {
+    padding-top: 167px;
+    background-color: #FFFFFF;
+}
+
+/* 마이페이지 레이아웃: 사이드바 + 콘텐츠 */
+.mypage-container {
+    display: flex;
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 0;
+    box-sizing: border-box;
+}
+
+/* 사이드바 */
+.sidebar {
+    flex: 0 0 180px; /* Figma: 180px */
+    padding-top: 59px; /* (266px - 167px) */
+    box-sizing: border-box;
+}
+
+/* 네비게이션 제목 */
+.mypage-nav .nav-title {
+    width: 180px;
+    height: 40px;
+    background-color: #1EC4CC;
+    border: 1px solid #1EC4CC;
+    border-radius: 4px 4px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* active 상태 (필요시 추가 커스터마이징) */
+.mypage-nav .nav-title.active {
+    /* 현재는 기본 스타일과 동일하게 유지 */
+}
+
+/* nav 목록 spacing */
+.mypage-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 8px;
+}
+.mypage-nav ul li {
+    margin-top: 8px;
+}
+
+.mypage-nav ul li a {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    height: 37px; /* Figma: 37px */
+    padding: 0 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #0099AD;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #5D5D5D;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mypage-nav ul li a:hover {
+    background-color: #F4F4F4;
+}
+
+/* 본문 영역 */
+.content {
+    flex: 1;
+    margin-left: 18px;
+}
+
+/* 게시글 섹션 제목 */
+.post-section h2 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #17292C;
+    margin: 24px 0 0;
+}
+
+.contentAll {
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;      /* 동그라미 */
+  object-fit: cover;        /* 잘라내기 */
+}
+
+.contentInfo{
+    display: flex;
+}
+
+.contentInfo .info-text{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.hidden {
+    border:1px solid #1EC4CC;
+    display:none;
+}
