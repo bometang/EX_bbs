@@ -1,4 +1,4 @@
-import { ajax } from '/js/community/bbs/common.js';
+import { ajax } from '/js/community/common.js';
 import '/js/community/vendor/ignoreDeprecatedEvents.js';
 
 const Quill = window.Quill;
@@ -58,7 +58,7 @@ async function saveDraft(data) {
 }
 
 // ---------------- 폼 요소 ------------------------------------------------
-const wrap           = document.querySelector('.content-area');
+const wrap           = document.querySelector('.content');
 const frm            = wrap.querySelector('#write-form');
 const categorySelect = wrap.querySelector('#bcategory');
 const btnDraft       = wrap.querySelector('#temp-save-btn');

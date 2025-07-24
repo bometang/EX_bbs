@@ -1,4 +1,4 @@
-import { ajax, PaginationUI } from '/js/community/bbs/common.js';
+import { ajax, PaginationUI } from '/js/community/common.js';
 import { formatRelativeTime } from '/js/community/bbs/csr/dateUtils.js';
 const $list = document.getElementById('post-tbody')
 let currentPage = 1;

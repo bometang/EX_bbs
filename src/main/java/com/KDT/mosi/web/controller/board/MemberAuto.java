@@ -53,7 +53,7 @@ public class MemberAuto {
   @GetMapping("/test-login")
   public String testLogin(HttpServletRequest request) {
     // 1) 임시 사용자 조회
-    Member member = memberSVC.findByEmail("a")
+    Member member = memberSVC.findByEmail("shinnosuke@naver.com")
         .orElseThrow(() -> new IllegalStateException("dev 계정이 없습니다"));
 
     List<Role> roles = memberRoleDAO.findRolesByMemberId(member.getMemberId());

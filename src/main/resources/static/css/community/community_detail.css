@@ -95,17 +95,34 @@
     color: #17292C;
     margin: 24px 0 0;
 }
+.post-section hr {
+    border: none;
+    height:2px;
+    background-color: #1EC4CC;
+}
+
+
+/*상단 버튼 줄*/
+.post-section .location {
+    margin: 17px 0 0 12px;
+}
+.post-section .btnGroup{
+    display: flex;
+    justify-content: space-between;
+}
+.btnGroup button {
+  /* 크기 지정 */
+  width: 66.02px;
+  height: 25.94px;
+
+  /* 안쪽 여백, 폰트 크기도 같이 조절하고 싶다면 */
+  padding: 0.5em 1em;
+  font-size: 1rem;
+}
 
 .contentAll {
     border: 1px solid #D4D4D4;
     border-radius: 5px;
-}
-
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;      /* 동그라미 */
-  object-fit: cover;        /* 잘라내기 */
 }
 
 .contentInfo{
@@ -118,7 +135,26 @@
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;      /* 동그라미 */
+  object-fit: cover;        /* 잘라내기 */
+}
 .hidden {
-    border:1px solid #1EC4CC;
     display:none;
 }

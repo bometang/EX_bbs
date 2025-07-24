@@ -95,7 +95,7 @@ public class RbbsDAOImpl implements RbbsDAO {
         .append("LEFT JOIN member m ON r.member_id = m.member_id ")
         .append("WHERE r.bbs_id = :bbsId ")
         .append("  AND r.status <> 'R0203' ")
-        .append("ORDER BY r.bgroup DESC, r.step ASC, r.rbbs_id ASC ")
+        .append("ORDER BY r.bgroup ASC, r.step ASC, r.rbbs_id ASC ")
         .append("OFFSET (:pageNo - 1) * :numOfRows ROWS ")
         .append("FETCH NEXT :numOfRows ROWS ONLY");
 
@@ -155,26 +155,36 @@ public class RbbsDAOImpl implements RbbsDAO {
 
   @Override
   public int updateStep(Long bgroup, Rbbs parentRbbs) {
-    // 1) 같은 계층 내 마지막 step 조회
-    StringBuffer sql = new StringBuffer();
-    sql.append("SELECT NVL(MAX(step), :parentStep) ")
-        .append("FROM rbbs ")
-        .append("WHERE bgroup = :bgroup ")
-        .append("  AND prbbs_id = :parentId ")
-        .append("  AND bindent = :childBindent");
 
-    long childBindent = parentRbbs.getBindent() + 1;
+    long pStep    = parentRbbs.getStep();
+    long pIndent  = parentRbbs.getBindent();
+    long parentId = parentRbbs.getRbbsId();
+
+    StringBuffer sql = new StringBuffer();
+    sql.append("SELECT NVL(MAX(step), :pStep) ")
+        .append("FROM rbbs ")
+        .append("WHERE bgroup = :bgroup ");
+
+    // — bindent 레벨별 분기 —
+    if (pIndent == 0) {              // 댓글 → 대댓글들
+
+    } else if (pIndent == 1) {       // 대댓글 → 대대댓글들
+      sql.append("  AND prbbs_id = :parentId ");
+    } else {                         // 대대댓글 → 더 깊이 없음
+      // MAX(step)이 parentStep 그대로이므로 아래서 +1만 하면 됨
+    }
+
     MapSqlParameterSource params = new MapSqlParameterSource()
         .addValue("bgroup", bgroup)
-        .addValue("parentId", parentRbbs.getRbbsId())
-        .addValue("parentStep", parentRbbs.getStep())
-        .addValue("childBindent", childBindent);
+        .addValue("pStep",  pStep)
+        .addValue("parentId", parentId);
 
-    Long lastStep = template.queryForObject(sql.toString(), params, Long.class);
-    int newStep = lastStep.intValue() + 1;
+    int lastStep = template.queryForObject(sql.toString(), params, Integer.class);
+    int newStep  = lastStep + 1;          // 바로 뒤에 삽입
 
-    // 2) 기존 댓글들 shift
-    String shiftSql = "UPDATE rbbs SET step = step + 1 WHERE bgroup = :bgroup AND step >= :newStep";
+    // 뒤에 있는 행들 step 밀기
+    String shiftSql =
+        "UPDATE rbbs SET step = step + 1 WHERE bgroup = :bgroup AND step >= :newStep";
     params.addValue("newStep", newStep);
     template.update(shiftSql, params);
 

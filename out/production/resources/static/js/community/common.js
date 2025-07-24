@@ -259,7 +259,7 @@ class PaginationUI {
   // 끝 클릭 시
   handleLastClick() {
       const lastGroupStart =
-          this.state.totalPages - (this.state.totalPages % this.state.pagesPerPage) + 1;
+          this.state.totalPages - ((this.state.totalPages - 1) % this.state.pagesPerPage);
       this.state.currentPageGroupStart = lastGroupStart;
       this.state.currentPage = this.state.totalPages;
       this.onPageChange(this.state.currentPage);

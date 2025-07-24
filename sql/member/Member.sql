@@ -1,137 +1,132 @@
--- 기존 테이블/시퀀스 삭제 (있으면)
-begin
-    execute immediate 'drop table member_role cascade constraints';
-exception when others then null;
-end;
-/
+-- 기존 테이블 및 시퀀스 삭제 (있으면)
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE member_terms CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
 
-begin
-    execute immediate 'drop table role cascade constraints';
-exception when others then null;
-end;
-/
 
-begin
-    execute immediate 'drop table member cascade constraints';
-exception when others then null;
-end;
-/
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE terms CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
 
-begin
-    execute immediate 'drop sequence member_member_id_seq';
-exception when others then null;
-end;
-/
 
--- role 테이블 생성 (구매자, 판매자)
-create table role (
-    role_id    varchar2(11) primary key,  -- 역할값 (R01, R02)
-    role_name  varchar2(50) not null      -- 역할명 (구매자, 판매자)
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE member_role CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE role CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE member CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'DROP SEQUENCE member_member_id_seq';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'DROP SEQUENCE terms_seq';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+
+
+-- 역할 테이블
+CREATE TABLE role (
+  role_id    VARCHAR2(11) PRIMARY KEY,
+  role_name  VARCHAR2(50) NOT NULL
 );
 
--- role 데이터 삽입
-insert into role (role_id, role_name) values ('R01', '구매자');
-insert into role (role_id, role_name) values ('R02', '판매자');
-
--- 회원 테이블 생성 (member_type 제거)
-create table member (
-    member_id       number(10),               -- 내부 관리 아이디
-    email           varchar2(40) not null,    -- 로그인 아이디
-    name            varchar2(50) not null,    -- 회원 이름
-    passwd          varchar2(12) not null,    -- 로그인 비밀번호
-    tel             varchar2(13),             -- 연락처 ex)010-1234-5678
-    nickname        varchar2(30),             -- 별칭
-    gender          varchar2(6),              -- 성별
-    address         varchar2(200),            -- 주소
-    pic             blob,                     -- 사진
-    create_date     timestamp default systimestamp, -- 생성일시
-    update_date     timestamp default systimestamp  -- 수정일시
+-- 회원 테이블 (생년월일 추가됨)
+CREATE TABLE member (
+  member_id       NUMBER(10),
+  email           VARCHAR2(40) NOT NULL,
+  name            VARCHAR2(50) NOT NULL,
+  passwd          VARCHAR2(100) NOT NULL,
+  tel             VARCHAR2(13),
+  nickname        VARCHAR2(30),
+  gender          VARCHAR2(6),
+  address         VARCHAR2(200),
+  birth_date      DATE,  -- ✅ 생년월일
+  pic             BLOB,
+  create_date     TIMESTAMP DEFAULT SYSTIMESTAMP,
+  update_date     TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
 -- 제약조건 추가
-alter table member
-    add constraint member_member_id_pk
-    primary key (member_id);
-
-alter table member
-    add constraint member_email_uk
-    unique(email);
-
-alter table member
-    add constraint member_gender_ck
-    check (gender in ('남자','여자'));
+ALTER TABLE member ADD CONSTRAINT member_member_id_pk PRIMARY KEY (member_id);
+ALTER TABLE member ADD CONSTRAINT member_email_uk UNIQUE(email);
+ALTER TABLE member ADD CONSTRAINT member_gender_ck CHECK (gender IN ('남자','여자'));
+ALTER TABLE member ADD CONSTRAINT member_nickname_uk UNIQUE(nickname);
 
 -- 시퀀스 생성
-create sequence member_member_id_seq;
+CREATE SEQUENCE member_member_id_seq;
 
--- 회원 샘플 데이터 삽입
-insert into member (member_id, email, name, passwd, tel, nickname, gender, address)
-values (member_member_id_seq.nextval, 'shinnosuke@naver.com', '신짱구', '1234', '010-1111-1111', '짱구', '남자', '떡잎마을');
+-- 샘플 데이터 삽입
+INSERT INTO role (role_id, role_name) VALUES ('R01', '구매자');
+INSERT INTO role (role_id, role_name) VALUES ('R02', '판매자');
 
-insert into member (member_id, email, name, passwd, tel, nickname, gender, address)
-values (member_member_id_seq.nextval, 'hiroshi@naver.com', '신형만', '5678', '010-2222-2222', '형만이', '남자', '떡잎마을');
+-- 회원 샘플 데이터 (생년월일 추가)
+INSERT INTO member (member_id, email, name, passwd, tel, nickname, gender, address, birth_date)
+VALUES (member_member_id_seq.NEXTVAL, 'shinnosuke@naver.com', '신짱구', '1234', '010-1111-1111', '짱구', '남자', '떡잎마을', TO_DATE('2010-03-01','YYYY-MM-DD'));
 
-insert into member (member_id, email, name, passwd, tel, nickname, gender, address)
-values (member_member_id_seq.nextval, 'misae@naver.com', '봉미선', 'abcd', '010-3333-3333', '미선이', '여자', '떡잎마을');
+INSERT INTO member (member_id, email, name, passwd, tel, nickname, gender, address, birth_date)
+VALUES (member_member_id_seq.NEXTVAL, 'hiroshi@naver.com', '신형만', '5678', '010-2222-2222', '형만이', '남자', '떡잎마을', TO_DATE('1980-11-03','YYYY-MM-DD'));
 
-insert into member (member_id, email, name, passwd, tel, nickname, gender, address)
-values (member_member_id_seq.nextval, 'nene@naver.com', '짱아', 'efgh', '010-4444-4444', '짱아', '여자', '떡잎마을');
+INSERT INTO member (member_id, email, name, passwd, tel, nickname, gender, address, birth_date)
+VALUES (member_member_id_seq.NEXTVAL, 'misae@naver.com', '봉미선', 'abcd', '010-3333-3333', '미선이', '여자', '떡잎마을', TO_DATE('1982-06-15','YYYY-MM-DD'));
 
-insert into member (member_id, email, name, passwd, tel, nickname, gender, address)
-values (member_member_id_seq.nextval, 'bo@naver.com', '맹구', 'ijkl', '010-5555-5555', '맹구', '남자', '떡잎마을');
+INSERT INTO member (member_id, email, name, passwd, tel, nickname, gender, address, birth_date)
+VALUES (member_member_id_seq.NEXTVAL, 'nene@naver.com', '짱아', 'efgh', '010-4444-4444', '짱아', '여자', '떡잎마을', TO_DATE('2015-09-09','YYYY-MM-DD'));
 
--- member_role 매핑 테이블 생성
-create table member_role (
-    member_id  number(10),          -- 회원 ID
-    role_id    varchar2(11),        -- 역할 ID
-    primary key (member_id, role_id),
-    foreign key (member_id) references member(member_id),
-    foreign key (role_id) references role(role_id)
+INSERT INTO member (member_id, email, name, passwd, tel, nickname, gender, address, birth_date)
+VALUES (member_member_id_seq.NEXTVAL, 'bo@naver.com', '맹구', 'ijkl', '010-5555-5555', '맹구', '남자', '떡잎마을', TO_DATE('2010-07-24','YYYY-MM-DD'));
+
+-- 역할 매핑
+CREATE TABLE member_role (
+  member_id  NUMBER(10),
+  role_id    VARCHAR2(11),
+  PRIMARY KEY (member_id, role_id),
+  FOREIGN KEY (member_id) REFERENCES member(member_id),
+  FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 
--- 초기 역할 할당 (짱구, 봉미선, 짱아는 구매자 / 형만, 맹구는 판매자)
-insert into member_role values (1, 'R01'); -- 짱구 : 구매자
-insert into member_role values (2, 'R02'); -- 형만 : 판매자
-insert into member_role values (3, 'R01'); -- 봉미선 : 구매자
-insert into member_role values (4, 'R01'); -- 짱아 : 구매자
-insert into member_role values (5, 'R02'); -- 맹구 : 판매자
+-- 초기 역할 지정
+INSERT INTO member_role VALUES (1, 'R01'); -- 짱구 : 구매자
+INSERT INTO member_role VALUES (2, 'R02'); -- 형만 : 판매자
+INSERT INTO member_role VALUES (3, 'R01'); -- 봉미선 : 구매자
+INSERT INTO member_role VALUES (4, 'R01'); -- 짱아 : 구매자
+INSERT INTO member_role VALUES (5, 'R02'); -- 맹구 : 판매자
+
+-- 역할 전환/제거 예시
+INSERT INTO member_role VALUES (1, 'R02');
+DELETE FROM member_role WHERE member_id = 1 AND role_id = 'R01';
 
 -- 커밋
-commit;
+COMMIT;
 
--- 역할 전환 : 짱구를 판매자로 등록 (버튼 누른 효과)
-insert into member_role values (1, 'R02');
-
--- 역할 제거 : 짱구를 구매자 역할에서 제거
-delete from member_role where member_id = 1 and role_id = 'R01';
-
--- 커밋
-commit;
-
--- 회원별 역할 조회
-select m.name, r.role_name
-from member m
-join member_role mr on m.member_id = mr.member_id
-join role r on mr.role_id = r.role_id
-order by m.member_id;
-
-
---------------------------약 관 동 의-----------------------------
-
--- 1. 시퀀스 생성 (terms_id 자동 증가용)
+-- 약관 테이블 및 트리거
 CREATE SEQUENCE terms_seq;
 
--- 2. terms 테이블 생성
 CREATE TABLE terms (
-  terms_id    NUMBER(10) PRIMARY KEY,            -- 약관 고유 ID (자동증가)
-  name        VARCHAR2(50) NOT NULL,             -- 약관 이름
-  content     CLOB NOT NULL,                      -- 약관 전문 (내용)
-  is_required CHAR(1) DEFAULT 'Y' CHECK (is_required IN ('Y','N')),  -- 필수 여부
-  version     VARCHAR2(20) NOT NULL,              -- 약관 버전
-  created_at  TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL  -- 등록일
+  terms_id     NUMBER(10) PRIMARY KEY,
+  name         VARCHAR2(50) NOT NULL,
+  content      CLOB NOT NULL,
+  is_required  CHAR(1) DEFAULT 'Y' CHECK (is_required IN ('Y','N')),
+  version      VARCHAR2(20) NOT NULL,
+  created_at   TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL
 );
 
--- 3. 트리거 생성 (insert 시 자동으로 terms_id 채움)
 CREATE OR REPLACE TRIGGER trg_terms_before_insert
 BEFORE INSERT ON terms
 FOR EACH ROW
@@ -140,22 +135,14 @@ BEGIN
     SELECT terms_seq.NEXTVAL INTO :NEW.terms_id FROM dual;
   END IF;
 END;
-/
 
--- 4. member_terms 테이블 생성 (회원이 동의한 약관 기록)
+
+-- 회원 약관 동의 테이블
 CREATE TABLE member_terms (
-  member_id NUMBER(10) NOT NULL,       -- 동의한 멤버 ID (외래키)
-  terms_id  NUMBER(10) NOT NULL,       -- 동의한 약관 ID (외래키)
-  agreed_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,  -- 동의한 시각
+  member_id  NUMBER(10) NOT NULL,
+  terms_id   NUMBER(10) NOT NULL,
+  agreed_at  TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
   PRIMARY KEY (member_id, terms_id),
   FOREIGN KEY (member_id) REFERENCES member(member_id),
   FOREIGN KEY (terms_id) REFERENCES terms(terms_id)
 );
-
-
-
-
-
-
-
-

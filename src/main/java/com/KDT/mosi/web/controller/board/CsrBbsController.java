@@ -27,16 +27,12 @@ public class CsrBbsController {
   final private RbbsSVC rbbsSVC;
 
   @GetMapping
-  public String bbs(Model model,HttpSession session) {
-    Member loginMember = (Member) session.getAttribute("loginMember");
-    model.addAttribute("user", loginMember);
+  public String bbs() {
     return "/postBoards/bbsHome";
   }
 
   @GetMapping("/community")
-  public String community(Model model,HttpSession session) {
-    Member loginMember = (Member) session.getAttribute("loginMember");
-    model.addAttribute("user", loginMember);
+  public String community() {
     return "postBoards/bbs_list";
   }
 

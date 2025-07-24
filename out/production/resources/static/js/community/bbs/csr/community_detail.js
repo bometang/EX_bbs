@@ -1,11 +1,11 @@
-import { ajax, PaginationUI } from '/js/community/bbs/common.js';
+import { ajax, PaginationUI } from '/js/community/common.js';
 import { formatRelativeTime } from '/js/community/bbs/csr/dateUtils.js';
 
 // community_detail.js (또는 적당한 JS 파일)
 document.addEventListener('DOMContentLoaded', async () => {
+
     let currentPage = 1;
     let initialPage = 1;
-
     const recordsPerPage = 10;
     const pagesPerPage   = 5;
     let categoryMap = {};
@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    btnLike.addEventListener('click', async () => {
-        window.location.href = `/bbs/community/add/${postBoard.bbsId}`;
+    btnReply.addEventListener('click', async () => {
+        window.location.href = `/bbs/community/add/${pid}`;
     });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,16 +243,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     //댓글 저장
-    const addPostComment = async (comment,$frm) => {
+    const addPostComment = async (comment) => {
       try {
         const url = `/api/bbs/${pid}/comments`;
         const result = await ajax.post(url,comment);
-        console.log(result);
+
         if (result.header.rtcd === 'S00') {
-          $frm.reset();
-          initialPage = 1; // 생성 후 1페이지로 이동
-          getPostCommentList(initialPage, recordsPerPage); // 첫 페이지의 기본 레코드로 호출
-          configPagination();
+
         } else if(result.header.rtcd.substr(0,1) == 'E'){
             for(let key in result.header.details){
                 console.log(`필드명:${key}, 오류:${result.header.details[key]}`);
@@ -285,7 +282,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     //댓글 수정
-    const modifyPostComment = async (pid,rbbsId ,bcontent) => {
+    const modifyPostComment = async (rbbsId ,bcontent) => {
       try {
         console.log('modifyPostComment 호출, pid=', rbbsId,'cid=', pid, 'body=', bcontent);
         const url = `/api/bbs/${pid}/comments/${rbbsId}`;
@@ -351,120 +348,115 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
-    // 인라인 답글 폼
     function showInlineReplyForm(parentCid, parentData) {
-      const existing = document.getElementById(`reply-form-${parentCid}`);
-      if (existing) { existing.querySelector('input').focus(); return; }
+        const replyDiv = document.querySelector(`#replyComment-${parentCid}`);
+        if (!replyDiv) return;
+        if (replyDiv.querySelector(`#reply-form-${parentCid}`)) return;
+        replyDiv.innerHTML = `
+            <div id="reply-form-${parentCid}" class="reply-form">
+                <div>
+                    <input type="text" id="reply-input-${parentCid}" placeholder="답글을 입력하세요" style="width:70%;" />
+                    <button class="btnSubmitReply">등록</button>
+                    <button class="btnCancelReply">취소</button>
+                </div>
+                <span class="field-error client" id="errReplyContent-${parentCid}"></span>
+            </div>
+        `;
 
-      const $parentRow = $list.querySelector(`tr[data-cid="${parentCid}"]`);
-      const indent     = ((parentData.bindent || 0) + 1) * 20;
-      const $div = document.createElement('div');
-      $div.id = `reply-form-${parentCid}`;
-      $div.innerHTML = `
-        <div>
-          <input type="text" id="reply-input-${parentCid}" placeholder="답글을 입력하세요" style="width:70%;" />
-          <button class="btnSubmitReply">등록</button>
-          <button class="btnCancelReply">취소</button>
-          <span class="field-error client" id="errReplyContent-${parentCid}"></span>
-        </div>
-      `;
-      $parentRow.after($div);
+            const form  = replyDiv.querySelector(`#reply-form-${parentCid}`);
+            const $input = form.querySelector(`#reply-input-${parentCid}`);
+            const $err   = form.querySelector(`#errReplyContent-${parentCid}`);
 
-      $div.querySelector('.btnSubmitReply').onclick = async () => {
-        const $input = $div.querySelector(`#reply-input-${parentCid}`);
-        const text   = $input.value.trim();
-        const $err   = $div.querySelector(`#errReplyContent-${parentCid}`);
-        if (!text) {
-          $err.textContent = '내용은 필수 입니다';
-          $input.focus();
-          return;
-        }
-        $err.textContent = '';
-        await addPostComment({ bcontent: text, prbbsId: parentCid }, { reset: () => {} });
-        $div.remove();
-        getPostCommentList(currentPage, recordsPerPage);
-      };
+            form.querySelector('.btnSubmitReply').onclick = async () => {
+                const text   = $input.value.trim();
 
-      $div.querySelector('.btnCancelReply').onclick = () => $div.remove();
+                if (!text) {
+                  $err.textContent = '내용은 필수 입니다';
+                  $input.focus();
+                  return;
+                }
+                $err.textContent = '';
+                await addPostComment({ bcontent: text, prbbsId: parentCid });
+                replyDiv.innerHTML = '';
+                configPagination();
+            };
+            form.querySelector('.btnCancelReply').onclick = () => {
+                replyDiv.innerHTML = '';
+            };
+
     }
+
+    // -----------------------------------------------------
+    // 댓글쓰기 폼(#comment-form) 한 번만 이벤트 등록
+    // -----------------------------------------------------
+    //댓글 버튼
+        async function EndPagination(){
+          const url = `/api/bbs/${pid}/comments/totCnt`;
+          try {
+            const result = await ajax.get(url);
+
+            const totalRecords = result.body; // 전체 레코드수
+
+            const handlePageChange = (reqPage)=>{
+              return getPostCommentList(reqPage,recordsPerPage);
+            };
+
+            // Pagination UI 초기화
+            var pagination = new PaginationUI('reply_pagenation', handlePageChange);
+
+            pagination.setTotalRecords(totalRecords);       //총건수
+            pagination.setRecordsPerPage(recordsPerPage);   //한페이지당 레코드수
+            pagination.setPagesPerPage(pagesPerPage);       //한페이지당 페이지수
+
+            // 첫페이지 가져오기
+            pagination.handleLastClick();
+
+          }catch(err){
+            console.error(err);
+          }
+        }
+
+    const $form    = document.getElementById('comment-form');
+    const $content = document.getElementById('comment-content');
+
+    $form.addEventListener('submit', async e => {
+      e.preventDefault();                 // 폼 기본 제출 막기
+      const text = $content.value.trim();
+
+      if (!text) {
+        alert('내용을 입력하세요.');
+        $content.focus();
+        return;
+      }
+
+      try {
+        // 최상위 댓글은 내용만 보내면 됨
+        await addPostComment({ bcontent: text });
+
+        // 성공 시 UI 처리
+        $content.value = '';              // 입력창 초기화
+        EndPagination();
+
+      } catch (err) {
+        console.error(err);
+        alert('댓글 등록에 실패했습니다.');
+      }
+    });
 
 ///////////////////////////////////////////////////////////////////////////////
     //댓글목록 화면
     async function displayPostCommentList(postComments) {
-
-      const changeCommentEditMode = async cid => {
-
-        const data = await getPostComment(pid, cid);
-
-        $contentTd.innerHTML =
-          `<textarea id="editContent-${cid}" rows="3" style="width:98%;">${data.bcontent}</textarea>`;
-
-        $btnCell.innerHTML = `
-          <button type="button" class="btnSaveComment">저장</button>
-          <button type="button" class="btnCancelComment">취소</button>`;
-
-        $btnCell.querySelector('.btnSaveComment').onclick = async () => {
-          const newVal = $contentTd.querySelector('textarea').value.trim();
-          const res = await modifyPostComment(pid, cid, newVal);
-
-          if (res.header.rtcd.startsWith('E')) {
-            const details = res.header.details;
-            if (details.bcontent)  document.querySelector(`#errContent-${cid}`).textContent   = details.bcontent;
-            return;
-          }
-          const udate = res.body.udate;
-          $udateTd.textContent=udate;
-          document.querySelector(`#errContent-${cid}`).textContent = '';
-          changeCommentReadMode(cid);
-        };
-
-
-        $btnCell.querySelector('.btnCancelComment').onclick =
-          () => {
-          document.querySelector(`#errContent-${cid}`).textContent = '';
-          changeCommentReadMode(cid);
-          };
-      };
-
-      const changeCommentReadMode = async cid => {
-        const data = await getPostComment(pid, cid);
-        const $row       = $list.querySelector(`tr[data-cid="${cid}"]`);
-        const $btnCell   = $row.querySelector('.commentBtns');
-        const $contentTd = $row.previousElementSibling.children[1];
-
-        $contentTd.textContent = data.bcontent;
-
-        $btnCell.querySelector('.btnEditComment').onclick  = async () => {
-        const memberId = await getMemberId();
-        if(memberId !== data.memberId) {
-          alert('작성자만 수정할 수 있습니다.');
-          return;
-        }
-        changeCommentEditMode(cid);
-        }
-          // 좋아요 버튼
-          $btnCell.querySelector('.btnLikeComment').onclick = async () => {
-            await ajax.post(`/api/bbs/comments/${cid}/likes`);
-            // UI 업데이트(예: 버튼 토글, 카운트 리프레시) 로직 추가
-          };
-
-          // 답글 버튼
-          $btnCell.querySelector('.btnReplyComment').onclick = () => {
-            showInlineReplyForm(cid, data);
-          };
-      };
-
 
       const makeTr = postComments => {
         // map() → 배열 of 문자열 → join() → 하나의 HTML 문자열
         return postComments
           .map((postComment, idx) => {
             const indentPx = postComment.bindent * 20;
-            const canReply  = postComment.bindent < 2;
+            const canReply  = ((postComment.bindent < 2) && (postComment.memberId !== loginId));
+            const canEdit  =  postComment.memberId === loginId;
             const canHr = postComment.step === 0 && idx >0;
-            const canDel = true;
-            const reported = !!c.reported;
-//            const canDel    = postComment.memberId === loginMemberId;
+            const canDel = postComment.memberId === loginId;
+            const reported = !!postComment.reported;
 
             // 첫 댓글 위에는 <hr> 넣지 않기 위해 idx > 0 검사
             return `
@@ -490,8 +482,29 @@ document.addEventListener('DOMContentLoaded', async () => {
                     >
                       답글
                     </button>
+                    <button
+                      type="button"
+                      class="btnEditComment${canEdit ? '' : ' hidden'}"
+                      data-rbbs-id="${postComment.rbbsId}"
+                    >
+                      수정
+                    </button>
+                    <button
+                      type="button"
+                      class="btnSaveComment hidden"
+                      data-rbbs-id="${postComment.rbbsId}"
+                    >
+                      저장
+                    </button>
+                    <button
+                      type="button"
+                      class="btnCancelComment hidden"
+                      data-rbbs-id="${postComment.rbbsId}"
+                    >
+                      취소
+                    </button>
                   </div>
-                  <span>${postComment.bcontent}</span>
+                  <span class="commentBcontent">${postComment.bcontent}</span>
                   <div>
                     <span>${postComment.updateDate}</span>
                     <button type="button" class="btnLikeComment" data-rbbs-id="${postComment.rbbsId}">
@@ -515,10 +528,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                   >
                     삭제
                   </button>
-                  <button type="button" class="btnReportComment" data-rbbs-id="${postComment.rbbsId}">신고</button>
+                  <button type="button" class="btnReportComment" data-rbbs-id="${postComment.rbbsId}" ${postComment.reported ? 'disabled' : ''}>신고</button>
                 </div>
               </div>
-              <div class="replyComment"></div>
+              <div id="replyComment-${postComment.rbbsId}" class="replyComment"></div>
             `;
           })
           .join('');
@@ -532,12 +545,83 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (!btn) return;
 
           const rbbsId   = Number(btn.dataset.rbbsId);
+          const commentDiv = document.getElementById(`comment-${rbbsId}`);
 
+          //답글부분
           if (btn.classList.contains('btnReplyComment')) {
-            console.log('reply', rbbsId);
+            const c = postComments.find(v => v.rbbsId === rbbsId);
+            showInlineReplyForm(rbbsId, c);
             return;
           }
 
+          // 1) 수정 클릭 → span → textarea, 버튼 토글
+              if (btn.classList.contains('btnEditComment')) {
+                const infoEl      = commentDiv.querySelector('.comment-info');
+                const contentSpan = infoEl.querySelector(':scope > span');
+                const original    = contentSpan.textContent;
+
+                // 원본 백업
+                commentDiv.dataset.originalContent = original;
+
+                // 버튼 토글
+                btn.classList.add('hidden');
+                commentDiv.querySelector('.btnSaveComment').classList.remove('hidden');
+                commentDiv.querySelector('.btnCancelComment').classList.remove('hidden');
+
+                // span → textarea
+                const ta = document.createElement('textarea');
+                ta.className = 'edit-textarea';
+                ta.value     = original;
+                ta.style.width  = '100%';
+                ta.style.height = '4em';
+                contentSpan.replaceWith(ta);
+                return;
+              }
+
+              // 2) 저장 클릭 → textarea → span(수정된 텍스트), 버튼 토글, API 호출
+              if (btn.classList.contains('btnSaveComment')) {
+                const ta      = commentDiv.querySelector('textarea.edit-textarea');
+                const updated = ta.value.trim();
+                if (!updated) {
+                  alert('내용을 입력하세요.');
+                  return;
+                }
+
+                // 서버에 전송
+                const { header } = await modifyPostComment(rbbsId, updated);
+                if (header.rtcd !== 'S00') {
+                  alert(header.rtmsg);
+                  return;
+                }
+
+                // textarea → span
+                const newSpan = document.createElement('span');
+                newSpan.textContent = updated;
+                ta.replaceWith(newSpan);
+
+                // 버튼 토글
+                commentDiv.querySelector('.btnEditComment').classList.remove('hidden');
+                btn.classList.add('hidden');
+                commentDiv.querySelector('.btnCancelComment').classList.add('hidden');
+                return;
+              }
+
+              // 3) 취소 클릭 → textarea → span(원본 텍스트), 버튼 토글
+              if (btn.classList.contains('btnCancelComment')) {
+                const ta       = commentDiv.querySelector('textarea.edit-textarea');
+                const original = commentDiv.dataset.originalContent;
+                const oldSpan  = document.createElement('span');
+                oldSpan.textContent = original;
+                ta.replaceWith(oldSpan);
+
+                // 버튼 토글
+                commentDiv.querySelector('.btnEditComment').classList.remove('hidden');
+                commentDiv.querySelector('.btnSaveComment').classList.add('hidden');
+                btn.classList.add('hidden');
+                return;
+              }
+
+            //좋아요 부분
           if (btn.classList.contains('btnLikeComment')) {
             const { header, body } = await ajax.post(`/api/bbs/comments/${rbbsId}/likes`);
             if (header.rtcd !== 'S00') {
@@ -554,7 +638,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
           if (btn.classList.contains('btnDelComment')) {
             const writerId = Number(btn.dataset.writer);
-            console.log({ loginId, writerId, eq: loginId === writerId, t1: typeof loginId, t2: typeof writerId });
 
             if (loginId == null || loginId !== writerId) {
               alert('작성자만 삭제할 수 있습니다.');
@@ -581,6 +664,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 { reason }
               );
               alert(header.rtcd === 'S00' ? '신고되었습니다.' : header.rtmsg);
+              btn.disabled = true;
             } catch (err) {
               console.error('신고 오류', err);
               alert('신고 중 오류가 발생했습니다.');
