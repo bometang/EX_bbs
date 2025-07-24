@@ -1,35 +1,27 @@
 /* MAIN LAYOUT */
-.page-container{
-    height:1500px;
+
+.page-container {
+    margin-top: 167px;
 }
 
 .mypage-container {
     padding: 40px 20px;
     display: flex;
-    height:1200px;
-    border:1px solid blue;
-}
 
-
-/* ---------- 사이드바 높이 조절 ---------*/
-.sidebar-card{
-    height: 200px;
 }
 
 
 /* 게시판 */
-.content {
-    margin-top: 10px;
-    width: 950px;
-    height: 1190px;
-    border:1px solid red;
-
+.content-area {
+    flex: 1;
+    background-color: #ffffff;
+    margin-left: 30px;
 }
 
-.content h1 {
+.content-area h1 {
     font-size: 24px;
     font-weight: 700;
-    color: #414141;
+    color: #000;
     margin-bottom: 20px;
     border-bottom: 2px solid #1EC4CC;
     padding-bottom: 10px;

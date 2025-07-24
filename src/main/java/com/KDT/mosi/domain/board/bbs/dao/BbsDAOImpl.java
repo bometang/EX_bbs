@@ -460,12 +460,12 @@ public class BbsDAOImpl implements BbsDAO {
    *         false : 중복 없음
    */
   @Override
-  public boolean existsDuplicateRecent(String title, String bcontent) {
+  public boolean existsDuplicateRecent(String title, String bcontent, int CHECK_CHAR_LEN) {
 
     StringBuffer sql = new StringBuffer();
     sql.append("SELECT COUNT(*)                                        ");
     sql.append("  FROM ( SELECT title,                                     ");
-    sql.append("                 DBMS_LOB.SUBSTR(bcontent, 4000, 1) AS bcontent_sub ");
+    sql.append("                 DBMS_LOB.SUBSTR(bcontent, :byteLen, 1) AS bcontent_sub ");
     sql.append("           FROM bbs                                   ");
     sql.append("          WHERE status <> 'B0203'                     ");
     sql.append("          ORDER BY create_date DESC                   ");
@@ -475,7 +475,8 @@ public class BbsDAOImpl implements BbsDAO {
 
     Map<String, Object> param = Map.of(
         "title",    title,
-        "bcontent", bcontent
+        "bcontent", bcontent,
+        "byteLen",  CHECK_CHAR_LEN
     );
 
     Integer cnt = template.queryForObject(sql.toString(), param, Integer.class);

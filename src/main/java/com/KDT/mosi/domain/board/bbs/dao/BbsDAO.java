@@ -46,7 +46,7 @@ public interface BbsDAO {
   public int increaseHit(Long id);
 
   //중복확인
-  public boolean existsDuplicateRecent(String title, String bcontent);
+  public boolean existsDuplicateRecent(String title, String bcontent, int CHECK_CHAR_LEN);
 
   //게시글 임시저장 확인
   Optional<Bbs> findTemporaryStorageById(Long member_id, Long pbbs_id);

@@ -15,8 +15,25 @@ import java.util.Optional;
 public class BbsSVCImpl implements BbsSVC{
   private final BbsDAO bbsDAO;
 
+  // 컬럼 최대 길이 상수
+  private static final int TITLE_MAX_LEN      = 100;
+  private static final int CONTENT_CHECK_LEN  = 1000;
+
+  // 문자열을 maxLen 만큼만 남기고 자르는 유틸
+  private String trimTo(String src, int maxLen) {
+    if (src == null) return null;
+    return (src.length() <= maxLen)
+        ? src
+        : src.substring(0, maxLen);
+  }
+
   @Override
   public Long save(Bbs bbs) {
+    String titleForCheck   = trimTo(bbs.getTitle(), TITLE_MAX_LEN);
+    String contentForCheck = trimTo(bbs.getBcontent(), CONTENT_CHECK_LEN);
+    bbs.setTitle(titleForCheck);
+
+
     // ① 답글이라면 부모 글을 미리 조회해 규칙만 확인
     if (bbs.getPbbsId() != null) {
       Bbs parent = bbsDAO.findById(bbs.getPbbsId())
@@ -33,7 +50,7 @@ public class BbsSVCImpl implements BbsSVC{
     }
 
     // 최근 10건 중복 제목·내용 검사
-    if (bbsDAO.existsDuplicateRecent(bbs.getTitle(), bbs.getBcontent())) {
+    if (bbsDAO.existsDuplicateRecent(bbs.getTitle(), contentForCheck,CONTENT_CHECK_LEN)) {
       throw new IllegalStateException("최근 10개 안에 동일한 제목/내용의 글이 이미 존재합니다.");
     }
     return bbsDAO.save(bbs);

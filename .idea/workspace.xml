@@ -5,33 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc470a1-286f-4360-ab34-5292c3cb0de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sql/product/product.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill_bak.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/rbbs/dao/RbbsDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/rbbs/dao/RbbsDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/CsrBbsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/CsrBbsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/MemberAuto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/MemberAuto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/bbs_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/bbs_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/writeForm_quill.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/writeForm_quill.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/fragments/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/member/Member.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/member/Member.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/mypage/Buyer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/mypage/Buyer.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/mypage/Seller.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/mypage/Seller.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill_test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/rbbs/dao/RbbsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/rbbs/dao/RbbsDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/CsrBbsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/CsrBbsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/MemberAuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/MemberAuto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/bbs_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/bbs_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/writeForm_quill.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/writeForm_quill.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill_test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +70,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/KDT/projects/EXBbs/sql",
+    "last_opened_file_path": "D:/study/project/EXBbbs/src/main/resources/static/css/community",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -88,11 +79,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\study\project\EXBbbs\src\main\resources\static\css\community" />
       <recent name="C:\KDT\projects\EXBbs\sql" />
       <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\web" />
       <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\web\form" />
       <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\domain\member" />
-      <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\domain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\js\community" />
