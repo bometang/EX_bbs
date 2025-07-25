@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,8 +87,19 @@ public class MemberAuto {
 
   @GetMapping("/update-pics")
   public String updateAllPics(HttpSession session) throws IOException {
-//    String baseDir = "C:/KDT/projects/realBbs/src/main/resources/static/img/member";
-    String baseDir = "D:/study/project/realBbs/src/main/resources/static/img/member";
+    // 두 경로를 미리 정의
+    String primaryBaseDir   = "C:/KDT/projects/realBbs/src/main/resources/static/img/member";
+    String secondaryBaseDir = "D:/study/project/realBbs/src/main/resources/static/img/member";
+
+// 존재 여부 검사 후 baseDir 결정
+    String baseDir;
+    File dir = new File(primaryBaseDir);
+    if (dir.exists() && dir.isDirectory()) {
+      baseDir = primaryBaseDir;
+    } else {
+      baseDir = secondaryBaseDir;
+    }
+
     String[] fileNames = {
         "1_인물.jpg",
         "2_인물.png",

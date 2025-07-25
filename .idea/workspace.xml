@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc470a1-286f-4360-ab34-5292c3cb0de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill_bak.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/MemberAuto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/controller/board/MemberAuto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/img/bbs/bbs_detail/report_begin.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/img/bbs/bbs_detail/report_begin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill_test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/dao/BbsDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbs/svc/BbsSVCImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/MemberAuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/controller/board/MemberAuto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/img/bbs/bbs_detail/report_begin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/img/bbs/bbs_detail/report_begin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill_test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,22 +56,22 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MosiApplication.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JUnit.MosiApplicationTests.testUpdateStepAndShift.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/study/project/EXBbbs/src/main/resources/static/css/community",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MosiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JUnit.MosiApplicationTests.testUpdateStepAndShift.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/study/project/EXBbbs/src/main/resources/static/css/community&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\study\project\EXBbbs\src\main\resources\static\css\community" />
@@ -86,11 +81,11 @@
       <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\domain\member" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\img\bbs\bbs_detail" />
       <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\js\community" />
       <recent name="C:\KDT\projects\realBbs\src\main\resources\static\img\bbs\bbs_detail" />
       <recent name="C:\KDT\projects\realBbs\src\main\resources\static\img\member" />
       <recent name="C:\KDT\projects\realBbs\src\main\resources\static\css\community\old" />
-      <recent name="C:\KDT\projects\realBbs\src\main\resources\static\img\bbs\bbs_list" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.KDT.mosi.web.controller" />

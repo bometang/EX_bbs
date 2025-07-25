@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           );
             const bbsData = span.textContent.trim();
             const decode = categoryMap[bbsData] ?? '기타';
-            span.textContent = decode;
+            span.textContent = '[' + decode + ']';
         }
       } catch (err) {
         console.error(err);
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const HEART_EMPTY = '/img/bbs/bbs_detail/Icon_Heart.png';
     const HEART_FILL  = '/img/bbs/bbs_detail/Icon_Heart_fill.png';
 
-    //게시글 조회
+    //댓글 조회
     const getPostComment = async (pid,rbbsId) => {
       try {
         const url = `/api/bbs/${pid}/comments/${rbbsId}`;
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // map() → 배열 of 문자열 → join() → 하나의 HTML 문자열
         return postComments
           .map((postComment, idx) => {
-            const indentPx = postComment.bindent * 20;
+            const indentPx = postComment.bindent * 46;
             const canReply  = ((postComment.bindent < 2) && (postComment.memberId !== loginId));
             const canEdit  =  postComment.memberId === loginId;
             const canHr = postComment.step === 0 && idx >0;
@@ -463,6 +463,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               ${canHr ? '<hr>' : ''}
               <div
                 id="comment-${postComment.rbbsId}"
+                class="commentContent"
                 style="padding-left: ${indentPx}px;"
               >
                 <div class="profile">
@@ -474,7 +475,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 <div class="comment-info">
                   <div>
-                    <span>${postComment.nickname}</span>
+                    <span class="commentNickname">${postComment.nickname}</span>
                     <button
                       type="button"
                       class="btnReplyComment${canReply ? '' : ' hidden'}"
@@ -505,8 +506,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </button>
                   </div>
                   <span class="commentBcontent">${postComment.bcontent}</span>
-                  <div>
-                    <span>${postComment.updateDate}</span>
+                  <div class="commentBottom">
+                    <span class="commentUpdateTime">${postComment.updateDate}</span>
                     <button type="button" class="btnLikeComment" data-rbbs-id="${postComment.rbbsId}">
                       <img
                         src="${

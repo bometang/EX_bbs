@@ -41,7 +41,7 @@
         <hr>
         <div class="btnGroup">
           <span class="location">커뮤니티 &gt; 자유 게시판</span>
-          <div th:classappend="${ #authorization.expression('isAuthenticated()') and (#authentication.principal.member.memberId != bbs.memberId)} ? 'hidden' : ''">
+          <div class="btn-controll" th:classappend="${ #authorization.expression('isAuthenticated()') and (#authentication.principal.member.memberId != bbs.memberId)} ? 'hidden' : ''">
             <div class="btn-area view-mode">
               <button id="btn-edit" class="btn-post-edit" type="button">수정</button>
               <button id="btn-del" class="btn-post-delete" type="button">삭제</button>
@@ -58,7 +58,6 @@
       </section>
 
       <div class="contentAll view-mode">
-
         <div class="contentHeader">
           <p class="meta-item"><b>no. </b> <span th:text="${bbs.bbsId}">123</span></p>
           <p class="meta-item"><span th:text="${bbs.title}">게시글 제목</span></p>
@@ -75,7 +74,7 @@
                  th:alt="${bbs.nickname}" />
             <div class="info-text">
               <span class="nickname" th:text="${bbs.nickname}">닉네임</span>
-              <span class="nickname" th:text="${'조회수 '+bbs.hit}">조회수</span>
+              <span class="hit" th:text="${'조회수 '+bbs.hit}">조회수</span>
               <div class="time-group">
                 <span class="createTime"  th:text="${'작성일: ' + #temporals.format(bbs.createDate, 'yyyy.MM.dd HH:mm')}">2025.07.02 09:58</span>
                 <span class="updateTime"  th:text="${'수정일: ' + #temporals.format(bbs.updateDate, 'yyyy.MM.dd HH:mm')}">2025.07.02 09:58</span>
@@ -88,14 +87,12 @@
               <!-- 신고된 경우 -->
               <img th:if="${reported}"
                    th:src="@{/img/bbs/bbs_detail/report_filled.png}"
-                   alt="신고됨 아이콘"
-                   width="24" height="24"/>
+                   alt="신고됨 아이콘">
 
               <!-- 신고되지 않은 경우 -->
               <img th:unless="${reported}"
                    th:src="@{/img/bbs/bbs_detail/report_begin.png}"
-                   alt="신고 아이콘"
-                   width="24" height="24"/>
+                   alt="신고 아이콘">
 
               <span>신고</span>
             </button>
@@ -115,15 +112,15 @@
                  th:src="@{/img/bbs/bbs_detail/Icon_Heart.png}"
                  alt="좋아요 비활성화 아이콘"
                  width="21" height="21"/>
-            <span class="cntLike" th:text="${'좋아요 ' + cnt_like}">좋아요 0</span>
+            <span class="cntLike" th:text="${'좋아요  ' + cnt_like}">좋아요 0</span>
           </button>
-          <div>
+          <div class="commentCnt">
             <img th:src="@{/img/bbs/bbs_detail/comment.png}" alt="댓글 아이콘" width="21" height="21">
-            <span th:text="${'댓글' + cnt_comment}">댓글 0</span>
+            <span th:text="${'댓글  ' + cnt_comment}">댓글 0</span>
           </div>
         </div>
         <div class="contentComment">
-          <div><span>등록순</span></div>
+          <div class="selectComment"><span>등록순</span></div>
           <div class="comment-list">
             <!--출력 예정-->
           </div>
@@ -189,7 +186,7 @@
               <button class="ql-indent" value="-1"></button>
               <button class="ql-indent" value="+1"></button>
             </div>
-            <div id="editor" style="height: 300px;" th:utext="${bbs.bcontent}"></div>
+            <div id="editor" style="height: 740px;" th:utext="${bbs.bcontent}"></div>
             <input type="hidden" name="bcontent" id="editorContent">
           </div>
         </form>
