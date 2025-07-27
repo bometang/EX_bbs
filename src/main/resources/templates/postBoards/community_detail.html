@@ -116,7 +116,7 @@
           </button>
           <div class="commentCnt">
             <img th:src="@{/img/bbs/bbs_detail/comment.png}" alt="댓글 아이콘" width="21" height="21">
-            <span th:text="${'댓글  ' + cnt_comment}">댓글 0</span>
+            <span id="comment-total" th:text="${'댓글  ' + cnt_comment}">댓글 0</span>
           </div>
         </div>
         <div class="contentComment">
@@ -191,7 +191,12 @@
           </div>
         </form>
       </div>
-
+      <div class="post-nav" >
+        <button type="button" id="btn-list" >
+          <img th:src="@{/img/bbs/bbs_detail/bbs_list.png}"alt="목록">
+          목록
+        </button>
+      </div>
 
 
     </section>

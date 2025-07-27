@@ -1,6 +1,6 @@
 import { ajax, PaginationUI } from '/js/community/common.js';
 import { formatRelativeTime } from '/js/community/bbs/csr/dateUtils.js';
-
+let pagination = null;
 // community_detail.js (또는 적당한 JS 파일)
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -40,6 +40,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(err);
       }
     };
+
+    const bbsList = document.getElementById('btn-list');
+
+    bbsList.addEventListener('click',() => {
+        window.location.href = `/bbs/community`;
+    })
+
 
     const viewEls = document.querySelectorAll('.view-mode');
     const editEls  = document.querySelectorAll('.edit-mode');
@@ -242,14 +249,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
 
-    //댓글 저장
+    //대댓글 저장
     const addPostComment = async (comment) => {
       try {
         const url = `/api/bbs/${pid}/comments`;
         const result = await ajax.post(url,comment);
 
         if (result.header.rtcd === 'S00') {
-
+          const { header, body: total } = await ajax.get(`/api/bbs/${pid}/comments/totCnt`);
+          if (header.rtcd !== 'S00') return;
+          getPostCommentList(currentPage, recordsPerPage);
+          document.getElementById('comment-total').textContent = `댓글  ${total}`;
         } else if(result.header.rtcd.substr(0,1) == 'E'){
             for(let key in result.header.details){
                 console.log(`필드명:${key}, 오류:${result.header.details[key]}`);
@@ -321,20 +331,31 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     };
 
-    //댓글 버튼
+    //댓글 목록 출력
     async function configPagination(){
       const url = `/api/bbs/${pid}/comments/totCnt`;
       try {
         const result = await ajax.get(url);
 
         const totalRecords = result.body; // 전체 레코드수
+//        const $commentCnt = document.querySelector('.commentCnt span');
+        const $commentCnt = document.getElementById('comment-total');
+        $commentCnt.textContent = `댓글  ${totalRecords}`;
+
+        if (totalRecords === 0) {
+          // 목록 영역에 안내 문구
+          $list.innerHTML = '<p class="no-comment">첫&nbsp;댓글을 입력해주세요</p>';
+          // 페이지 버튼 영역 비우기
+          document.getElementById('reply_pagenation').innerHTML = '';
+          return;                       // 아래 페이징 로직 건너뜀
+        }
 
         const handlePageChange = (reqPage)=>{
           return getPostCommentList(reqPage,recordsPerPage);
         };
 
         // Pagination UI 초기화
-        var pagination = new PaginationUI('reply_pagenation', handlePageChange);
+        pagination = new PaginationUI('reply_pagenation', handlePageChange);
 
         pagination.setTotalRecords(totalRecords);       //총건수
         pagination.setRecordsPerPage(recordsPerPage);   //한페이지당 레코드수
@@ -355,7 +376,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         replyDiv.innerHTML = `
             <div id="reply-form-${parentCid}" class="reply-form">
                 <div>
-                    <input type="text" id="reply-input-${parentCid}" placeholder="답글을 입력하세요" style="width:70%;" />
+                    <textarea id="reply-input-${parentCid}" name="content" placeholder="답글을 입력하세요." required></textarea>
                     <button class="btnSubmitReply">등록</button>
                     <button class="btnCancelReply">취소</button>
                 </div>
@@ -378,7 +399,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 $err.textContent = '';
                 await addPostComment({ bcontent: text, prbbsId: parentCid });
                 replyDiv.innerHTML = '';
-                configPagination();
+
             };
             form.querySelector('.btnCancelReply').onclick = () => {
                 replyDiv.innerHTML = '';
@@ -389,32 +410,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     // -----------------------------------------------------
     // 댓글쓰기 폼(#comment-form) 한 번만 이벤트 등록
     // -----------------------------------------------------
-    //댓글 버튼
-        async function EndPagination(){
-          const url = `/api/bbs/${pid}/comments/totCnt`;
-          try {
-            const result = await ajax.get(url);
+    //새 댓글 버튼
+    const goLastPage = async () => {
+      const { header, body: total } =
+        await ajax.get(`/api/bbs/${pid}/comments/totCnt`);
+      if (header.rtcd !== 'S00') return;
 
-            const totalRecords = result.body; // 전체 레코드수
+      const lastPage = Math.max(1, Math.ceil(total / recordsPerPage));
 
-            const handlePageChange = (reqPage)=>{
-              return getPostCommentList(reqPage,recordsPerPage);
-            };
+      // 2. 마지막 페이지 목록 요청
+      await getPostCommentList(lastPage, recordsPerPage);
+      document.getElementById('comment-total').textContent = `댓글  ${total}`;
 
-            // Pagination UI 초기화
-            var pagination = new PaginationUI('reply_pagenation', handlePageChange);
-
-            pagination.setTotalRecords(totalRecords);       //총건수
-            pagination.setRecordsPerPage(recordsPerPage);   //한페이지당 레코드수
-            pagination.setPagesPerPage(pagesPerPage);       //한페이지당 페이지수
-
-            // 첫페이지 가져오기
-            pagination.handleLastClick();
-
-          }catch(err){
-            console.error(err);
-          }
+      if (!pagination) {
+          await configPagination();           // ← 여기 한 줄이면 충분
         }
+
+      pagination.setTotalRecords(total);
+      pagination.handleLastClick();
+        };
 
     const $form    = document.getElementById('comment-form');
     const $content = document.getElementById('comment-content');
@@ -435,7 +449,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // 성공 시 UI 처리
         $content.value = '';              // 입력창 초기화
-        EndPagination();
+        await goLastPage();
 
       } catch (err) {
         console.error(err);
@@ -452,12 +466,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         return postComments
           .map((postComment, idx) => {
             const indentPx = postComment.bindent * 46;
+            const doubleIndentPx = postComment.bindent * 46 + 46;
             const canReply  = ((postComment.bindent < 2) && (postComment.memberId !== loginId));
             const canEdit  =  postComment.memberId === loginId;
             const canHr = postComment.step === 0 && idx >0;
             const canDel = postComment.memberId === loginId;
             const reported = !!postComment.reported;
-
+            const canStatus = postComment.status === 'R0201';
+            const relTime = formatRelativeTime(postComment.updateDate);
             // 첫 댓글 위에는 <hr> 넣지 않기 위해 idx > 0 검사
             return `
               ${canHr ? '<hr>' : ''}
@@ -478,14 +494,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <span class="commentNickname">${postComment.nickname}</span>
                     <button
                       type="button"
-                      class="btnReplyComment${canReply ? '' : ' hidden'}"
+                      class="btnReplyComment${canReply && canStatus ? '' : ' hidden'}"
                       data-rbbs-id="${postComment.rbbsId}"
                     >
                       답글
                     </button>
                     <button
                       type="button"
-                      class="btnEditComment${canEdit ? '' : ' hidden'}"
+                      class="btnEditComment${canEdit && canStatus ? '' : ' hidden'}"
                       data-rbbs-id="${postComment.rbbsId}"
                     >
                       수정
@@ -507,7 +523,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                   </div>
                   <span class="commentBcontent">${postComment.bcontent}</span>
                   <div class="commentBottom">
-                    <span class="commentUpdateTime">${postComment.updateDate}</span>
+                    <span class="commentUpdateTime">${relTime}</span>
                     <button type="button" class="btnLikeComment" data-rbbs-id="${postComment.rbbsId}">
                       <img
                         src="${
@@ -520,7 +536,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </button>
                   </div>
                 </div>
-                <div class="comment_btns">
+                <div class="comment_btns${canStatus ? '' : ' hidden'}" >
                   <button
                     type="button"
                     class="btnDelComment${canDel ? '' : ' hidden'}"
@@ -532,7 +548,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                   <button type="button" class="btnReportComment" data-rbbs-id="${postComment.rbbsId}" ${postComment.reported ? 'disabled' : ''}>신고</button>
                 </div>
               </div>
-              <div id="replyComment-${postComment.rbbsId}" class="replyComment"></div>
+              <div id="replyComment-${postComment.rbbsId}" class="replyComment" style="padding-left: ${doubleIndentPx}px;"></div>
             `;
           })
           .join('');

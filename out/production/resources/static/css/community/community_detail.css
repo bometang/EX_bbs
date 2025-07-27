@@ -148,6 +148,15 @@
     border: 1px solid #FF3535;
 }
 
+.post-section .btnGroup #btn-save {
+    border: 1px solid #0099AD;
+}
+
+.btnGroup #btn-cancel {
+    border: 1px solid #FF3535;
+}
+
+
 .btnGroup #btn-reply {
     border: 1px solid #0099AD;
 }
@@ -156,6 +165,7 @@
     border: 1px solid #D4D4D4;
     border-radius: 5px;
     margin-left:12px;
+    margin-bottom:18px;
     padding:0 17px 0 17px;
 }
 
@@ -248,6 +258,8 @@
     padding-left:20px;
     padding-right:20px;
     margin-bottom:36px;
+    white-space: pre-wrap;
+    word-break: break-all;
 }
 
 /* inline-image 컨테이너는 width 지정 빼거나 auto 로 두세요 */
@@ -386,6 +398,50 @@
   color:#797979;
   transition: opacity 0.2s ease;
 }
+
+.replyComment {
+    margin-bottom: 20px;
+    padding-right: 58px;
+}
+
+.reply-form > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.reply-form textarea{
+    flex: 1;
+    height:56px;
+    resize: none;
+    border-radius: 5px;
+}
+
+
+.btnSubmitReply {
+    width: 65px;
+    height:56px;
+    background-color: #0099AD;
+    border-radius:5px;
+    border:none;
+    color: #fff;
+    font-size:11px;
+    font-weight:600;
+    padding-inline: 0;
+}
+
+.btnCancelReply {
+    width: 65px;
+    height:56px;
+    background-color: #00AEC4;
+    border-radius:5px;
+    border:none;
+    color: #fff;
+    font-size:11px;
+    font-weight:600;
+    padding-inline: 0;
+}
+
 .commentContent .comment_btns button:hover {
   opacity: 0.7;          /* 살짝 투명하게 */
 }
@@ -420,11 +476,14 @@
 
 .commentForm {
     display:flex;
+
     background-color : #F6FDFF;
     box-shadow:
         -17px 0 0 0 #F6FDFF,
         17px 0 0 0 #F6FDFF;
     border-radius: 5px;
+    padding-right:34px;
+    margin-bottom:19px;
 }
 
 
@@ -444,13 +503,14 @@
 }
 #comment-form {
   display: flex;
-  align-items: center;      /* 자식 요소 가로축 가운데 정렬 */
-  gap: 8px;                 /* textarea와 버튼 사이 간격 (필요에 따라 조절) */
+  align-items: center;
+  gap: 3px;
 }
 #comment-form #comment-content {
     flex: 1;
     height:56px;
     resize: none;
+    border-radius: 5px;
 }
 
 #comment-form #comment-content::placeholder{
@@ -468,6 +528,75 @@
     font-weight:600;
     padding-inline: 0;
 }
+
+
+.comment-input {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.post-nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-nav button {
+    width: 66.02px;
+    height:25.94px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 153, 173, 1);
+    border-radius:4px;
+
+    font-size:11px;
+    font-weight:600;
+    color: #000;
+
+    padding-inline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.post-nav button img {
+  width: 17.29px;
+  height: 18.08px;
+}
+
+
+#edit-form {
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.form-label {
+    font-size:20px;
+    font-weight: 600;
+    margin:5px;
+}
+
+#edit-title {
+    font-size:20px;
+    height:20px;
+    padding:5px;
+    width:90%;
+    border-radius:5px;
+}
+
+.content-editor-wrapper{
+    margin-top:20px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
