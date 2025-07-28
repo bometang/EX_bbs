@@ -46,9 +46,10 @@ ul {
 }
 
 /* Sidebar */
+/*
 .sidebar {
   width: 180px;
-  min-height: 920px;
+  min-height: 1300px;
   flex-shrink: 0;
   background-color: #f8f9fa;
 }
@@ -132,7 +133,7 @@ ul {
 .mypage-nav > ul > li > ul a:hover {
   color: #00c7e2;
 }
-
+*/
 /* Content */
 .content {
   flex-grow: 1;

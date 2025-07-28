@@ -1,10 +1,10 @@
-/* 페이지 컨테이너: 헤더 높이만큼 패딩 */
+/*
 .page-container {
     padding-top: 167px;
     background-color: #FFFFFF;
 }
-
-/* 마이페이지 레이아웃: 사이드바 + 콘텐츠 */
+ */
+/*
 .mypage-container {
     display: flex;
     width: 1200px;
@@ -14,14 +14,13 @@
     box-sizing: border-box;
 }
 
-/* 사이드바 */
+
 .sidebar {
-    flex: 0 0 180px; /* Figma: 180px */
-    padding-top: 59px; /* (266px - 167px) */
+    flex: 0 0 180px;
+    padding-top: 59px;
     box-sizing: border-box;
 }
 
-/* 네비게이션 제목 */
 .mypage-nav .nav-title {
     width: 180px;
     height: 40px;
@@ -41,12 +40,7 @@
     box-sizing: border-box;
 }
 
-/* active 상태 (필요시 추가 커스터마이징) */
-.mypage-nav .nav-title.active {
-    /* 현재는 기본 스타일과 동일하게 유지 */
-}
 
-/* nav 목록 spacing */
 .mypage-nav ul {
     margin: 0;
     padding: 0;
@@ -61,7 +55,7 @@
     display: flex;
     align-items: center;
     width: 180px;
-    height: 37px; /* Figma: 37px */
+    height: 37px;
     padding: 0 12px;
     background-color: #FFFFFF;
     border: 1px solid #0099AD;
@@ -79,11 +73,41 @@
 .mypage-nav ul li a:hover {
     background-color: #F4F4F4;
 }
+*/
+.page-container {
+    background-color: #FFFFFF;
+}
 
-/* 본문 영역 */
+/* 마이페이지 레이아웃: 사이드바 + 콘텐츠 */
+.mypage-container {
+    display: flex;
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+
+.mypage-nav ul li a:hover {
+    color: #80CCD6;
+}
+
+.post-section h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #414141;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1EC4CC;
+    padding-bottom: 10px;
+    margin-top: 0px;
+}
 .content {
-    flex: 1;
-    margin-left: 18px;
+  flex: 1;
+  width: 950px;
+}
+.sidebar-card{
+    height: 200px;
 }
 
 .post-section {
@@ -91,14 +115,7 @@
 }
 
 /* 게시글 섹션 제목 */
-.post-section h2 {
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #17292C;
-    margin: 24px 0 0;
-}
+
 .post-section hr {
     border: none;
     height:2px;
@@ -169,8 +186,14 @@
     padding:0 17px 0 17px;
 }
 
+.contentAll hr {
+    margin-bottom: 9px;
+}
+
 .contentAll .contentHeader {
     padding-left: 20px;
+    padding-right:20px;
+    margin-bottom:20px;
 }
 
 .contentHeader .meta-item {
@@ -351,8 +374,9 @@
 .comment-info .commentNickname {
     font-size: 12px;
     font-weight:600;
+    margin-right:13px;
 }
-.comment-info .commentNickname {
+.comment-info .commentBcontent {
     font-size: 13px;
     font-weight:400;
 }
@@ -397,6 +421,11 @@
   margin-right:58px;
   color:#797979;
   transition: opacity 0.2s ease;
+}
+
+.comment_btns button {
+    margin-left:3px;
+    color:#797979;
 }
 
 .replyComment {
@@ -458,6 +487,7 @@
     border:0;
     background: none;
     font-size:15px;
+    padding:0 5px 0 5px;
 }
 
 #reply_pagenation .active {
@@ -475,15 +505,24 @@
 }
 
 .commentForm {
-    display:flex;
-
-    background-color : #F6FDFF;
-    box-shadow:
-        -17px 0 0 0 #F6FDFF,
-        17px 0 0 0 #F6FDFF;
+    position: relative;     /* pseudo‑element 위치 기준 */
+    display: flex;
     border-radius: 5px;
-    padding-right:34px;
-    margin-bottom:19px;
+    padding-right: 34px;
+    margin-bottom: 19px;
+    z-index: 0;             /* ::before가 -1 이라도 commentForm 위에 표시되도록 */
+}
+
+.commentForm::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -17px;            /* 좌우 확장값 */
+    right: -17px;
+    bottom: -19px;          /* 기존 margin-bottom 만큼 아래로 확장 */
+    background-color: #F6FDFF;
+    border-radius: 5px;     /* 상하좌우 모서리 모두 같이 둥글게 */
+    z-index: -1;            /* commentForm 뒤로 */
 }
 
 
@@ -579,7 +618,7 @@
 
 #edit-title {
     font-size:20px;
-    height:20px;
+    height:30px;
     padding:5px;
     width:90%;
     border-radius:5px;

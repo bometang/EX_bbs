@@ -71,13 +71,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.contentText').innerHTML;
     });
 
-    // 2) “취소” 클릭 → 다시 보기 버튼으로 복구
+    // 2) “취소” 클릭 (수정 후  버튼)
     btnCancel.addEventListener('click', () => {
         editEls.forEach(el => el.classList.add('hidden'));
         viewEls.forEach(el => el.classList.remove('hidden'));
     });
 
-    // 3) “저장” 클릭 → AJAX 저장 후 복구
+    // 3) “저장” 클릭 (수정 후 저장 버튼)
     btnSave.addEventListener('click', async () => {
         document.getElementById('editorContent').value = quill.root.innerHTML;
         editEls.forEach(el => el.classList.add('hidden'));
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           alert(result.header.rtmsg);
         }
       } catch (err) {
-        console.log("수정 오류")
+        console.log("수정 오류");
         console.error(err.message);
       }
     };
@@ -222,7 +222,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     $commentList.appendChild(divEle);
     const formEl  = document.querySelector('.commentForm');
     const img = document.getElementById('loginProfilePic');
+    const post_img = document.querySelector('.post-pic');
     const loginId = img.alt ? Number(img.alt) : null;
+    const postId = post_img.alt ? Number(post_img.alt) : null;
     const HEART_EMPTY = '/img/bbs/bbs_detail/Icon_Heart.png';
     const HEART_FILL  = '/img/bbs/bbs_detail/Icon_Heart_fill.png';
 
@@ -249,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
 
-    //대댓글 저장
+    //댓글 저장
     const addPostComment = async (comment) => {
       try {
         const url = `/api/bbs/${pid}/comments`;
@@ -258,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (result.header.rtcd === 'S00') {
           const { header, body: total } = await ajax.get(`/api/bbs/${pid}/comments/totCnt`);
           if (header.rtcd !== 'S00') return;
-          getPostCommentList(currentPage, recordsPerPage);
+          console.log('댓글완');
           document.getElementById('comment-total').textContent = `댓글  ${total}`;
         } else if(result.header.rtcd.substr(0,1) == 'E'){
             for(let key in result.header.details){
@@ -318,11 +320,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       try {
         const url = `/api/bbs/${pid}/comments/paging?pageNo=${reqPage}&numOfRows=${reqRec}`;
         const result = await ajax.get(url);
-
+        console.log('댓글목록 가져오기');
         if (result.header.rtcd === 'S00') {
+          console.log(reqPage);
           currentPage = reqPage; // 현재 페이지 업데이트
           displayPostCommentList(result.body);
-
+          console.log('댓글 그리기');
         } else {
           alert(result.header.rtmsg);
         }
@@ -398,6 +401,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 $err.textContent = '';
                 await addPostComment({ bcontent: text, prbbsId: parentCid });
+                await getPostCommentList(reqPage,recordsPerPage);
                 replyDiv.innerHTML = '';
 
             };
@@ -424,6 +428,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (!pagination) {
           await configPagination();           // ← 여기 한 줄이면 충분
+          console.log('새 댓글 버튼의 버튼 목록');
         }
 
       pagination.setTotalRecords(total);
@@ -474,6 +479,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const reported = !!postComment.reported;
             const canStatus = postComment.status === 'R0201';
             const relTime = formatRelativeTime(postComment.updateDate);
+            const isAuthor = postComment.memberId === postId;
+
             // 첫 댓글 위에는 <hr> 넣지 않기 위해 idx > 0 검사
             return `
               ${canHr ? '<hr>' : ''}
@@ -491,7 +498,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 <div class="comment-info">
                   <div>
-                    <span class="commentNickname">${postComment.nickname}</span>
+                    <span class="commentNickname">
+                      ${postComment.nickname}
+                      ${isAuthor ? '<span class="commentAuthorTag">  (작성자)</span>' : ''}
+                    </span>
                     <button
                       type="button"
                       class="btnReplyComment${canReply && canStatus ? '' : ' hidden'}"

@@ -5,11 +5,13 @@
 
 .sidebar {
     width: 180px;
-    height: 1200px;
+    height: 1400px;
     flex-shrink: 0;
 }
 
 .sidebar-card  {
+    width: 180px;
+    height: 1400px;
     border: 1px solid #82d8d8;
     border-radius: 4px;
     background: #fff;
@@ -17,23 +19,39 @@
 }
 
 .profile-box {
-    padding: 20px 15px;
-    text-align: center;
-    border-bottom: 1px solid #E0E0E0;
-    background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 180px;
+  height: 220px;
+  padding-top: 15px;
+  background: #fff;
+  border-bottom: 1px solid #E0E0E0;
+  text-decoration: none;
 }
+
+
 .profile-image {
-    width: 93.5px !important;
-    height: 93.5px !important;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto 10px;
-    border: 1px solid #ddd;
+  width: 93.5px !important;
+  height: 93.5px !important;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  margin-bottom: 0; /* auto 제거 */
 }
+
 .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
 }
 
 .profile-badge  {
@@ -43,6 +61,7 @@
     padding: 2px 8px;
     border-radius: 12px;
     margin-bottom: 8px;
+    text-decoration: none;
 }
 
 .profile-name  {
@@ -61,26 +80,35 @@
     display: inline-block;
 }
 
+.mypage-nav {
+    width: 180px;
+    height: 1020px;
+}
+
 
 .mypage-nav .nav-title {
+    width: 180px;
+    height: 50px;
     background:#1EC4CC;
     color:#fff;
     font-weight:bold;
-    padding:15px;
-    text-align:center;
+    /*padding-top: 15px;
+    padding-bottom: 15px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size:16px;
 }
 
 .mypage-nav ul {
     background:#fff;
     padding:10px 0;
-    /*margin: 0;
-    height: 930px;*/
+    margin: 0;
+
 }
 
 .mypage-nav > ul > li {
-    padding-top: 20px;
-    /*height: 100px;*/
+    padding-top: 33px;
 }
 
 
@@ -105,11 +133,35 @@
     font-size: 13px;
     color: #414141;             /* 폰트 컬러: 진한 회색 */
     font-weight: normal;        /* 레귤러(기본) 굵기 */
+    text-decoration: none;
 }
 
 .mypage-nav > ul > li > ul a:hover {
     color:#00c7e2;
 }
+
+/*전환 버튼*/
+.btn-role-switch {
+  width: 77px;
+  height: 22px;
+  background: linear-gradient(to right, #56DDF8 0%, #09D0C0 100%);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 400; /* Regular */
+  border: none;
+  border-radius: 6px;
+  padding: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 22px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-role-switch:hover {
+  opacity: 0.9;
+}
+
 
 /* ============================= */
 /* ✅ B. Notice Bar & Section   */

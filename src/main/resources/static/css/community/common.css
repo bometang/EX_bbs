@@ -24,3 +24,53 @@ dialog {
 textarea {
   font-family: inherit;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  color: #000;
+  background-color: #fff;
+  padding-top: 150px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 레이아웃 */
+.page-container {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  /*height: 1980px;*/
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-container {
+  flex: 1;
+  display: flex;
+  gap: 30px;
+  padding: 40px 20px;
+  background-color: #fff;
+  min-height: calc(100vh - 150px - 80px); /* ✅ 헤더/푸터 제외 높이 확보 */
+}
+
+.content {
+  flex-grow: 1;
+  width: auto;
+}

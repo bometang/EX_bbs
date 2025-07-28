@@ -108,6 +108,116 @@ input[type='text']:focus {
 .product-info-left,
 .product-info-right{}
 
+/* pagination 컨테이너 */
+.pagination {
+    display: flex;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-top: 30px; /* 상단 여백 */
+    padding: 10px 0; /* 상하 패딩 */
+    font-family: 'Pretendard', sans-serif; /* 모든 페이징 요소에 폰트 적용 */
+}
+
+/* 개별 페이지 링크 버튼 및 스페이서 공통 스타일 */
+.page-link, .page-link-spacer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 38px; /* 버튼의 최소 너비를 설정하여 숫자 1자리, 2자리 모두 대응 */
+    height: 38px; /* 높이 통일 */
+
+    padding: 0; /* Figma에 Padding 정보가 없으므로 0으로 설정. min-width로 크기 제어. */
+    margin: 0 4px; /* 버튼 사이의 간격 (Figma 이미지 간격과 유사하게 조정) */
+
+    border: none; /* 모든 테두리 제거 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #fff; /* 기본 배경색 (흰색) */
+    color: #1F1F1F; /* 기본 글자색 */
+
+    /* Figma Typography 반영 */
+    font-size: 20px; /* 폰트 크기 */
+    font-weight: 400; /* 폰트 두께 */
+    line-height: 100%; /* 라인 높이 */
+    letter-spacing: 0%; /* 자간 */
+    text-decoration: none; /* 밑줄 제거 */
+
+    transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+    cursor: pointer;
+}
+
+페이징 컴포넌트 CSS 디자인 최종 수정 (테두리 제외)
+요청하신 대로 페이징 컴포넌트에서 모든 테두리를 제외하고 CSS를 수정하겠습니다.
+
+CSS 수정 (테두리 제외)
+이전 CSS 코드에서 테두리 관련 속성들을 제거하거나 transparent로 설정하겠습니다.
+
+CSS
+
+/* pagination 컨테이너 */
+.pagination {
+    display: flex;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-top: 30px; /* 상단 여백 */
+    padding: 10px 0; /* 상하 패딩 */
+    font-family: 'Pretendard', sans-serif; /* 모든 페이징 요소에 폰트 적용 */
+}
+
+/* 개별 페이지 링크 버튼 및 스페이서 공통 스타일 */
+.page-link, .page-link-spacer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 25px;
+    height: 25px;
+
+    padding: 0;
+    margin: 0 4px;
+
+    background-color: #fff; /* 기본 배경색 (흰색) */
+    color: #1F1F1F; /* 기본 글자색 */
+
+    font-size: 20px; /* 폰트 크기 */
+    font-weight: 400; /* 폰트 두께 */
+    line-height: 100%; /* 라인 높이 */
+    letter-spacing: 0%; /* 자간 */
+    text-decoration: none; /* 밑줄 제거 */
+
+    transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+    cursor: pointer;
+}
+
+/* 스페이서에 대한 추가 스타일: 보이지 않게 */
+.page-link-spacer {
+    visibility: hidden; /* 내용을 숨기되, 공간은 유지 */
+    pointer-events: none; /* 클릭 이벤트 비활성화 */
+    cursor: default; /* 마우스 커서 변경 */
+    background-color: transparent; /* 배경을 투명하게 */
+}
+
+/* `<` `>` `<<` `>>` 버튼의 특정 스타일 */
+.page-link:first-child, /* << */
+.page-link:nth-child(2), /* < */
+.page-link:nth-last-child(2), /* > */
+.page-link:last-child { /* >> */
+    border: none;
+    color: #555;
+    margin: 0 8px;
+}
+
+/* 현재 활성화된 페이지 버튼 */
+.page-link.active {
+    background-color: #0099AD;
+    color: #FFF;
+    font-weight: 700;
+    cursor: default;
+
+    min-width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
 
 /* 이미지 */
 .product-item img{

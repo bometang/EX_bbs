@@ -1,70 +1,198 @@
-body {
-  background-color: #e6f0ff;
+/* ✅ 기본 설정 */
+/* body {
+  background-color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #003366;
-  padding: 40px;
+  color: #414141;
+  padding-top: 167px;
+} */
+
+.layout-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 1513px;
+  margin: 0 auto;
+  padding-top: 90px;
 }
 
 h1 {
-  color: #004080;
-  margin-bottom: 30px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #414141;
+  margin-bottom: 32px;
 }
 
-form {
-  background-color: #cce0ff;
-  padding: 30px;
+/* ✅ 공통 form */
+.content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 530px;
+  height: 700px;
+  padding: 48px 30px 30px 30px;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 64, 128, 0.3);
-  max-width: 480px;
+  outline: 1px solid #1EC4CC;
+  margin: 60px;
 }
 
+.form-text {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.form-text.success {
+  color: #2E7D32;  
+}
+
+.form-text.error {
+  color: #D32F2F; 
+}
+
+
+/* ✅ label */
 label {
   display: block;
   margin-bottom: 14px;
   font-weight: 600;
 }
 
-input[type="number"],
-input[type="file"],
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 2px solid #3399ff;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
+/* ✅ 프로필 업로드 */
+.profile-upload {
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-input[type="number"]:focus,
-input[type="file"]:focus,
-textarea:focus {
-  border-color: #0066cc;
-  outline: none;
-}
-
-button {
-  margin-top: 20px;
-  background-color: #0073e6;
+.profile-upload-label {
   color: white;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ✅ 닉네임 입력 */
+.nickname-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 9px;
+  margin-left: 20px;
+}
+
+.nickname-box input {
+  width: 200px;
+  height: 38px;
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 500;
   border: none;
-  border-radius: 10px;
+  border-bottom: 1px solid #414141;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ✅ 중복확인 버튼 */
+.nickname-box .btn-small {
+  width: 62px;
+  height: 22px;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 8px;
+  line-height: 1;
+  margin-top: 18px;
+  padding-top: 2px;
+}
+
+/* ✅ 제출 버튼 */
+.nickname-box .btn-small,
+.submit-btn {
+  background-color: #1EC4CC;
+  color: white;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%;
 }
 
-button:hover {
-  background-color: #005bb5;
-}
-
-#charCount {
-  color: #004080;
+.submit-btn {
+  width: 140px;
+  height: 38px;
   font-size: 14px;
-  margin-top: 6px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #0F8291;
+}
+
+/* ✅ 소개글 입력 */
+.textarea-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.textarea-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.intro-box {
+  width: 450px;
+  height: 275px;
+  border-radius: 10px;
+  border: 1px solid #B2B2B2;
+  padding: 12px;
+  margin-top: 39px;
+  resize: none;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* ✅ 글자 수 카운트 */
+#charCount {
+  font-size: 16px;
   font-weight: 500;
-  text-align: right;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: #fff;
+  padding-left: 4px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+#charCountNum,.unit {
+  color: #6B6B6B;
+}
+
+.maxCount {
+  color: #B2B2B2;
 }

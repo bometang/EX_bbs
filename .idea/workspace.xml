@@ -5,15 +5,103 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc470a1-286f-4360-ab34-5292c3cb0de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/bbs/bbs_detail/bbs_list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail_bak.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/addStyles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/allForm_v2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/bbs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/bbsHome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/bbs_list.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/bbsdetail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/common.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/community_detail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/community_list.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/write_quill.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/allForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/bbs_list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/community_detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/dateUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/detailForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/updateForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/writeForm_quill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/bbsHomeTest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/allForm_v2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/bbsHome.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/bbs_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/community_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/detailForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/updateForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/write_quill.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/write_quill_test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/buyerMypageHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/buyerMypageHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/editBuyerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/editBuyerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/viewBuyerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/buyerpage/viewBuyerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/bbsHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/bbsHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/community_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/community_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/community_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/community/write_quill_bak.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_area.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/product/product_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_enroll.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/product/product_enroll.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/product/product_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_list_v2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_managing.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/product/product_managing.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/product/product_update.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/product/product_update.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/createSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/createSellerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/editSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/editSellerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/sellerMypageHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/sellerMypageHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/viewSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/css/sellerpage/viewSellerPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail_bak.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/detailForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/detailForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/writeForm_quill_bak.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/allForm_v2.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/allForm_v2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/bbsHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/bbsHome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/bbs_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/bbs_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/community_detail_bak.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/detailForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/detailForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/detailForm_bak.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/postBoards/write_quill.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/buyerMypageHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/buyerMypageHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/editBuyerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/editBuyerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/viewBuyerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/buyerpage/viewBuyerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/bbsHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/bbsHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/community_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/community_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/community_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/community/write_quill_bak.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/community/old2/write_quill_bak.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_area.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/product/product_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_enroll.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/product/product_enroll.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/product/product_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_list_v2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_managing.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/product/product_managing.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/product/product_update.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/product/product_update.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/createSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/createSellerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/editSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/editSellerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/sellerMypageHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/sellerMypageHome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/viewSellerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/sellerpage/viewSellerPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail_bak.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/community_detail_bak.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/detailForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/detailForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/writeForm_quill_bak.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/old/writeForm_quill_bak.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/allForm_v2.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/allForm_v2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/bbsHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/bbsHome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/bbs_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/bbs_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/community_detail_bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/community_detail_bak.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/detailForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/detailForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/detailForm_bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/old2/detailForm_bak.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/postBoards/write_quill.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +149,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/study/project/EXBbs/src/main/resources/static/js/community/bbs/csr",
+    "last_opened_file_path": "C:/KDT/projects/EXBbs/src/main/resources/templates/postBoards",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -70,18 +158,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\templates\postBoards" />
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\css\community" />
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\js\community\bbs\csr" />
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\css" />
       <recent name="D:\study\project\EXBbs\src\main\resources\static\js\community\bbs\csr" />
-      <recent name="D:\study\project\EXBbbs\src\main\resources\static\css\community" />
-      <recent name="C:\KDT\projects\EXBbs\sql" />
-      <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\web" />
-      <recent name="D:\study\project\realBbs\src\main\java\com\KDT\mosi\web\form" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\templates\postBoards\old2" />
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\css\community\old2" />
+      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\js\community\bbs\csr\old" />
       <recent name="D:\study\project\EXBbs\src\main\resources\static\img\bbs\bbs_detail" />
       <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\img\bbs\bbs_detail" />
-      <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\js\community" />
-      <recent name="C:\KDT\projects\realBbs\src\main\resources\static\img\bbs\bbs_detail" />
-      <recent name="C:\KDT\projects\realBbs\src\main\resources\static\img\member" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.KDT.mosi.web.controller" />

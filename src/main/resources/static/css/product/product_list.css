@@ -1,235 +1,550 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    color: #333;
+ul li {
+    list-style:none;
 }
-.container {
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*** 전체 레이아웃 영역 ***/
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    min-height: 950px;
 }
-.header {
-    background: linear-gradient(135deg, #3498db, #2ecc71);
-    color: white;
-    padding: 40px 20px;
-    margin: -40px -20px 40px -20px;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    position: relative;
+/* 카테고리명 */
+.category-header h1{
+    margin-left: 10px;
+    font-size: 36px;
 }
-.logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    color: white;
-    text-decoration: none;
+
+.sort-first-depth {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 사이드바: 좌측 메뉴 카테고리 */
+.sidebar {
+    width: 240px;
+    min-width: 155px;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* 사이드 안내 박스 (상단에 딱 붙임) */
+.guide-box {
+    background: #e6fcfa;
+    border-radius: 7px;
+    color: #09d0c0;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 10px 10px 10px;
+    border-left: 3px solid #13b4b1;
+    margin-top: 0;      /* 여기! 꼭 0 또는 최소값으로! */
+    margin-bottom: 16px; /* 카테고리 메뉴와 간격만 */
+    width: 220px;
+    height: 88px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
-    z-index: 100;
 }
-.logo:hover {
-    transform: translateY(-2px);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-.logo i {
-    font-size: 28px;
-}
-.header h1 {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    text-align: center;
-}
-.search-container {
-    max-width: 800px;
+
+.guide-box ul {
+    width: 200px;
     margin: 0 auto;
-    position: relative;
 }
-.search-bar {
-    display: flex;
-    gap: 10px;
-    background: white;
-    padding: 15px;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-.search-input {
-    flex: 1;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    background: #f8f9fa;
-    transition: all 0.3s;
-}
-.search-input:focus {
-    outline: none;
-    background: white;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-.filter-select {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    background: #f8f9fa;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.filter-select:focus {
-    outline: none;
-    background: white;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-.add-product-btn {
-    background: #2ecc71;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-.add-product-btn:hover {
-    background: #27ae60;
-    transform: translateY(-2px);
-}
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-.product-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s;
-    position: relative;
-}
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-.product-image {
+
+.guide-box ul li {
     width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.guide-box ul .left-sort{
+    display: flex;
+    justify-content: flex-start;
+    color: #414141;
+}
+
+.guide-box ul .right-sort{
+    display: flex;
+    justify-content: flex-end;
+    color: #0099AD;
+}
+
+/* 인기 키워드 */
+.top-keywords-frame {
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
     height: 200px;
-    object-fit: cover;
-    transition: all 0.3s;
+    justify-content: space-evenly;
+    background-color: #F9F9F9;
 }
-.product-card:hover .product-image {
-    transform: scale(1.05);
-}
-.product-info {
-    padding: 20px;
-}
-.product-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #2c3e50;
-}
-.product-price {
-    font-size: 20px;
-    color: #e74c3c;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-.product-category {
-    display: inline-block;
-    padding: 5px 12px;
-    background: #f0f7ff;
-    color: #3498db;
-    border-radius: 15px;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-.product-stock {
-    font-size: 14px;
-    color: #27ae60;
+.top-keywords-title {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: row;
+    font-size: 24px;
+    font-weight: 600;
 }
-.product-tags {
+.hot-badge {
+    width: 33px;
+    height: 22px;
+    font-size: 14px;
+    background: linear-gradient(to right, #56DDF8, #09D0C0);
+    margin-top: 0;
+}
+
+.keyword-cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
-.tag {
-    background: #f8f9fa;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    color: #666;
+.keyword-card {
+    display: flex;
+    flex-direction: row;
+    width: 216px;
+    height: 88px;
 }
-.pagination {
+.keyword-content {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 40px;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+
 }
-.pagination button {
-    padding: 10px 20px;
+.keyword-content img {
+    width: 80px;
+    height: 80px;
+    margin: 5px 5px;
+}
+.keyword-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 90px;
+}
+
+/* 카테고리 메뉴 */
+.menu-frame {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+}
+.menu-frame ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.menu-frame li {
     border: none;
-    background: white;
-    border-radius: 25px;
-    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+.menu-frame a {
+    display: block;
+    color: #414141;
+    font-size: 16px;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background 0.13s, color 0.13s;
+}
+.menu-frame a.active, .menu-frame a:hover {
+    background: #eafcfb;
+    color: #09d0c0;
+    font-weight: 700;
+}
+
+/* 본문 컨텐츠 영역*/
+.content-wrapper {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 20px;
+}
+
+/*** 카테고리 선택 영역 ***/
+.filter-form {
+    background: #f6fafd;
+    border-radius: 13px;
+    padding: 18px 28px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 26px;
+    margin-top: 8px;
+    border: 1px solid #e0eaef;
+}
+.select-container { display: flex; flex-wrap: wrap; gap: 15px 22px; }
+.filter-item { min-width: 100px; }
+.filter-select {
+    border: 1.2px solid #09D0C0;
+    border-radius: 7px;
+    outline: none;
+    padding: 7px 15px;
+    background: #fff;
+    color: #313b49;
+    font-size: 15px;
     font-weight: 500;
-    transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: border-color 0.18s;
 }
-.pagination button:hover {
-    background: #3498db;
-    color: white;
+
+.filter-item.filter-search button{
+    width: 100%;
 }
-.pagination button.active {
-    background: #3498db;
-    color: white;
+
+.filter-select:focus { border-color: #41cccf; }
+.keyword-input {
+    border: 1px solid #e7e7ea;
+    border-radius: 7px;
+    padding: 7px 15px;
+    font-size: 15px;
+    min-width: 230px;
+    margin-right: 8px;
 }
-.product-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(231, 76, 60, 0.9);
-    color: white;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: 500;
-}
-.product-rating {
+.formButton-container {
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-top: 10px;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
 }
-.product-rating i {
-    color: #f1c40f;
+
+.filter-example { color: #b7b7c0; font-size: 13px; font-family: 'Inter', sans-serif; }
+.btn-search {
+    background: #09D0C0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 8px 28px;
+    cursor: pointer;
+    transition: background 0.17s;
 }
-.product-rating span {
-    color: #666;
+.btn-search:hover { background: #13a79f; }
+
+/* service-controls 컨테이너의 기본 스타일 */
+.service-controls {
+    margin-top: 20px;
+    position: relative; /* 자식 요소의 absolute 포지셔닝을 위해 */
+    display: inline-block; /* 너비 조절 */
+    width: 100%;
+}
+
+/* service-count: 상품 개수와 정렬 버튼을 포함하는 flex 컨테이너 */
+.service-count {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* 기존 CSS 반영: 양 끝으로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    /* width: 100%; 필요한 경우 설정 */
+}
+
+/* 드롭다운을 열고 닫는 버튼 */
+.dropdown-toggle {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* 텍스트와 화살표 사이 간격 */
+}
+
+/* 선택된 레이블 (텍스트와 확장 버튼 포함) */
+.selected-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* 기존 CSS 반영: 가로 중앙 정렬 */
+    align-items: center; /* 기존 CSS 반영: 세로 중앙 정렬 */
+    width: 100px; /* 기존 CSS 반영: 너비 100px */
+}
+
+/* 확장 버튼 아이콘 (th:replace로 삽입되는 부분) */
+.selected-label .ex_btn {
+    width: 25px; /* 기존 CSS 반영 */
+    height: 18px; /* 기존 CSS 반영 */
+    transition: transform 0.2s ease-in-out; /* 부드러운 회전 애니메이션 */
+}
+
+/* 드롭다운이 열렸을 때 확장 버튼 회전 */
+.service-controls .custom-dropdown.open + .service-count .selected-label .ex_btn {
+    transform: rotate(180deg); /* 드롭다운이 열리면 180도 회전 */
+}
+
+/* 드롭다운 메뉴 자체 */
+.custom-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 140px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none; /* 기본적으로 숨김 */
+    border-radius: 4px;
+    overflow: hidden; /* 모서리 둥글게 */
+}
+
+/* 'open' 클래스가 붙으면 보이게 */
+.custom-dropdown.open {
+    display: block;
+}
+
+/* 드롭다운 메뉴 리스트 */
+.dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 각 드롭다운 옵션 (라디오 버튼과 텍스트 포함) */
+.dropdown-menu li label {
+    display: block;
+    padding: 8px 15px;
+    cursor: pointer;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* 라디오 버튼과 텍스트 사이 간격 */
+}
+
+.dropdown-menu li label:hover {
+    background-color: #f0f0f0;
+}
+
+/* 기본 라디오 버튼 숨기고 커스텀 이미지로 대체할 경우 */
+.dropdown-menu input[type="radio"] {
+    display: none;
+}
+
+/* 커스텀 라디오 버튼 모양 */
+.radio-img {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50%; /* 동그란 모양 */
+    vertical-align: middle;
+}
+
+/* 선택 시 커스텀 라디오 버튼 모양 */
+input[type="radio"]:checked + .radio-img {
+    background-color: #007bff; /* 선택 시 파란색 배경 */
+    border-color: #007bff;
+    box-shadow: inset 0 0 0 4px #fff; /* 내부 흰색 원 */
+}
+
+/*** 상품 리스트 목록 ***/
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 32px 24px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 36px auto 0;
+    padding-bottom: 40px;
+}
+/* 이하 카드 스타일 등도 그대로 */
+.product-item {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 290px;
+    height: 380px;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.product-item:hover {
+    box-shadow: 0 6px 16px rgba(17, 45, 98, .17);
+    border-color: #09D0C0;
+}
+.thumbnail img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #f0f0f0;
+    background: #f6fafd;
+}
+.product-info {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 15px 15px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+.product-info h3 {
+    width: 100%;
+    margin: 0 0 2px 0;
+    font-weight: 700;
+    font-size: 18px;
+    color: #222;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.s-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #414141;
+    margin: 0 0 4px 0;
+}
+.n-price {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0099AD;
+    margin: 0 0 4px 0;
+}
+.status {
     font-size: 14px;
+    color: #2ecc71;
+}
+.description {
+    font-size: 14px;
+    color: #828282;
+    margin-top: 4px;
+    height: 40px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* pagination 컨테이너 */
+.pagination {
+    display: flex;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-top: 30px; /* 상단 여백 */
+    padding: 10px 0; /* 상하 패딩 */
+    font-family: 'Pretendard', sans-serif; /* 모든 페이징 요소에 폰트 적용 */
+}
+
+/* 개별 페이지 링크 버튼 및 스페이서 공통 스타일 */
+.page-link, .page-link-spacer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 38px; /* 버튼의 최소 너비를 설정하여 숫자 1자리, 2자리 모두 대응 */
+    height: 38px; /* 높이 통일 */
+
+    padding: 0; /* Figma에 Padding 정보가 없으므로 0으로 설정. min-width로 크기 제어. */
+    margin: 0 4px; /* 버튼 사이의 간격 (Figma 이미지 간격과 유사하게 조정) */
+
+    border: none; /* 모든 테두리 제거 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #fff; /* 기본 배경색 (흰색) */
+    color: #1F1F1F; /* 기본 글자색 */
+
+    /* Figma Typography 반영 */
+    font-size: 20px; /* 폰트 크기 */
+    font-weight: 400; /* 폰트 두께 */
+    line-height: 100%; /* 라인 높이 */
+    letter-spacing: 0%; /* 자간 */
+    text-decoration: none; /* 밑줄 제거 */
+
+    transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+    cursor: pointer;
+}
+
+/* 스페이서에 대한 추가 스타일: 보이지 않게 */
+.page-link-spacer {
+    visibility: hidden; /* 내용을 숨기되, 공간은 유지 */
+    pointer-events: none; /* 클릭 이벤트 비활성화 */
+    cursor: default; /* 마우스 커서 변경 */
+    background-color: transparent; /* 배경을 투명하게 */
+    border: none; /* 스페이서 테두리 제거 */
+}
+
+/* `<` `>` `<<` `>>` 버튼의 특정 스타일 */
+/* Figma 이미지에서 이 버튼들의 배경과 테두리는 흰색으로, 글자는 회색으로 보입니다. */
+.page-link:first-child, /* << */
+.page-link:nth-child(2), /* < */
+.page-link:nth-last-child(2), /* > */
+.page-link:last-child { /* >> */
+    border: none; /* 테두리 제거 */
+    color: #555; /* 화살표 색상 조정 (Figma에서 #1F1F1F와 약간 다름) */
+    background-color: #fff; /* 배경색 흰색 */
+    margin: 0 8px; /* 페이지 숫자 버튼과의 간격을 더 넓게 (Figma 이미지에 맞춰 조정) */
 }
 
 
+/* 호버 효과 */
+.page-link:not(.active):hover {
+    background-color: #f5f5f5; /* 약간 어두운 회색 */
+    border: none; /* 호버 시에도 테두리 없음 */
+    color: #333;
+}
 
+/* 현재 활성화된 페이지 버튼 */
+.page-link.active {
+    background-color: #0099AD; /* Figma에서 제공된 #0099AD 색상 사용 */
+    border: none; /* 활성화 시에도 테두리 없음 */
+    color: white; /* 글자색 흰색 */
+    font-weight: 700; /* 굵게 */
+    cursor: default; /* 클릭 불가능하게 */
 
+    min-width: 40px; /* 약간 더 넓게 */
+    height: 40px; /* 약간 더 높게 */
+    font-size: 20px; /* 폰트 크기 유지 */
+}
 
+/* 공지사항 */
+.notice-frame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    height: 54px;
+    background-color: #C2C2C280;
+}
+.notice-frame .notice-title {
+    color: #0099AD;
+    font-size: 16px;
+    font-weight: 600;
+}
+.notice-frame .notice-text {
+    color: #000;
+    font-size: 14px;
+
+}
+.notice-frame .notice-more {
+    color: #0099AD;
+    font-size: 16px;
+    font-weight: 600;
+}
+.notice-title, .notice-text, .notice-more {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* 카드 간 세로 간격 맞춤 */
+.product-list > .product-item {
+    align-self: stretch;
+}

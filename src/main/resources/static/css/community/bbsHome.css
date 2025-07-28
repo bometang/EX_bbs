@@ -1,3 +1,8 @@
+/* ---------- 사이드바 높이 조절 ---------*/
+.sidebar-card{
+    height: 200px;
+}
+
 /* ---------- 본문 영역 ---------- */
 * {
     margin: 0;
@@ -6,14 +11,22 @@
 }
 
 .content {
-    margin: 50px;
     width: 950px;
+    margin-top: 10px;
 }
 
+.community-wrapper {
+    height: 1000px;
+}
+
+.mypage-nav ul li a:hover {
+    color: #80CCD6;
+}
 
 /* ---------- 리뷰 영역 ---------- */
 .review-list {
-    outline: 1px solid #EDEDED;
+    /* outline: 1px solid #EDEDED; */
+    margin-bottom: 50px;
 
     height: 540px;
     display: flex;
@@ -22,21 +35,21 @@
     align-items: center;
 }
 
+
 .review-list h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #414141;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1EC4CC;
+    padding-bottom: 10px;
+    margin-top: 0px;
     width: 100%;
-    /* margin-bottom: 12px; */
-    padding-left: 15px;
 }
 
-.review-list hr {
-    width: 97%;
-    border: 0px;
-    border-top: 2px solid #80CCD6;
-    margin-bottom: 13px;
-}
 
 .review-list article {
-    outline: 1px solid #EDEDED;
+    /* outline: 1px solid #EDEDED; */
 
     width: 924px;
     height: 484px;
@@ -49,7 +62,7 @@
 
 /* ---- 구체적인 리뷰 컨텐트 내용들 ----*/
 .review-content {
-    outline: 1px solid #EDEDED;
+    /* outline: 1px solid #EDEDED; */
 
     width: 462px;
     height: 242px;
@@ -60,24 +73,26 @@
     align-items: start;
 }
 
-.review-top{
+.review-top {
     height: 20%;
 
 }
 
-.review-bottom{
+.review-bottom {
     height: 70%;
 
     display: flex;
 }
-.review-left{
-    width: 50%;
-}
-.review-right{
+
+.review-left {
     width: 50%;
 }
 
-.review-more{
+.review-right {
+    width: 50%;
+}
+
+.review-more {
     height: 10%;
 }
 
@@ -85,24 +100,97 @@
 
 /* ---------- 게시글 영역 ---------- */
 .post-section {
-    outline: 1px solid #EDEDED;
+    /* outline: 1px solid #EDEDED; */
 
-    height: 540px;
+    height: 850px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.post-section h2 {
-    width: 100%;
-    /* margin-bottom: 12px; */
-    padding-left: 15px;
+.post-section article {
+    /* outline: 1px solid #EDEDED; */
+
+    width: 924px;
+    height: 750px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-.post-section hr {
-    width: 97%;
-    border: 0px;
-    border-top: 2px solid #80CCD6;
-    margin-bottom: 13px;
+.post-section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #414141;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1EC4CC;
+    padding-bottom: 10px;
+    margin-top: 0px;
+    width: 100%;
+}
+
+
+.post-entire {
+    width: 100%;
+    padding-right: 15px;
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: end;
+}
+
+
+/* ---- 구체적인 포스트 컨텐트 내용들 ----*/
+.post-content {
+    /* outline: 1px solid #EDEDED; */
+
+    width: 100%;
+    height: 250px;
+    padding-top: 20px;
+    border-bottom: 1px solid #80CCD6;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.post-bottom {
+    height: 180px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-left {
+    width: 660px;
+    height: 165px;
+
+    margin-right: 20px;
+}
+
+.post-right {
+    outline: 1px solid #EDEDED;
+
+    width: 240px;
+    height: 100%;
+    ;
+}
+
+
+
+.post-text:first-child {
+    font-size: larger;
+}
+
+.post-text p {
+    font-size: large;
+    margin: 8px 0;
+}
+
+.post-more {
+    display: flex;
 }

@@ -1,0 +1,108 @@
+/* ---------- 본문 영역 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    margin: 50px;
+    width: 950px;
+}
+
+
+/* ---------- 리뷰 영역 ---------- */
+.review-list {
+    outline: 1px solid #EDEDED;
+
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-list h2 {
+    width: 100%;
+    /* margin-bottom: 12px; */
+    padding-left: 15px;
+}
+
+.review-list hr {
+    width: 97%;
+    border: 0px;
+    border-top: 2px solid #80CCD6;
+    margin-bottom: 13px;
+}
+
+.review-list article {
+    outline: 1px solid #EDEDED;
+
+    width: 924px;
+    height: 484px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- 구체적인 리뷰 컨텐트 내용들 ----*/
+.review-content {
+    outline: 1px solid #EDEDED;
+
+    width: 462px;
+    height: 242px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.review-top{
+    height: 20%;
+
+}
+
+.review-bottom{
+    height: 70%;
+
+    display: flex;
+}
+.review-left{
+    width: 50%;
+}
+.review-right{
+    width: 50%;
+}
+
+.review-more{
+    height: 10%;
+}
+
+
+
+/* ---------- 게시글 영역 ---------- */
+.post-section {
+    outline: 1px solid #EDEDED;
+
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-section h2 {
+    width: 100%;
+    /* margin-bottom: 12px; */
+    padding-left: 15px;
+}
+
+.post-section hr {
+    width: 97%;
+    border: 0px;
+    border-top: 2px solid #80CCD6;
+    margin-bottom: 13px;
+}

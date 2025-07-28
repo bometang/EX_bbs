@@ -9,10 +9,14 @@
   <link rel="stylesheet" th:href="@{/css/layout.css}">
   <link rel="stylesheet" th:href="@{/css/common.css}">
 
-  <link rel="stylesheet" th:href="@{/css/community/community_detail.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.8/dist/web/static/pretendard.css">
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+  <!-- 페이지 전용 스타일 -->
+  <link rel="stylesheet" th:href="@{/css/community/common.css}">
+  <link rel="stylesheet" th:href="@{/css/community/community_detail.css}">
+
 </head>
 
 <body th:attr="data-parent-id=${bbs.bbsId}">
@@ -37,8 +41,8 @@
     <!-- ---------- 본문 영역 ---------- -->
     <section class="content">
       <section class="post-section">
-        <div class="board" th:id="${bbs.bbsId}"><h2>게시글</h2></div>
-        <hr>
+        <div class="board" th:id="${bbs.bbsId}"><h1>게시글</h1></div>
+
         <div class="btnGroup">
           <span class="location">커뮤니티 &gt; 자유 게시판</span>
           <div class="btn-controll" th:classappend="${ #authorization.expression('isAuthenticated()') and (#authentication.principal.member.memberId != bbs.memberId)} ? 'hidden' : ''">
@@ -63,15 +67,15 @@
           <p class="meta-item"><span th:text="${bbs.title}">게시글 제목</span></p>
           <p class="meta-item contentCategory"><span th:text="${bbs.bcategory}">[카테고리]</span></p>
           <div class="contentInfo">
-            <img class="profile-pic"
+            <img class="post-pic profile-pic"
                  th:if="${picData != null}"
                  th:src="${picData}"
-                 th:alt="${bbs.nickname}" />
+                 th:alt="${bbs.memberId}" />
 
-            <img class="profile-pic"
+            <img class="post-pic profile-pic"
                  th:if="${picData == null}"
                  th:src="@{/img/bbs/bbs_detail/profile-pic.png}"
-                 th:alt="${bbs.nickname}" />
+                 th:alt="${bbs.memberId}" />
             <div class="info-text">
               <span class="nickname" th:text="${bbs.nickname}">닉네임</span>
               <span class="hit" th:text="${'조회수 '+bbs.hit}">조회수</span>
@@ -193,12 +197,13 @@
       </div>
       <div class="post-nav" >
         <button type="button" id="btn-list" >
-          <img th:src="@{/img/bbs/bbs_detail/bbs_list.png}"alt="목록">
+          <img th:src="@{/img/bbs/bbs_detail/comment.png}"alt="목록">
           목록
         </button>
       </div>
 
 
+    </section>
     </section>
   </main>
 </div>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 공통 스타일 -->
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+
+    <!-- 페이지 전용 스타일 -->
+    <link rel="stylesheet" href="/static/css/sellerpage/sellerMypageHome.css">
+    <link rel="stylesheet" href="/static/css/community/bbsHome.css">
+</head>
+
+<body>
+    <!-- ---------- 본문 영역 ---------- -->
+    <section class="content">
+        <main class="community-wrapper">
+
+            <!-- ---------- 리뷰 영역 ---------- -->
+            <section class="review-list">
+                <h2>리뷰</h2>
+                <hr>
+                <article class="review-item" th:each="review : ${reviews}" th:attr="data-rating=${review.rating}">
+                    <div class="review-content">
+                        <div class="review-top">
+                            <div class="review-header">
+                                <div class="review-nickname" th:text="${review.nickname}">닉네임</div>
+                                <div class="stars" th:attr="aria-label=|별점 ${review.rating}|"></div>
+                            </div>
+                            <div class="review-subtitle" th:text="'판매자: ' + ${review.sellerName}">판매자: 모시러버
+                            </div>
+                        </div>
+                        <div class="review-bottom">
+                            <div class="review-left">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                            <div class="review-right">
+                                <div class="review-text">
+                                    <strong th:text="${review.title}">[MO:SI Pick] 황령산 투어 (1박2일)</strong><br />
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span><br />
+                                    <span th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-more">
+                            <a th:href="@{'/review/' + ${review.id}}">더보기 &gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-top">
+                            <div class="review-header">
+                                <div class="review-nickname" th:text="${review.nickname}">닉네임</div>
+                                <div class="stars" th:attr="aria-label=|별점 ${review.rating}|"></div>
+                            </div>
+                            <div class="review-subtitle" th:text="'판매자: ' + ${review.sellerName}">판매자: 모시러버
+                            </div>
+                        </div>
+                        <div class="review-bottom">
+                            <div class="review-left">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                            <div class="review-right">
+                                <div class="review-text">
+                                    <strong th:text="${review.title}">[MO:SI Pick] 황령산 투어 (1박2일)</strong><br />
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span><br />
+                                    <span th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-more">
+                            <a th:href="@{'/review/' + ${review.id}}">더보기 &gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-top">
+                            <div class="review-header">
+                                <div class="review-nickname" th:text="${review.nickname}">닉네임</div>
+                                <div class="stars" th:attr="aria-label=|별점 ${review.rating}|"></div>
+                            </div>
+                            <div class="review-subtitle" th:text="'판매자: ' + ${review.sellerName}">판매자: 모시러버
+                            </div>
+                        </div>
+                        <div class="review-bottom">
+                            <div class="review-left">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                            <div class="review-right">
+                                <div class="review-text">
+                                    <strong th:text="${review.title}">[MO:SI Pick] 황령산 투어 (1박2일)</strong><br />
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span><br />
+                                    <span th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-more">
+                            <a th:href="@{'/review/' + ${review.id}}">더보기 &gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-top">
+                            <div class="review-header">
+                                <div class="review-nickname" th:text="${review.nickname}">닉네임</div>
+                                <div class="stars" th:attr="aria-label=|별점 ${review.rating}|"></div>
+                            </div>
+                            <div class="review-subtitle" th:text="'판매자: ' + ${review.sellerName}">판매자: 모시러버
+                            </div>
+                        </div>
+                        <div class="review-bottom">
+                            <div class="review-left">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                            <div class="review-right">
+                                <div class="review-text">
+                                    <strong th:text="${review.title}">[MO:SI Pick] 황령산 투어 (1박2일)</strong><br />
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span><br />
+                                    <span th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-more">
+                            <a th:href="@{'/review/' + ${review.id}}">더보기 &gt;&gt;</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ---------- 게시글 영역 ---------- -->
+            <section class="post-section">
+                <h2>게시글</h2>
+                <hr>
+                <div class="post-entire" th:if="${session.loginMember != null}">
+                    <a th:href="@{/csr/bbs/add}" class="btn-write">전체보기 ></a>
+                </div>
+
+                <article class="post-item" th:each="review : ${}">
+                    <div class="post-content">
+                        <div class="post-top">
+                            <div class="post-header">
+                                <div class="post-category" th:text="${}">카테고리</div>
+                            </div>
+                        </div>
+                        <div class="post-bottom">
+                            <div class="post-left">
+                                <div class="post-text">
+                                    <h3 th:text="${review.title}">토박이 부산 국밥집 투어 추천좀요...</h3>
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span>
+                                    <p th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="post-right">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-more">
+                            <div>32</div>
+                            <div>댓글</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-top">
+                            <div class="post-header">
+                                <div class="post-category" th:text="${}">카테고리</div>
+                            </div>
+                        </div>
+                        <div class="post-bottom">
+                            <div class="post-left">
+                                <div class="post-text">
+                                    <h3 th:text="${review.title}">토박이 부산 국밥집 투어 추천좀요...</h3>
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span>
+                                    <p th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="post-right">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-more">
+                            <div>32</div>
+                            <div>댓글</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-top">
+                            <div class="post-header">
+                                <div class="post-category" th:text="${}">카테고리</div>
+                            </div>
+                        </div>
+                        <div class="post-bottom">
+                            <div class="post-left">
+                                <div class="post-text">
+                                    <h3 th:text="${review.title}">토박이 부산 국밥집 투어 추천좀요...</h3>
+                                    <span th:text="${#temporals.format(review.date, 'yyyy. MM. dd')}">2025. 06.
+                                        17</span>
+                                    <p th:text="${review.content}">
+                                        부산은 바다와 숲같이 도시의 리듬처럼 살아 있는 곳이라는 느낌이 들어요...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="post-right">
+                                <img th:src="${review.imageUrl}" alt="리뷰 이미지" />
+                                <div class="img-overlay" th:if="${review.imageCount > 1}"
+                                    th:text="'+' + (${review.imageCount - 1})">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-more">
+                            <div>32</div>
+                            <div>댓글</div>
+                        </div>
+                    </div>
+                </article>
+
+
+                
+            </section>
+
+        </main>
+    </section>
+</body>
+
+</html>

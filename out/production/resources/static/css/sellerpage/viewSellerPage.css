@@ -1,296 +1,209 @@
 /*viewSellerPage.css*/
 
-/* ============================= */
-/* ✅ 페이지 컨테이너 */
-/* ============================= */
+/* =================== 판매자 마이페이지 프로필 전용 =================== */
 .page-container {
-  width: 1200px;
-  height: 1980px;
-  margin: 0 auto;
-  padding: 0 40px 60px 40px; /* header 높이 고려 */
+  width: 100%;
+  min-height: 100vh;
+  padding: 167px 40px 60px 40px;
+  box-sizing: border-box;
   background-color: #fff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  overflow-x: hidden;
 }
 
-/* ============================= */
-/* ✅ 마이페이지 레이아웃 */
-/* ============================= */
 .mypage-container {
   display: flex;
-  gap: 30px;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  padding-top: 40px;
 }
 
-/* ============================= */
-/* ✅ 사이드바 영역 */
-/* ============================= */
-/* Sidebar */
-.sidebar {
-  width: 180px;
-  min-height: 920px;
-  flex-shrink: 0;
-  background-color: #f8f9fa;
-}
 
-.sidebar-card {
-  border: 1px solid #82d8d8;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.profile-box {
-  padding: 20px 15px;
+/* 전체 카드 박스 */
+.info-summary-card {
+  border: 1px solid #1ec4cc;
+  border-radius: 12px;
+  padding: 32px;
+  background-color: #fff;
+  max-width: 932px;
+  max-height: 500px;
+  margin: 40px auto 0 auto;
   text-align: center;
-  border-bottom: 1px solid #E0E0E0;
-  background-color: #ffffff;
 }
 
-.profile-image {
-  width: 60px;
-  height: 60px;
+/* 제목 "나의 프로필" */
+.info-summary-card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #000;
+}
+
+/* 프로필 전체 컨테이너 */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.profile-left{
+
+  width: 300px;
+  height: 320px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+/* 프로필 이미지 박스 */
+.profile-image-box {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 
-.profile-image img {
+.profile-image-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.profile-badge {
-  display: inline-block;
-  color: #666;
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-}
-
-.profile-name {
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.mypage-nav .nav-title {
-  background-color: #1EC4CC;
-  color: #fff;
-  font-weight: bold;
-  padding: 15px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.mypage-nav ul {
-  background-color: #fff;
-  padding: 10px 0;
-}
-
-.mypage-nav > ul > li > a {
-  font-weight: bold;
-  display: block;
-  padding: 10px 20px;
-  font-size: 14px;
-}
-
-.mypage-nav > ul > li > ul {
-  padding-left: 0;
-  margin-bottom: 10px;
-}
-
-.mypage-nav > ul > li > ul a {
-  display: block;
-  padding: 6px 30px;
-  font-size: 13px;
-  color: #555;
-}
-
-.mypage-nav > ul > li > ul a:hover {
-  color: #00c7e2;
-}
-
-/* ============================= */
-/* ✅ 프로필 박스 */
-/* ============================= */
-.profile-box {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.profile-image img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
   border-radius: 50%;
-  border: 1px solid #ccc;
 }
 
-.profile-info {
-  margin-top: 12px;
-}
-
-.profile-badge {
-  font-size: 13px;
-  color: #666;
-  text-decoration: none;
-}
-
-.profile-name {
-  font-weight: bold;
-  font-size: 18px;
-  margin: 6px 0;
-}
-
-.profile-discount {
-  font-size: 14px;
-  color: #0099AD;
-  text-decoration: none;
-}
-
-/* ============================= */
-/* ✅ 메뉴 내비게이션 */
-/* ============================= */
-.mypage-nav {
-  font-size: 14px;
-}
-
-.nav-title {
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #333;
-}
-
-.mypage-nav ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.mypage-nav li {
-  margin-bottom: 8px;
-}
-
-.mypage-nav a {
-  color: #333;
-  text-decoration: none;
-}
-
-.mypage-nav a:hover {
-  text-decoration: underline;
-}
-
-/* ============================= */
-/* ✅ 본문 영역 */
-/* ============================= */
-.content {
-  flex: 1;
-}
-
-.info-summary-card {
-  padding: 32px;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  background-color: #fafafa;
-}
-
-.info-summary-card h2 {
-  margin-bottom: 24px;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-/* ============================= */
-/* ✅ 정보 테이블 */
-/* ============================= */
-.member-info-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 24px;
-}
-
-.member-info-table th {
-  text-align: left;
-  width: 160px;
-  padding: 12px;
-  background-color: #f0f0f0;
-  font-weight: bold;
-  vertical-align: top;
-}
-
-.member-info-table td {
-  padding: 12px;
-  background-color: #fff;
-}
-
-/* ============================= */
-/* ✅ 입력폼 공통 스타일 */
-/* ============================= */
-.form-control {
-  width: 100%;
-  padding: 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fefefe;
-}
-
-textarea.form-control {
-  resize: vertical;
-  min-height: 80px;
-}
-
-/* ============================= */
-/* ✅ 버튼 그룹 */
-/* ============================= */
-.btn-group {
+/* 프로필 정보 박스 */
+.profile-right {
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  width: 600px;
+  height: 320px;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
 }
 
-.btn {
-  background-color: #0099AD;
-  color: #fff;
-  font-weight: 600;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
+/* 닉네임 스타일 */
+.profile-right .nickname {
+  font-size: 20px;
+  font-weight: 600; /* 세미볼드 */
+  color: #414141;
+  width: 78px;
+  height: 23px;
+}
+
+/* 활동 지표 전체 */
+.activity-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-count {
+  font-size: 20px;
+  font-weight: 600; /* 세미볼드 */
+  color: #414141;
+}
+
+.stat-label {
   font-size: 15px;
+  font-weight: 500; /* 미디움 */
+  color: #414141;
+}
+
+/* 해시태그 형식 자기소개 */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 95%;
+  height: 50%;
+}
+
+.tags span {
+  font-size: 16px;
+  font-weight: 400; /* 레귤러 */
+  color: #414141;
+}
+
+/* 연락처 정보 영역 */
+.contact-info {
+  margin-top: 12px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.contact-info .nickname {
+  font-weight: bold;
+  font-size: large;
+}
+
+.contact-info .email {
+  font-size: 16px;
+  font-weight: 500; /* 미디움 */
+  color: #6B6B6B;
+}
+
+.contact-info .tel {
+  font-size: 15px;
+  font-weight: 500; /* 미디움 */
+  color: #6B6B6B;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 인증완료 배지 */
+.contact-info .badge {
+  display: inline-block;
+  width: 55px;
+  height: 16px;
+  background-color: #DEDEDE;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 400; /* 레귤러 */
+  border-radius: 4px;
+  text-align: center;
+  line-height: 16px;
+}
+
+/* 프로필 수정하기 버튼 */
+.btn-box{
+  display: flex;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.btn-box .btn-primary {
+  width: 180px;
+  height: 38px;
+  background-color: #1EC4CC;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600; /* 세미볼드 */
+  border: none;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  text-align: center;
 }
 
-.btn:hover {
-  background-color: #007C90;
+.btn-box .btn-primary:hover {
+  background-color: #00aab8;
 }
-
-.btn-primary {
-  background-color: #0099AD;
-}
-
-.btn-primary:hover {
-  background-color: #007C90;
-}
-
-.btn-danger {
-  background-color: #d9534f;
-}
-
-.btn-danger:hover {
-  background-color: #c9302c;
-}
-
-.btn-secondary {
-  background-color: #ccc;
-  color: #333;
-  font-weight: normal;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 14px;
-}
-
-.btn-seco
 

@@ -12,6 +12,7 @@ body {
   font-family: 'Pretendard', sans-serif;
   color: #333;
   background-color: #ffffff;
+  padding-top: 167px;
 }
 
 a {
@@ -143,6 +144,18 @@ ul {
   margin-top: 4px;
   font-size: 13px;
   color: #777;
+}
+
+.notification-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.notification-checkbox-wrapper input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
 }
 
 /* ✅ 수정 / 탈퇴 버튼 그룹 */

@@ -1,4 +1,4 @@
-import { ajax,  PaginationUI} from '/js/community/bbs/common.js';
+import { ajax,  PaginationUI} from '/js/common.js';
 let currentPage = 1; // 현재 페이지를 위한 전역 변수
 let initialPage = 1; // 게시글 추가 후 이동할 페이지 (1페이지)
 
@@ -309,7 +309,6 @@ async function displayReadForm() {
       <div>
           <label for="bcontent">내용</label>
           <textarea id="bcontent" name="bcontent" readonly>${postBoard.bcontent}</textarea>
-          <div class="bbs-body quill-content" th:utext="${postBoard.bcontent}">
           <span class="field-error client" id="errBContent"></span>
       </div>
       <div class='btns'></div>
@@ -738,27 +737,3 @@ async function displayPostCommentList(postComments) {
 
 };
 configPagination();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

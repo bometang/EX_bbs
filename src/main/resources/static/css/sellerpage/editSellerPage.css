@@ -2,8 +2,16 @@
 /* ========================= */
 /* ✅ 페이지 기본 레이아웃 */
 /* ========================= */
+body {
+    width: 1200px;
+    height:1980px;
+    margin: 0 auto;
+}
+
+
 .page-container {
   width: 1200px;
+  height: 1270px:
   margin: 0 auto;
   padding: 167px 40px 60px 40px;  /* 고정 header 높이 고려 */
   background-color: #fff;
