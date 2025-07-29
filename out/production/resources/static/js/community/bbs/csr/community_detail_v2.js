@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pid = board.id;
     const Quill = window.Quill;
     const frm      = document.getElementById('edit-form');
+    const li_list = document.getElementById('file-list');
 
     // ---------------- Quill 에디터 초기화 ------------------------------------
     const quill = new Quill('#editor', {
@@ -37,7 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const MAX_MB = 5;
     quill.enable(false);
     const uploadIds = [];
-
+    const deletedAttachments = [];          // 첨부파일 삭제버튼을 누른 id의 배열
+/*
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         mutation.removedNodes.forEach(node => {
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
     observer.observe(editorRoot, { childList: true, subtree: true });
-
+*/
     // 카테고리 매핑 로드 (페이지 최초 1회만 호출)
     const loadCategories = async () => {
       try {
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         editorEl.addEventListener('dragover', onDragOver);
         editorEl.addEventListener('drop',     onDrop);
         fileInput.disabled = false;
+        li_list.innerHTML = '';
         const groupId = await loadAttachmentsByBbsId(pid);
         if (groupId) await deleteOrphanUploadsByGroup(groupId);
     });
@@ -116,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         editorEl.removeEventListener('drop',     onDrop);
         fileInput.disabled = true;
         await deleteNewUploads();
+        deletedAttachments.length = 0;
     });
 
     // 3) “저장” 클릭 (수정 후 저장 버튼)
@@ -141,6 +145,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     `${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
                      document.querySelector('.updateTime').textContent = '수정일: ' + formatted;
         };
+        for (const id of deletedAttachments) {
+            try {
+              await ajax.delete(`/api/bbs/upload/del/${id}`);
+            } catch (err) {
+              console.error(`첨부 삭제 실패(id:${id})`, err);
+              alert(`파일 삭제에 실패했습니다 (ID: ${id})`);
+              // 필요시 continue or break
+            }
+          }
+
         quill.enable(false);
         editorEl.removeEventListener('dragover', onDragOver);
         editorEl.removeEventListener('drop',     onDrop);
@@ -795,14 +809,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         const names = res.body.map(getDisplayName);
         if (names.length > 0) fileNameDisplay.textContent ='';
 
-        uploadGroupInput.value = res.body[0].uploadGroup;
-        return res.body[0].uploadGroup;
+        if (!uploadGroupInput.value && attachGroupId != null) {
+              uploadGroupInput.value = list_groupId;
+            }
+        return list_groupId;
       } catch (err) {
         console.error('첨부파일 로드 실패', err);
         console.log('loadAttachmentsByBbsId 실행 실패');
         return null;
       }
     }
+
+    async function loadImagesByBbsId(bbsId) {
+          try {
+            const res = await ajax.get(`/api/bbs/upload/${bbsId}/images`);
+            if (res.header.rtcd !== 'S00' || !Array.isArray(res.body)) return null;
+
+
+            const urls = res.body.map(item => item.url);
+            if (names.length > 0) fileNameDisplay.textContent ='';
+
+            const list_groupId = res.body[0]?.uploadGroup ?? null;
+            if (!uploadGroupInput.value && list_groupId != null) {
+                  uploadGroupInput.value = list_groupId;
+            }
+            return urls;
+          } catch (err) {
+            console.error('첨부파일 로드 실패', err);
+            console.log('loadImagesByBbsId 실행 실패');
+            return null;
+          }
+        }
 
     fileInput.addEventListener('change', async () => {
       // 1) 파일 대화상자에서 "취소"를 누른 경우
@@ -858,7 +895,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function resetAttachmentUI() {
       fileNameDisplay.textContent = '선택된 파일 없음';
-      uploadGroupInput.value      = '';
       attachmentList.innerHTML    = '';
       attachments.length          = 0;
     }
@@ -907,20 +943,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function removeAttachment(uploadId, li) {
       if (!confirm('선택한 파일을 삭제하시겠습니까?')) return;
 
-      try {
-        await ajax.delete(`/api/bbs/upload/del/${uploadId}`);
-      } catch (err) {
-        console.error(err);
-        alert('삭제 실패');
-        return;
-      }
+      deletedAttachments.push(uploadId);
 
       // 프론트 상태 갱신
-      const idx = attachments.findIndex(a => a.uploadId === uploadId);
-      if (idx !== -1) attachments.splice(idx, 1);
       li.remove();
 
-      if (attachments.length === 0) resetAttachmentUI();
+      if (document.querySelectorAll('#file-list li').length === 0) {
+          resetAttachmentUI();
+        }
     }
 
     function getInsertIndex() {
