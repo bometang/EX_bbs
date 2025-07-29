@@ -228,5 +228,18 @@ public class BbsUploadDAOImpl implements BbsUploadDAO{
     }
   }
 
+  @Override
+  public List<Long> findUnlinkedUploadGroupIds(Long groupId) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("SELECT UPLOAD_ID  FROM BBS_UPLOAD WHERE upload_group = :groupId AND bbs_id IS NULL ");
+
+    SqlParameterSource param = new MapSqlParameterSource()
+        .addValue("groupId", groupId);
+
+    List<Long> idx = template.queryForList(sql.toString(), param, Long.class);
+
+    return idx;
+  }
+
 
 }

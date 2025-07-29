@@ -18,4 +18,5 @@ public class UpdateApi {
   @DateTimeFormat(pattern = "yyyy.MM.dd HH:mm")
   private LocalDateTime udateDate;
   private Long memberId;
+  private Long uploadGroup;
 }

@@ -172,6 +172,12 @@ public class ApiBbsController {
     bbs.setBbsId(id);
     int updatedRow = bbsSVC.updateById(id, bbs);
 
+    if (updateApi.getUploadGroup() != null) {
+      bbsUploadSVC.bindGroupToBbs(id,updateApi.getUploadGroup());
+      log.info("updateApi.getUploadGroup = {}",updateApi.getUploadGroup());
+    }else{
+      log.info("NOONONONONOupdateApi.getUploadGroup = {}", updateApi.getUploadGroup());
+    }
 
     //5) 수정된게시글 조회
     optionalBbs = bbsSVC.findById(id);

@@ -188,6 +188,7 @@
 
 .contentAll hr {
     margin-bottom: 9px;
+    background-color: #D5D5D5;
 }
 
 .contentAll .contentHeader {
@@ -275,6 +276,12 @@
     flex-direction: column;
 
 }
+/*첨부파일 관련시작*/
+.contentAll .contentAttachment {
+    border-radius:5px;
+    border:1px solid #D5D5D5;
+    height:80px;
+}
 
 
 .contentAll .contentText {
@@ -284,20 +291,24 @@
     white-space: pre-wrap;
     word-break: break-all;
 }
+.attachment_list {
+    display:flex;
+    flex-direction: column;
+}
 
+/*첨부파일 관련끝*/
 /* inline-image 컨테이너는 width 지정 빼거나 auto 로 두세요 */
-.inline-image {
-  max-width: 600px;    /* 컨테이너가 필요하다면 */
-  /* width: auto; */   /* 또는 이 줄을 추가해서 inline style 덮어쓰기 */
+.contentText .inline-image {
+  width: 100% !important;
+  text-align: center;      /* 내부 인라인 요소 가운데 정렬 */
 }
 
 /* 이미지 자체에 최대 크기 지정 + 비율 유지 */
-.inline-image img.keep-original {
-  display: block;
-  max-width: 100%;     /* 컨테이너 너비 또는 지정한 max-width 안에서 */
-  max-height: 400px;   /* 원하는 최대 높이 */
-  width: auto;         /* 비율 유지 */
-  height: auto;        /* 비율 유지 */
+.contentText .inline-image img.keep-original {
+  display: inline-block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .contentReview {

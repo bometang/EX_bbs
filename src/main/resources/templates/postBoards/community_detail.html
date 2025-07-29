@@ -103,6 +103,15 @@
           </div>
         </div>
         <hr>
+        <div class="contentAttachment">
+          <div class="attachment_info">
+            <span>첨부파일</span>
+          </div>
+          <div class="attachment_list">
+            <span>기차 (2).jpg {1.01KB}</span>
+            <span>2025년 2분기 실적 분석 자료.pdf {90.23KB}</span>
+          </div>
+        </div>
         <div class="contentText" th:utext="${bbs.bcontent}"></div>
         <div class="contentReview">
           <button id="btn-like" type="button">
@@ -193,6 +202,16 @@
             <div id="editor" style="height: 740px;" th:utext="${bbs.bcontent}"></div>
             <input type="hidden" name="bcontent" id="editorContent">
           </div>
+          <div class="file-upload-section">
+            <input type="hidden" id="upload-group" name="uploadGroup">
+            <span class="upload-label">파일 첨부</span>
+            <div class="file-upload-buttons">
+              <input type="file" id="file-input" name="files" multiple style="display: none;">
+              <button type="button" onclick="document.getElementById('file-input').click();">파일 선택</button>
+              <span id="file-name-display">선택된 파일 없음</span>
+              <ul id="file-list" class="file-list"></ul>
+            </div>
+          </div>
         </form>
       </div>
       <div class="post-nav" >
@@ -220,6 +239,6 @@
 <!-- 3) ImageResize UMD (로컬) -->
 <script th:src="@{/js/community/vendor/image-resize.min.js}"></script>
 
-<script type="module" src="/js/community/bbs/csr/community_detail.js"></script>
+<script type="module" src="/js/community/bbs/csr/community_detail_v2.js"></script>
 </body>
 </html>

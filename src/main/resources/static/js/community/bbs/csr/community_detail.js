@@ -1,5 +1,7 @@
 import { ajax, PaginationUI } from '/js/community/common.js';
 import { formatRelativeTime } from '/js/community/bbs/csr/dateUtils.js';
+import '/js/community/vendor/ignoreDeprecatedEvents.js';
+
 let pagination = null;
 // community_detail.js (또는 적당한 JS 파일)
 document.addEventListener('DOMContentLoaded', async () => {
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.contentHeader .meta-item:nth-child(2) span').textContent;
         quill.root.innerHTML =
         document.querySelector('.contentText').innerHTML;
+
     });
 
     // 2) “취소” 클릭 (수정 후  버튼)

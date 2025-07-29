@@ -156,4 +156,14 @@ public class ApiBbsUploadController {
             "attachment; filename=\"" + filename + "\"")
         .body(resource);
   }
+
+  /**
+   * bbsId에 연결되지 않은(uploadGroup) ID 목록 조회
+   */
+  @GetMapping("/groups/unlinked/{groupId}")
+  public ResponseEntity<ApiResponse<List<Long>>> getUnlinkedUploadGroups(@PathVariable("groupId") Long groupId) {
+    List<Long> groups = bbsUploadSVC.findUnlinkedUploadGroupIds(groupId);
+    return ResponseEntity.ok(ApiResponse.of(ApiResponseCode.SUCCESS, groups));
+  }
+
 }

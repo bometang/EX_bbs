@@ -17,7 +17,7 @@
     color: #80CCD6;
 }
 
-.post-section h1 {
+.content h1 {
     font-size: 24px;
     font-weight: 700;
     color: #414141;
@@ -51,6 +51,7 @@
     grid-template-columns: 120px 1fr;
     gap: 20px;
     align-items: center;
+    margin:0 12px 0 12px;
 }
 
 .form-label {
@@ -296,3 +297,20 @@
     margin-left: 8px;
 }
 
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+/* 파일명은 좌우 여유를 갖고 늘어나도록 */
+.attachment-item .file-name {
+  flex: 1;
+}
+
+#file-list .attachment-item button {
+    background: none;
+    border:none;
+}

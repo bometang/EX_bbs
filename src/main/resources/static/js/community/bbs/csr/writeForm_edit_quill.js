@@ -46,16 +46,6 @@ async function addBbs(data) {
   }
 }
 
-// ---------------- 임시저장 ----------------------------------------------
-async function saveDraft(data) {
-  data.status = 'B0203';
-  const res = await ajax.post('/api/bbs', data);
-  if (res.header.rtcd === 'S00') {
-    window.location.href = '/bbs/community';
-  } else {
-    alert('임시 저장에 실패했습니다.');
-  }
-}
 
 // ---------------- 폼 요소 ------------------------------------------------
 const wrap           = document.querySelector('.content');

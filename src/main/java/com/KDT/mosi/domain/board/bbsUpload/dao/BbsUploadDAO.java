@@ -45,4 +45,6 @@ public interface BbsUploadDAO {
 
   // 이미지 하나만 가져오기
   Optional<BbsUpload> findFirstImageByBbsId(Long bbsId, String fileTYpe);
+
+  List<Long> findUnlinkedUploadGroupIds(Long groupId);
 }

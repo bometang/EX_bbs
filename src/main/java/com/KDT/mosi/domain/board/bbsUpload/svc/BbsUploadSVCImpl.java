@@ -207,4 +207,9 @@ public class BbsUploadSVCImpl implements BbsUploadSVC{
             u.getOriginalName()
         ));
   }
+
+  @Override
+  public List<Long> findUnlinkedUploadGroupIds(Long groupId) {
+    return bbsUploadDAO.findUnlinkedUploadGroupIds(groupId);
+  }
 }

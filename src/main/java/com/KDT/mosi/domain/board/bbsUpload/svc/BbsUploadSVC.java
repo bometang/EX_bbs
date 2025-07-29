@@ -44,4 +44,6 @@ public interface BbsUploadSVC {
   // 이미지 하나만 가져오기
   Optional<UploadResult> findThumbnail(Long bbsId, String fileType);
 
+  List<Long> findUnlinkedUploadGroupIds(Long groupId);
+
 }

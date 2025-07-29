@@ -242,19 +242,21 @@ function addAttachmentItem(meta) {
   li.className = 'attachment-item';
   li.dataset.uploadId = meta.uploadId;
 
-  // 파일명 결정 로직 ---------------------------
+  // 파일명 결정 로직
   const displayName = getDisplayName(meta);
 
-  // 파일명 영역
+  // 파일명 영역 (클릭 시 삭제)
   const spanName = document.createElement('span');
   spanName.className = 'file-name';
   spanName.textContent = displayName;
+  spanName.style.cursor = 'pointer';
+  spanName.addEventListener('click', () => removeAttachment(meta.uploadId, li));
   li.appendChild(spanName);
 
   // 삭제 버튼
   const btnRemove = document.createElement('button');
   btnRemove.type  = 'button';
-  btnRemove.textContent = '삭제';
+  btnRemove.textContent = 'X';
   btnRemove.addEventListener('click', () => removeAttachment(meta.uploadId, li));
   li.appendChild(btnRemove);
 
