@@ -280,9 +280,30 @@
 .contentAll .contentAttachment {
     border-radius:5px;
     border:1px solid #D5D5D5;
-    height:80px;
+    margin-bottom:10px;
+    padding:5px;
+}
+.attachment_info {
+    border-bottom:1px solid #D4D4D4;
+    padding-bottom:3px;
+}
+.contentAttachment .attachment_list {
+  display: flex;
+  flex-wrap: wrap;    /* ← 이 한 줄 추가 */
+  gap: 0.5em;         /* 항목 간격 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.attachment-item-downloadList {
+    border:1px solid #F6FDFF;
+    border-radius:3px;
+    padding:2px;
 }
 
+.attachment-item-downloadList a:hover{
+    color:#1EC4CC;
+}
 
 .contentAll .contentText {
     padding-left:20px;
@@ -290,10 +311,6 @@
     margin-bottom:36px;
     white-space: pre-wrap;
     word-break: break-all;
-}
-.attachment_list {
-    display:flex;
-    flex-direction: column;
 }
 
 /*첨부파일 관련끝*/
@@ -637,12 +654,48 @@
 
 .content-editor-wrapper{
     margin-top:20px;
+    margin-bottom:20px;
 }
 
+.file-upload-buttons {
+    margin-top:10px;
+}
 
+.file-upload-buttons > button:first-of-type {
+  width: 70px;
+  height:30px;
+  padding:3px;
+  font-weight:600;
+}
 
+#file-list {
+    margin-top:5px;
+}
 
+#file-list button {
+    border:none;
+    background:none;
+    margin-left: 5px;
 
+}
+
+.file-upload-buttons .file-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.file-upload-buttons .file-list .attachment-item {
+  white-space: nowrap;
+}
+
+.file-upload-buttons .file-list .attachment-item:hover .file-name,
+.file-upload-buttons .file-list .attachment-item:hover button {
+  color: #1EC4CC;
+}
 
 
 

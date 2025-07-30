@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -106,18 +108,40 @@ public class BbsUploadSVCImpl implements BbsUploadSVC{
     }
 
     List<UploadResult> results = new ArrayList<>(files.size());
-    for (MultipartFile file : files) {
-      // 2) BbsUpload 엔티티 준비
-      BbsUpload u = new BbsUpload();
-      u.setUploadGroup(uploadGroup);
-      u.setFileType(fileType);
-      u.setSortOrder(nextOrder++);
-      Long id = save(u, file);
-      String publicUrl = urlPrefix + "/" + u.getSavedName();
-      results.add(new UploadResult(id, publicUrl, uploadGroup, file.getOriginalFilename()));
-      log.info("★ publicUrl={}", publicUrl);
+    List<String>      savedPaths = new ArrayList<>(files.size());
+    try {
+      for (MultipartFile file : files) {
+        // 2) BbsUpload 엔티티 준비
+        BbsUpload u = new BbsUpload();
+        u.setUploadGroup(uploadGroup);
+        u.setFileType(fileType);
+        u.setSortOrder(nextOrder++);
+
+        // 3) save() 호출 → 파일 디스크 저장 + DB 저장
+        Long id = save(u, file);
+
+        // 4) 저장된 파일 경로 기록 (롤백 시 삭제용)
+        String fullPath = uploadPath + File.separator + u.getSavedName();
+        savedPaths.add(fullPath);
+
+        // 5) 결과 리스트에 추가
+        String publicUrl = urlPrefix + "/" + u.getSavedName();
+        results.add(new UploadResult(id, publicUrl, uploadGroup, file.getOriginalFilename(),0L));
+        log.info("★ publicUrl={}", publicUrl);
+      }
+      return results;
+
+    } catch (Exception ex) {
+      // 6) 예외 발생 시 DB는 자동 롤백, 파일은 직접 삭제
+      for (String path : savedPaths) {
+        try {
+          Files.deleteIfExists(Paths.get(path));
+        } catch (IOException ioe) {
+          log.error("롤백 중 파일 삭제 실패: {}", path, ioe);
+        }
+      }
+      throw ex;
     }
-    return results;
   }
 
   @Override
@@ -204,7 +228,8 @@ public class BbsUploadSVCImpl implements BbsUploadSVC{
             u.getUploadId(),
             urlPrefix + "/" + u.getSavedName(),
             u.getUploadGroup(),
-            u.getOriginalName()
+            u.getOriginalName(),
+            0L
         ));
   }
 

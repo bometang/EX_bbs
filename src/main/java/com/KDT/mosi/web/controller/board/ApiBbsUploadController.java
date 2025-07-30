@@ -19,10 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,22 +49,36 @@ public class ApiBbsUploadController {
             u.getUploadId(),
             urlPrefix + "/" + u.getSavedName(),   // ★ 수정
             u.getUploadGroup(),
-            u.getOriginalName()))
+            u.getOriginalName(),
+            0L))
         .toList();
     return ResponseEntity.ok(ApiResponse.of(ApiResponseCode.SUCCESS, images));
   }
 
   @GetMapping("/{bbsId}/attachments")
   public ResponseEntity<ApiResponse<List<UploadResult>>> getAttachments(@PathVariable("bbsId") Long bbsId) {
-    List<UploadResult> attachments = bbsUploadSVC.findAttachmentsByBbsIdOrderBySort(bbsId)
-        .stream()
-        .map(u -> new UploadResult(
-            u.getUploadId(),
-            urlPrefix + "/" + u.getSavedName(),   // ★ 수정
-            u.getUploadGroup(),
-            u.getOriginalName()))
-        .toList();
-    log.info("불러오기는함");
+    List<BbsUpload> list = bbsUploadSVC.findAttachmentsByBbsIdOrderBySort(bbsId);
+    List<UploadResult> attachments = new ArrayList<>(list.size());
+
+    for (BbsUpload u : list) {
+      Path file = Paths.get(uploadPath).resolve(u.getSavedName()).normalize();
+      long size;
+      try {
+        size = Files.size(file);
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+
+      String downloadUrl = urlPrefix + "/download/" + u.getUploadId();
+      attachments.add(new UploadResult(
+          u.getUploadId(),
+          downloadUrl,
+          u.getUploadGroup(),
+          u.getOriginalName(),
+          size
+      ));
+    }
+
     return ResponseEntity.ok(ApiResponse.of(ApiResponseCode.SUCCESS, attachments));
   }
 
@@ -146,12 +163,16 @@ public class ApiBbsUploadController {
   public ResponseEntity<Resource> downloadAttachment(@PathVariable("uploadId") Long uploadId) throws IOException {
     BbsUpload u = bbsUploadSVC.findById(uploadId)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
     Path path = Paths.get(uploadPath).resolve(u.getSavedName());
+    long size = Files.size(path);
+
     Resource resource = new UrlResource(path.toUri());
 
     String filename = URLEncoder.encode(u.getOriginalName(), StandardCharsets.UTF_8);
     return ResponseEntity.ok()
         .contentType(MediaType.APPLICATION_OCTET_STREAM)
+        .contentLength(size)
         .header(HttpHeaders.CONTENT_DISPOSITION,
             "attachment; filename=\"" + filename + "\"")
         .body(resource);

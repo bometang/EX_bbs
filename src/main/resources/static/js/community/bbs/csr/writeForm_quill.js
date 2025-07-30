@@ -186,6 +186,15 @@ fileInput.addEventListener('change', async () => {
     return;
   }
 
+  for (const f of fileInput.files) {
+          if (!isValidFile(f)) {
+            alert(`"${f.name}" 은(는) 최대 ${MAX_MB}MB 이하의 파일만 업로드할 수 있습니다.`);
+            fileInput.value = '';        // 다시 선택 가능하도록 초기화
+            fileNameDisplay.textContent = '';
+            return;                      // 업로드 로직으로 넘어가지 않음
+          }
+        }
+
   // 2) 선택한 파일명 배열 확보
   const selectedFileNames = Array.from(fileInput.files).map(f => f.name);
   fileNameDisplay.textContent = selectedFileNames.join(', ');
@@ -198,6 +207,10 @@ fileInput.addEventListener('change', async () => {
   try {
     // 4) 업로드 요청
     const res = await ajax.post('/api/bbs/upload/attachments', fd);
+    if (res.header.rtcd === 'C02') {
+        alert('파일 크기를 초과했습니다.');
+        return;
+    }
     if (res.header.rtcd !== 'S00' || !Array.isArray(res.body) || res.body.length === 0) {
       throw new Error(res.header.rtmsg || '빈 응답');
     }
@@ -218,10 +231,16 @@ fileInput.addEventListener('change', async () => {
     fileInput.value = '';
 
     alert(`${res.body.length}개 파일이 업로드되었습니다.`);
-  } catch (e) {
-    console.error(e);
-    alert('파일 업로드 실패');
-  }
+  } catch (err) {                 // ← 변수명 'err' 로 통일
+        const code = parseInt(err.message.split(':').pop().trim(), 10); // 413
+
+            if (code === 413) {
+              alert('파일 크기를 초과했습니다. (최대 5 MB)');
+              return;
+            }
+
+            alert('파일 업로드에 실패했습니다.');
+      }
 });
 
 function resetAttachmentUI() {
@@ -306,6 +325,11 @@ const MAX_MB = 5;
 function getInsertIndex() {
   const sel = quill.getSelection(true);
   return sel ? sel.index : quill.getLength();
+}
+
+//파일첨부용 파일 크기 확인
+function isValidFile(f) {   // ② 파일 검증 유틸
+  return f.size <= MAX_MB * 1024 * 1024;   // 타입 검사 필요 없으면 이 한 줄로 OK
 }
 
 function validImage(file){

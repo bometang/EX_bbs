@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -94,5 +95,20 @@ public class ApiExceptionHandler {
         );
         
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiResponse<Void>> handleFileSizeLimit(MaxUploadSizeExceededException ex) {
+        Map<String,String> details = Map.of(
+            "maxFileSize",  "5MB"
+        );
+        ApiResponse<Void> body = ApiResponse.withDetails(
+            ApiResponseCode.FILE_TOO_LARGE,   // ← 상수명만 맞춰주면 끝
+            details,
+            null
+        );
+        return ResponseEntity
+            .status(HttpStatus.PAYLOAD_TOO_LARGE) // 413
+            .body(body);
     }
 }

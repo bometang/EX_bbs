@@ -10,4 +10,5 @@ public class UploadResult {
   private String url;
   private Long uploadGroup;
   private String originalName;
+  private long size;
 }

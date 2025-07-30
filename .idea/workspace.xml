@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc470a1-286f-4360-ab34-5292c3cb0de6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbsUpload/svc/BbsUploadSVCImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/domain/board/bbsUpload/svc/BbsUploadSVCImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/api/ApiResponseCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/api/ApiResponseCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/exception/ApiExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/KDT/mosi/web/exception/ApiExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail_v2.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/community_detail_v2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/writeForm_quill.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/static/js/community/bbs/csr/writeForm_quill.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbsUpload/svc/BbsUploadSVCImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/domain/board/bbsUpload/svc/BbsUploadSVCImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/api/ApiResponseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/api/ApiResponseCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/exception/ApiExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/KDT/mosi/web/exception/ApiExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail_v2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/community_detail_v2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/writeForm_quill.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/community/bbs/csr/writeForm_quill.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +89,11 @@
       <recent name="C:\KDT\projects\EXBbs\src\main\resources\static\img\bbs\bbs_detail" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.KDT.mosi.web.exception" />
       <recent name="com.KDT.mosi.web.controller" />
       <recent name="com.KDT.mosi.web.config" />
       <recent name="com.KDT.mosi.web.controller.board" />
       <recent name="com.KDT.mosi.domain.board.bbsUpload.dao" />
-      <recent name="com.KDT.mosi.domain.board.bbsUpload.svc" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MosiApplication">

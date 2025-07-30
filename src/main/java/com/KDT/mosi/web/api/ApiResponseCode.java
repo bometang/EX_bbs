@@ -9,6 +9,8 @@ public enum ApiResponseCode {
   // 성공 응답
   SUCCESS("S00", "Success"),
   // 데이터 없음
+  INVALID_PARAMETER("C01", "잘못된 요청 파라미터입니다."),
+  FILE_TOO_LARGE("C02", "업로드 가능한 최대 파일 용량을 초과했습니다."),
   NO_DATA("N04", "No data found"),
 
   // 공통 예외

@@ -18,6 +18,7 @@ spring:
       max-file-size: 5MB
       max-request-size: 20MB
       file-size-threshold: 0B
+      resolve-lazily: true
 
 # 웹서버 포트
 server:
